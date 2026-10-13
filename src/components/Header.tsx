@@ -6,6 +6,8 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { nav, services, solutions, industryGroups } from "@/lib/content";
 import { Logo } from "./Logo";
 import { ArrowRight, Icon } from "./Icons";
+import { TopBar } from "./TopBar";
+import { toneVars } from "@/lib/tones";
 
 type Mega = "services" | "solutions" | "industries";
 
@@ -16,18 +18,22 @@ export function Header() {
   const [mobile, setMobile] = useState(false);
   const [indicator, setIndicator] = useState({ x: 0, w: 0, o: 0 });
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const bar = useRef<HTMLSpanElement>(null);
   const closeTimer = useRef<number | undefined>(undefined);
 
   const activeIndex = nav.findIndex((n) => pathname === n.href || pathname.startsWith(n.href + "/"));
 
-  // Shrink + border once the page scrolls
+  // Shrink, tuck the ticker away and update the progress line — one rAF per frame, transform only
   useEffect(() => {
     let ticking = false;
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        setScrolled(window.scrollY > 8);
+        const y = window.scrollY;
+        setScrolled(y > 8);
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        if (bar.current) bar.current.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
         ticking = false;
       });
     };
@@ -86,12 +92,23 @@ export function Header() {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header
+      data-scrolled={scrolled}
+      className={`fixed inset-x-0 top-0 z-50 transition-transform duration-500 ease-out-expo ${scrolled ? "-translate-y-10" : "translate-y-0"}`}
+    >
+      <TopBar />
       <div
-        className={`relative transition-[background-color,box-shadow,height] duration-500 ease-out-expo ${
-          scrolled || open ? "bg-white/90 shadow-[0_1px_0_var(--color-line)] backdrop-blur-md" : "bg-transparent"
+        className={`relative transition-[background-color,box-shadow] duration-500 ease-out-expo ${
+          scrolled || open || mobile ? "bg-white shadow-[0_1px_0_var(--color-line),0_10px_30px_-20px_rgb(11_18_32/0.25)]" : "bg-transparent"
         }`}
       >
+        {/* reading progress */}
+        <span
+          ref={bar}
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-[3px] origin-left"
+          style={{ background: "var(--grad-brand)", transform: "scaleX(0)" }}
+        />
         <div
           className={`container-x flex items-center justify-between transition-[height] duration-500 ease-out-expo ${
             scrolled ? "h-[68px]" : "h-[84px]"
@@ -118,18 +135,34 @@ export function Header() {
                       moveTo(i);
                       openMega(item.mega);
                     }}
-                    className={`relative block px-4 py-2 text-[15px] font-medium transition-colors duration-300 ${
-                      i === activeIndex || open === item.mega ? "text-ink" : "text-muted hover:text-ink"
+                    className={`relative flex items-center gap-1 px-4 py-2 text-[15px] font-medium transition-colors duration-300 ${
+                      i === activeIndex || open === item.mega ? "text-[#5b21b6]" : "text-ink-2 hover:text-[#5b21b6]"
                     }`}
                   >
                     {item.label}
+                    {item.mega && (
+                      <svg
+                        aria-hidden
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.2"
+                        strokeLinecap="round"
+                        className={`transition-transform duration-300 ${open === item.mega ? "rotate-180" : ""}`}
+                      >
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    )}
                   </Link>
                 </li>
               ))}
               <span
                 aria-hidden
-                className="pointer-events-none absolute -bottom-0.5 left-0 h-[1.5px] rounded-full bg-ink transition-[transform,width,opacity] duration-500 ease-out-expo"
+                className="pointer-events-none absolute -bottom-0.5 left-0 h-[2px] rounded-full transition-[transform,width,opacity] duration-500 ease-out-expo"
                 style={{
+                  background: "var(--grad-brand)",
                   width: Math.max(indicator.w - 32, 0),
                   transform: `translateX(${indicator.x + 16}px)`,
                   opacity: indicator.o,
@@ -172,10 +205,10 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile sheet */}
+      {/* Mobile sheet (positioned under the nav bar; the header itself is transformed) */}
       <div
         data-lenis-prevent
-        className={`fixed inset-x-0 bottom-0 top-[68px] overflow-y-auto bg-white transition-[opacity,visibility] duration-500 ease-out-expo lg:hidden ${
+        className={`absolute inset-x-0 top-full ${scrolled ? "h-[calc(100dvh-68px)]" : "h-[calc(100dvh-124px)]"} overflow-y-auto bg-white transition-[opacity,visibility] duration-500 ease-out-expo lg:hidden ${
           mobile ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
@@ -209,7 +242,7 @@ function MegaPanel({ which }: { which: Mega }) {
       <div className="grid grid-cols-4 gap-8">
         {industryGroups.map((g) => (
           <div key={g.key}>
-            <Link href={`/industries#${g.key}`} className="font-display text-[15px] font-semibold text-ink hover:text-accent">
+            <Link href={`/industries#${g.key}`} className="font-display text-[15px] font-semibold text-ink hover:text-[#5b21b6]">
               {g.label}
             </Link>
             <ul className="mt-3 space-y-2">
@@ -227,16 +260,16 @@ function MegaPanel({ which }: { which: Mega }) {
 
   const list =
     which === "services"
-      ? services.map((s) => ({ href: `/services/${s.slug}`, title: s.title, sub: s.short, icon: s.icon }))
-      : solutions.map((s) => ({ href: `/solutions/${s.slug}`, title: s.title, sub: s.items.slice(0, 2).join(" · "), icon: s.icon }));
+      ? services.map((s) => ({ href: `/services/${s.slug}`, title: s.title, sub: s.short, icon: s.icon, tone: s.tone }))
+      : solutions.map((s) => ({ href: `/solutions/${s.slug}`, title: s.title, sub: s.items.slice(0, 2).join(" · "), icon: s.icon, tone: s.tone }));
 
   return (
     <div className="grid grid-cols-12 gap-8">
       <ul className="col-span-8 grid grid-cols-2 gap-2">
         {list.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="group flex gap-4 rounded-2xl p-4 transition-colors duration-300 hover:bg-tint">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent-50 text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
+            <Link href={l.href} style={toneVars(l.tone)} className="group flex gap-4 rounded-2xl p-4 transition-colors duration-300 hover:bg-[var(--cs)]">
+              <span className="tone-icon grid h-11 w-11 shrink-0 place-items-center rounded-xl transition-transform duration-300 group-hover:-rotate-6">
                 <Icon name={l.icon} size={20} />
               </span>
               <span>
@@ -249,11 +282,13 @@ function MegaPanel({ which }: { which: Mega }) {
       </ul>
       <Link
         href={which === "services" ? "/services" : "/solutions"}
-        className="group relative col-span-4 flex flex-col justify-end overflow-hidden rounded-2xl bg-ink p-6 text-white"
+        className="group relative col-span-4 flex flex-col justify-end overflow-hidden rounded-2xl p-6 text-white"
+        style={{ background: "var(--grad-brand)" }}
       >
         <span
           aria-hidden
-          className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-accent opacity-70 blur-3xl transition-transform duration-700 ease-out-expo group-hover:scale-125"
+          className="orb -right-20 -top-20 h-64 w-64 transition-transform duration-700 ease-out-expo group-hover:scale-125"
+          style={{ ["--orb" as string]: "rgb(255 255 255 / 0.35)" }}
         />
         <span className="relative text-[12px] font-semibold uppercase tracking-[0.08em] text-white/60">
           {which === "services" ? "Services" : "Solutions"}

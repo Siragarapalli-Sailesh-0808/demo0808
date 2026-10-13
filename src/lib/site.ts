@@ -13,6 +13,8 @@ export const site = {
   description:
     "We design, modernize and run mission-critical technology for enterprises and public institutions — and provide the expert talent that keeps it moving.",
   phone: "+1 (000) 000-0000",
+  /** WhatsApp number in international format, digits only (country code first). */
+  whatsapp: "910000000000",
   email: "hello@example.com",
   offices: [
     {

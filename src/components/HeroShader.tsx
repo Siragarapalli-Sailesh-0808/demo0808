@@ -43,7 +43,7 @@ float noise(vec2 p) {
 float fbm(vec2 p) {
   float v = 0.0;
   float a = 0.5;
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 3; i++) {
     v += a * noise(p);
     p = p * 2.03 + vec2(1.7, 9.2);
     a *= 0.5;
@@ -63,20 +63,23 @@ void main() {
                 fbm(p * 1.1 + 1.8 * q - m + vec2(8.3, 2.8) - t));
   float f = fbm(p * 1.2 + 1.6 * r);
 
-  vec3 bg    = vec3(0.980, 0.980, 0.973);
-  vec3 sky   = vec3(0.70, 0.82, 1.00);
-  vec3 lilac = vec3(0.82, 0.78, 1.00);
-  vec3 aqua  = vec3(0.70, 0.95, 0.96);
-  vec3 cobalt= vec3(0.141, 0.325, 1.00);
+  vec3 bg     = vec3(0.980, 0.980, 0.973);
+  vec3 lilac  = vec3(0.80, 0.74, 1.00);
+  vec3 sky    = vec3(0.68, 0.80, 1.00);
+  vec3 aqua   = vec3(0.62, 0.93, 0.97);
+  vec3 rose   = vec3(0.99, 0.76, 0.90);
+  vec3 violet = vec3(0.49, 0.23, 0.93);
 
   vec3 col = mix(sky, lilac, smoothstep(-0.35, 0.45, q.x));
-  col = mix(col, aqua, smoothstep(-0.05, 0.55, r.y) * 0.55);
-  col = mix(col, cobalt, smoothstep(0.08, 0.62, f) * 0.9);
+  col = mix(col, aqua, smoothstep(-0.05, 0.55, r.y) * 0.65);
+  col = mix(col, rose, smoothstep(0.15, 0.6, q.y) * 0.35);
+  col = mix(col, violet, smoothstep(0.12, 0.66, f) * 0.55);
 
   // Keep the left (text) side calm and bright, let colour bloom to the right.
   float side = smoothstep(0.18, 0.92, uv.x + (uv.y - 0.5) * 0.3 + f * 0.5);
   float bottom = smoothstep(0.0, 0.38, uv.y);
   float mask = side * bottom;
+  mask *= mix(0.45, 1.0, smoothstep(0.8, 1.3, uRes.x / uRes.y));
   col = mix(bg, col, mask);
 
   gl_FragColor = vec4(col, 1.0);
@@ -95,6 +98,8 @@ export default function HeroShader() {
     const lowPower =
       (nav.hardwareConcurrency ?? 8) <= 2 || (nav.deviceMemory ?? 8) <= 2 || nav.connection?.saveData === true;
     const mobile = window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+    // Phones get the static CSS gradient underneath instead: same look, no GPU/battery cost, faster load.
+    if (window.matchMedia("(max-width: 767px)").matches) return;
     let still = reduce || lowPower;
 
     let renderer: Renderer | null = null;
@@ -154,9 +159,16 @@ export default function HeroShader() {
       const t0 = performance.now();
       const minDelta = mobile ? 1000 / 30 : 0; // 30fps is plenty for a slow field on phones
       let last = 0;
+      let scrollingUntil = 0;
+      const onScrollThrottle = () => {
+        scrollingUntil = performance.now() + 220;
+      };
+      window.addEventListener("scroll", onScrollThrottle, { passive: true });
       const frame = (now: number) => {
         if (!renderer) return;
-        if (now - last < minDelta) {
+        // While the user scrolls, give the GPU back to the page: draw at most ~20fps.
+        const budget = now < scrollingUntil ? 50 : minDelta;
+        if (now - last < budget) {
           raf = requestAnimationFrame(frame);
           return;
         }
@@ -181,11 +193,14 @@ export default function HeroShader() {
       renderer.render({ scene: mesh });
       setReady(true);
 
-      const io = new IntersectionObserver(([e]) => {
-        visible = e.isIntersecting;
-        if (visible) play();
-        else pause();
-      });
+      const io = new IntersectionObserver(
+        ([e]) => {
+          visible = e.isIntersecting && e.intersectionRatio >= 0.25;
+          if (visible) play();
+          else pause();
+        },
+        { threshold: [0, 0.25] },
+      );
       io.observe(el);
 
       const onVis = () => (document.hidden ? pause() : play());
@@ -205,6 +220,7 @@ export default function HeroShader() {
         io.disconnect();
         ro.disconnect();
         document.removeEventListener("visibilitychange", onVis);
+        window.removeEventListener("scroll", onScrollThrottle);
         window.removeEventListener("pointermove", onMove);
         gl.getExtension("WEBGL_lose_context")?.loseContext();
         canvas.remove();

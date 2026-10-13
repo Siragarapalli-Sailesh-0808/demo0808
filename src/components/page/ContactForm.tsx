@@ -57,7 +57,7 @@ export function ContactForm() {
   if (status === "sent") {
     return (
       <div className="fade-up flex min-h-[520px] flex-col items-start justify-center" role="status">
-        <span className="grid h-16 w-16 place-items-center rounded-full bg-accent text-white shadow-lift">
+        <span className="grid h-16 w-16 place-items-center rounded-full bg-[linear-gradient(135deg,#7c3aed,#2563eb_60%,#0891b2)] text-white shadow-lift">
           <Check size={28} />
         </span>
         <h2 className="mt-8 text-[clamp(1.8rem,1.4rem+1.4vw,2.6rem)] font-bold">
@@ -87,7 +87,7 @@ export function ContactForm() {
                 aria-pressed={on}
                 onClick={() => setInterest(on ? "" : i)}
                 className={`rounded-full px-4 py-2 text-[14px] font-medium transition-[background-color,color,box-shadow] duration-300 ${
-                  on ? "bg-ink text-white" : "bg-white text-ink-2 ring-1 ring-line-2 hover:ring-ink"
+                  on ? "bg-[linear-gradient(100deg,#7c3aed,#2563eb)] text-white shadow-[0_8px_20px_-10px_#4f46e5]" : "bg-white text-ink-2 ring-1 ring-line-2 hover:text-[#5b21b6] hover:ring-[#a78bfa]"
                 }`}
               >
                 {i}

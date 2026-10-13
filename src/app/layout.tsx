@@ -6,6 +6,7 @@ import { site } from "@/lib/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Motion } from "@/components/Motion";
+import { FloatingContact } from "@/components/FloatingContact";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fafaf8",
+  themeColor: "#1e1b4b",
   colorScheme: "light",
   width: "device-width",
   initialScale: 1,
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <FloatingContact />
         <Motion />
       </body>
     </html>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { services } from "@/lib/content";
 import { ArrowUpRight, Icon } from "../Icons";
+import { toneVars } from "@/lib/tones";
 
 /** Bento layout per card on large screens (6-column grid). */
 const spans = ["lg:col-span-3", "lg:col-span-3", "lg:col-span-2", "lg:col-span-2", "lg:col-span-2"];
@@ -86,12 +87,19 @@ export function WhatWeDo() {
               strokeDasharray="3 5"
               vectorEffect="non-scaling-stroke"
             />
+            <defs>
+              <linearGradient id="wwd-line" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stopColor="#7c3aed" />
+                <stop offset=".5" stopColor="#2563eb" />
+                <stop offset="1" stopColor="#06b6d4" />
+              </linearGradient>
+            </defs>
             <path
               ref={path}
               d="M2 6 C 20 2, 30 14, 50 8 S 92 2, 97 22 S 70 50, 50 50 S 4 46, 3 70 S 30 98, 50 94 S 96 90, 98 98"
               fill="none"
-              stroke="var(--color-accent)"
-              strokeWidth="1.8"
+              stroke="url(#wwd-line)"
+              strokeWidth="2.2"
               strokeLinecap="round"
               vectorEffect="non-scaling-stroke"
               pathLength={1}
@@ -108,10 +116,14 @@ export function WhatWeDo() {
                 <Link
                   href={`/services/${s.slug}`}
                   onPointerMove={spotlight}
+                  style={{
+                    ...toneVars(s.tone),
+                    ...(featured ? { background: "linear-gradient(140deg, #4c1d95 0%, #3730a3 45%, #0e7490 100%)" } : {}),
+                  }}
                   className={`group relative isolate flex h-full min-h-[280px] flex-col overflow-hidden rounded-3xl p-7 transition-[box-shadow,translate] duration-500 ease-out-expo hover:-translate-y-1 md:p-8 ${
                     featured
-                      ? "bg-ink text-white shadow-[0_30px_60px_-30px_rgb(11_18_32/0.5)]"
-                      : "bg-surface shadow-card ring-1 ring-line hover:shadow-lift"
+                      ? "text-white shadow-[0_40px_70px_-34px_rgb(76_29_149/0.75)]"
+                      : "bg-surface shadow-card ring-1 ring-line hover:shadow-[0_30px_60px_-30px_var(--c)] hover:ring-[var(--c2)]"
                   }`}
                 >
                   {/* cursor spotlight */}
@@ -120,19 +132,19 @@ export function WhatWeDo() {
                     className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                     style={{
                       background: `radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), ${
-                        featured ? "rgb(36 83 255 / 0.45)" : "rgb(36 83 255 / 0.09)"
+                        featured ? "rgb(255 255 255 / 0.16)" : "var(--cs)"
                       }, transparent 65%)`,
                     }}
                   />
                   <div className="flex items-start justify-between">
                     <span
-                      className={`grid h-14 w-14 place-items-center rounded-2xl transition-[background-color,color,rotate] duration-500 ease-out-expo group-hover:-rotate-6 ${
-                        featured ? "bg-accent text-white" : "bg-accent-50 text-accent group-hover:bg-accent group-hover:text-white"
+                      className={`grid h-14 w-14 place-items-center rounded-2xl transition-[rotate] duration-500 ease-out-expo group-hover:-rotate-6 ${
+                        featured ? "bg-white/15 text-white ring-1 ring-white/30" : "tone-icon"
                       }`}
                     >
                       <Icon name={s.icon} size={26} />
                     </span>
-                    <span className={`font-display text-[13px] font-semibold tabular-nums ${featured ? "text-white/40" : "text-muted/70"}`}>
+                    <span className={`font-display text-[13px] font-bold tabular-nums ${featured ? "text-white/50" : "tone-text"}`}>
                       0{i + 1}
                     </span>
                   </div>
@@ -141,7 +153,7 @@ export function WhatWeDo() {
                     <h3 className={`text-[22px] font-bold md:text-[24px] ${featured ? "!text-white" : ""}`}>{s.title}</h3>
                     <p className={`mt-3 max-w-md text-[15px] leading-relaxed ${featured ? "text-white/70" : "text-muted"}`}>{s.body}</p>
                     <span
-                      className={`mt-6 inline-flex items-center gap-1.5 text-[14px] font-semibold ${featured ? "text-white" : "text-ink"}`}
+                      className={`mt-6 inline-flex items-center gap-1.5 text-[14px] font-semibold ${featured ? "text-white" : "tone-text"}`}
                     >
                       Learn more
                       <ArrowUpRight className="transition-transform duration-500 ease-out-expo group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

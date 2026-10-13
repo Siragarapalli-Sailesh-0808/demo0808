@@ -11,10 +11,13 @@
   --color-muted: #667085;
   --color-line: #e5e8ee;
   --color-line-2: #d6dbe5;
-  --color-accent: #2453ff;
-  --color-accent-600: #1b40d6;
-  --color-accent-50: #eef2ff;
-  --color-accent-100: #dfe6ff;
+  --color-accent: #5b3df5;
+  --color-accent-600: #4a2be0;
+  --color-accent-50: #f1edff;
+  --color-accent-100: #e2dbff;
+  --color-violet: #7c3aed;
+  --color-cyan: #06b6d4;
+  --color-navy: #141a46;
 
   --font-display: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
@@ -23,7 +26,13 @@
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 
   --shadow-card: 0 1px 2px rgb(11 18 32 / 0.04), 0 8px 24px -12px rgb(11 18 32 / 0.08);
-  --shadow-lift: 0 2px 4px rgb(11 18 32 / 0.04), 0 24px 48px -20px rgb(36 83 255 / 0.25);
+  --shadow-lift: 0 2px 4px rgb(11 18 32 / 0.04), 0 24px 48px -20px rgb(79 70 229 / 0.3);
+}
+
+:root {
+  /* Signature brand gradient: violet → blue → cyan */
+  --grad-brand: linear-gradient(100deg, #7c3aed 0%, #4f46e5 30%, #2563eb 60%, #0891b2 100%);
+  --grad-text: linear-gradient(100deg, #7c3aed 0%, #4f46e5 35%, #2563eb 65%, #06b6d4 100%);
 }
 
 /* ───────────────────────── Base ───────────────────────── */
@@ -60,7 +69,7 @@
     text-wrap: pretty;
   }
   ::selection {
-    background: var(--color-accent-100);
+    background: #e4dcff;
     color: var(--color-ink);
   }
   :focus-visible {
@@ -88,26 +97,46 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 12.5px;
-    font-weight: 600;
+    padding: 6px 14px 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: #5b21b6;
+    background: linear-gradient(100deg, #f1ebff, #e6eeff 60%, #e0f7fb);
+    box-shadow: inset 0 0 0 1px rgb(124 58 237 / 0.12);
   }
   .eyebrow::before {
     content: "";
-    width: 18px;
-    height: 1.5px;
-    background: currentColor;
-    border-radius: 2px;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--grad-brand);
+    box-shadow: 0 0 0 3px rgb(124 58 237 / 0.15);
   }
 
   .h-section {
     font-size: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
     font-weight: 700;
   }
-  .accent-word {
-    color: var(--color-accent);
+  /* Gradient headline words */
+  .accent-word,
+  .text-gradient {
+    background-image: var(--grad-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .text-gradient-live {
+    background-image: linear-gradient(100deg, #7c3aed, #4f46e5, #2563eb, #06b6d4, #7c3aed);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-pan 7s ease-in-out infinite alternate;
   }
 
   .btn {
@@ -124,8 +153,11 @@
     font-size: 15px;
     letter-spacing: -0.01em;
     white-space: nowrap;
+    isolation: isolate;
+    overflow: hidden;
     transition:
       background-color 0.3s var(--ease-out-expo),
+      background-position 0.6s var(--ease-out-expo),
       color 0.3s var(--ease-out-expo),
       box-shadow 0.4s var(--ease-out-expo),
       transform 0.4s var(--ease-out-expo);
@@ -137,12 +169,44 @@
     transform: translateX(3px);
   }
   .btn-primary {
+    background-image: var(--grad-brand);
+    background-size: 170% 100%;
+    background-position: 0% 0;
+    color: #fff;
+    box-shadow: 0 12px 28px -14px rgb(79 70 229 / 0.75);
+  }
+  .btn-primary:hover {
+    background-position: 100% 0;
+    box-shadow: 0 18px 36px -14px rgb(37 99 235 / 0.7);
+    transform: translateY(-1px);
+  }
+  /* light sweep across primary buttons on hover (transform only = cheap) */
+  .btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.35) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.8s var(--ease-out-expo);
+  }
+  .btn-primary:hover::after {
+    transform: translateX(120%);
+  }
+  .btn-dark {
     background: var(--color-ink);
     color: #fff;
   }
-  .btn-primary:hover {
-    background: var(--color-accent);
-    box-shadow: var(--shadow-lift);
+  .btn-dark:hover {
+    background: #1f2a44;
+  }
+  .btn-white {
+    background: #fff;
+    color: var(--color-ink);
+    box-shadow: 0 14px 30px -14px rgb(11 18 32 / 0.45);
+  }
+  .btn-white:hover {
+    transform: translateY(-1px);
   }
   .btn-ghost {
     background: rgb(255 255 255 / 0.7);
@@ -151,7 +215,30 @@
   }
   .btn-ghost:hover {
     background: #fff;
-    box-shadow: inset 0 0 0 1px var(--color-ink);
+    color: #5b21b6;
+    box-shadow: inset 0 0 0 1px #a78bfa;
+  }
+
+  /* Tone helpers (see src/lib/tones.ts) */
+  .tone-icon {
+    background-image: linear-gradient(135deg, var(--c2), var(--c));
+    color: #fff;
+    box-shadow: 0 12px 24px -12px var(--c);
+  }
+  .tone-soft {
+    background: var(--cs);
+    color: var(--ci);
+  }
+  .tone-text {
+    color: var(--ci);
+  }
+
+  /* Soft colour glow without blur filters (blur is what made scrolling stutter) */
+  .orb {
+    position: absolute;
+    border-radius: 999px;
+    pointer-events: none;
+    background: radial-gradient(closest-side, var(--orb), transparent);
   }
 
   .link-arrow {
@@ -246,6 +333,42 @@ html.js [data-reveal].is-in {
   }
 }
 
+@keyframes gradient-pan {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes ping-soft {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  80%,
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes pulse-soft {
   0%,
   100% {
@@ -328,4 +451,24 @@ html.lenis body {
 /* Hold nested animations until their section scrolls into view */
 html.js [data-reveal]:not(.is-in) * {
   animation-play-state: paused !important;
+}
+
+/* Looping animations pause when their zone is off-screen, and the ticker pauses once tucked away */
+.anim-off,
+.anim-off * {
+  animation-play-state: paused !important;
+}
+header[data-scrolled="true"] .ticker,
+header[data-scrolled="true"] .ticker-dot {
+  animation-play-state: paused;
+}
+
+/* Top "Now hiring" ticker */
+.ticker {
+  animation: marquee 48s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker {
+    animation: none;
+  }
 }

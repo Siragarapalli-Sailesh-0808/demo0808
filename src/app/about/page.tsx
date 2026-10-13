@@ -69,9 +69,9 @@ export default function AboutPage() {
                   key={m.k}
                   data-reveal
                   style={{ ["--d" as string]: `${i * 80}ms` }}
-                  className={`rounded-3xl p-7 ${i === 0 ? "bg-accent text-white" : "bg-tint"}`}
+                  className={`rounded-3xl p-7 ${i === 0 ? "bg-[linear-gradient(135deg,#6d28d9,#2563eb)] text-white" : "bg-[#e2f8fc]"}`}
                 >
-                  <p className={`text-[12.5px] font-semibold uppercase tracking-[0.08em] ${i === 0 ? "text-white/70" : "text-accent"}`}>{m.k}</p>
+                  <p className={`text-[12.5px] font-semibold uppercase tracking-[0.08em] ${i === 0 ? "text-white/70" : "text-[#0e7490]"}`}>{m.k}</p>
                   <p className={`mt-4 font-display text-[19px] font-semibold leading-snug ${i === 0 ? "text-white" : "text-ink"}`}>{m.v}</p>
                 </div>
               ))}

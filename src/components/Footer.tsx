@@ -16,6 +16,7 @@ export function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="relative bg-tint pt-20">
+      <div aria-hidden className="absolute inset-x-0 top-0 h-1" style={{ background: "var(--grad-brand)" }} />
       <div className="container-x">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
@@ -41,7 +42,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="grid h-10 w-10 place-items-center rounded-full bg-white text-ink-2 ring-1 ring-line transition-[background-color,color,translate] duration-300 hover:-translate-y-0.5 hover:bg-accent hover:text-white hover:ring-accent"
+                    className="grid h-10 w-10 place-items-center rounded-full bg-white text-ink-2 ring-1 ring-line transition-[background-color,color,translate] duration-300 hover:-translate-y-0.5 hover:bg-[linear-gradient(135deg,#7c3aed,#2563eb)] hover:text-white hover:ring-transparent"
                   >
                     <Social name={s.icon} />
                   </a>

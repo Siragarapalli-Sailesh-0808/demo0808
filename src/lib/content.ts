@@ -3,6 +3,8 @@
  * edit freely. Slugs are used for future detail pages (e.g. /services/[slug]).
  */
 
+import type { Tone } from "./tones";
+
 export type IconName =
   | "consulting"
   | "cloud"
@@ -29,6 +31,7 @@ export const services: {
   short: string;
   body: string;
   icon: IconName;
+  tone: Tone;
 }[] = [
   {
     slug: "consulting-transformation",
@@ -36,6 +39,7 @@ export const services: {
     short: "Strategy, roadmaps and operating models",
     body: "We shape technology strategy, build transformation roadmaps and redesign operating models so every investment ties back to a measurable business outcome.",
     icon: "consulting",
+    tone: "violet",
   },
   {
     slug: "cloud-infrastructure-operations",
@@ -43,6 +47,7 @@ export const services: {
     short: "Secure, resilient platforms that scale",
     body: "We plan, migrate and run secure, resilient cloud and hybrid environments built for the workloads your organization cannot afford to lose.",
     icon: "cloud",
+    tone: "blue",
   },
   {
     slug: "data-ai-analytics",
@@ -50,6 +55,7 @@ export const services: {
     short: "From raw data to trusted decisions",
     body: "We turn scattered enterprise data into governed platforms, reliable analytics and practical AI that people actually use.",
     icon: "data",
+    tone: "cyan",
   },
   {
     slug: "application-digital-experience",
@@ -57,6 +63,7 @@ export const services: {
     short: "Modern apps people enjoy using",
     body: "We modernize legacy applications and build digital products that are fast, accessible and easy to evolve over the long term.",
     icon: "app",
+    tone: "pink",
   },
   {
     slug: "talent-staffing-solutions",
@@ -64,6 +71,7 @@ export const services: {
     short: "Vetted experts, deployed fast",
     body: "Contract, contract-to-hire and dedicated teams of vetted technologists — ready to strengthen your delivery in weeks, not months.",
     icon: "talent",
+    tone: "emerald",
   },
 ];
 
@@ -72,6 +80,7 @@ export const solutions: {
   title: string;
   body: string;
   icon: IconName;
+  tone: Tone;
   items: string[];
 }[] = [
   {
@@ -79,6 +88,7 @@ export const solutions: {
     title: "Digital Operations & Enterprise Transformation",
     body: "Streamline how work gets done — fewer handoffs, better service levels and operations that scale with confidence.",
     icon: "ops",
+    tone: "violet",
     items: [
       "IT service & incident management",
       "Workflow & process automation",
@@ -92,6 +102,7 @@ export const solutions: {
     title: "Supply Chain & Asset Intelligence",
     body: "Bring real-time visibility and resilience to supply chains and asset-heavy operations.",
     icon: "supply",
+    tone: "amber",
     items: [
       "Inventory accuracy & control",
       "Logistics & network visibility",
@@ -105,6 +116,7 @@ export const solutions: {
     title: "Industry-Focused Digital Platforms",
     body: "Purpose-built solutions for the realities of regulated and asset-intensive industries.",
     icon: "industry",
+    tone: "cyan",
     items: [
       "Core industry system integration",
       "Operations & capacity planning",
@@ -118,6 +130,7 @@ export const solutions: {
     title: "Accelerators",
     body: "Reusable frameworks that shorten time-to-value for data, AI and automation programs.",
     icon: "bolt",
+    tone: "pink",
     items: [
       "Enterprise data platform blueprints",
       "Executive KPI dashboards",
@@ -232,4 +245,26 @@ export const trustGroups = [
   { title: "Technology Partnerships", items: ["Partner logo", "Partner logo"] },
   { title: "Accreditations", items: ["Certification", "Certification", "Certification", "Certification"] },
   { title: "Industry Memberships", items: ["Association", "Association"] },
+];
+
+/** Open roles shown in the scrolling bar at the top of every page (placeholders). */
+export const openRoles = [
+  "Cloud Solutions Architect – 10–14 yrs",
+  "Senior Java Developer – 7–10 yrs",
+  "Azure DevOps Engineer – 5–8 yrs",
+  "Data Engineer (Databricks) – 4–7 yrs",
+  "ServiceNow Developer – 5–9 yrs",
+  "SAP FICO Consultant – 6–10 yrs",
+  "Salesforce QA Lead – 6–8 yrs",
+  "React / Next.js Developer – 3–6 yrs",
+  "Cybersecurity Analyst – 4–7 yrs",
+  "AI / ML Engineer – 3–6 yrs",
+];
+
+/** Headline numbers used on the home page and About page (placeholders). */
+export const stats = [
+  { value: 15, suffix: "+", label: "Years of delivery", tone: "violet" as Tone },
+  { value: 200, suffix: "+", label: "Enterprise clients", tone: "blue" as Tone },
+  { value: 2500, suffix: "+", label: "Professionals placed", tone: "cyan" as Tone },
+  { value: 98, suffix: "%", label: "Client retention", tone: "emerald" as Tone },
 ];

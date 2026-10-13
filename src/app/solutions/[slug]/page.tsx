@@ -12,6 +12,7 @@ import { RelatedServices } from "@/components/page/RelatedServices";
 import { JsonLd } from "@/components/page/JsonLd";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ArrowRight, ArrowUpRight, Icon } from "@/components/Icons";
+import { toneVars } from "@/lib/tones";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -62,7 +63,7 @@ export default async function SolutionPage({ params }: Props) {
         ]}
         aside={
           <div className="relative ml-auto hidden w-full max-w-[380px] rounded-[32px] bg-white/85 p-7 shadow-[0_40px_80px_-40px_rgb(11_18_32/0.35)] ring-1 ring-white lg:block">
-            <span className="grid h-14 w-14 place-items-center rounded-2xl bg-accent text-white">
+            <span className="tone-icon grid h-14 w-14 place-items-center rounded-2xl" style={toneVars(s.tone)}>
               <Icon name={s.icon} size={26} />
             </span>
             <p className="mt-6 text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">Focus areas</p>
@@ -115,7 +116,7 @@ export default async function SolutionPage({ params }: Props) {
                   href={`/solutions/${o.slug}`}
                   className="group flex h-full items-center gap-4 rounded-2xl bg-white p-5 ring-1 ring-line transition-[box-shadow,translate] duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-lift"
                 >
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent-50 text-accent">
+                  <span className="tone-icon grid h-11 w-11 shrink-0 place-items-center rounded-xl" style={toneVars(o.tone)}>
                     <Icon name={o.icon} size={20} />
                   </span>
                   <span className="flex-1 font-display text-[15.5px] font-semibold leading-snug">{o.title}</span>

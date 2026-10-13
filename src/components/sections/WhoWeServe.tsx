@@ -91,26 +91,24 @@ export function WhoWeServe() {
                   onClick={() => go(i)}
                   className="group min-w-[200px] snap-start text-left md:min-w-0"
                 >
-                  <span className="relative block h-[2px] overflow-hidden rounded-full bg-line">
+                  <span className="relative block h-[3px] overflow-hidden rounded-full bg-line">
                     {on && (
                       <span
                         key={active}
-                        className="absolute inset-0 origin-left bg-accent"
-                        style={
-                          auto
-                            ? {
-                                animation: `progress ${DURATION}ms linear both`,
-                                animationPlayState: running ? "running" : "paused",
-                              }
-                            : undefined
-                        }
+                        className="absolute inset-0 origin-left"
+                        style={{
+                          background: "var(--grad-brand)",
+                          ...(auto
+                            ? { animation: `progress ${DURATION}ms linear both`, animationPlayState: running ? "running" : "paused" }
+                            : {}),
+                        }}
                         onAnimationEnd={() => go((active + 1) % industryGroups.length)}
                       />
                     )}
                   </span>
                   <span
                     className={`mt-4 block font-display text-[15px] font-semibold leading-snug transition-colors duration-300 ${
-                      on ? "text-accent" : "text-muted group-hover:text-ink"
+                      on ? "text-[#5b21b6]" : "text-muted group-hover:text-ink"
                     }`}
                   >
                     {g.label}
@@ -136,7 +134,7 @@ function Slide({ group, on }: { group: (typeof industryGroups)[number]; on: bool
       <div className="relative flex h-full flex-col justify-between p-7 md:p-12">
         <div className="max-w-2xl">
           <p
-            className={`text-[12.5px] font-semibold uppercase tracking-[0.08em] text-accent transition-[opacity,translate] duration-700 ease-out-expo ${
+            className={`text-[12.5px] font-semibold uppercase tracking-[0.08em] text-[#6d28d9] transition-[opacity,translate] duration-700 ease-out-expo ${
               on ? "translate-y-0 opacity-100 delay-500" : "translate-y-3 opacity-0"
             }`}
           >
@@ -169,7 +167,7 @@ function Slide({ group, on }: { group: (typeof industryGroups)[number]; on: bool
           <Link
             href={`/industries#${group.key}`}
             tabIndex={on ? 0 : -1}
-            className="link-arrow mt-6 text-accent"
+            className="link-arrow mt-6 !text-[#5b21b6]"
           >
             View industry expertise <ArrowRight />
           </Link>
@@ -198,7 +196,6 @@ export function Art({ kind, fit = "slice" }: { kind: "grid" | "columns" | "waves
             rx={10}
             fill={hot ? "rgb(36 83 255 / 0.85)" : "rgb(255 255 255 / 0.7)"}
             stroke={hot ? "none" : stroke}
-            style={hot ? { animation: `pulse-soft 3.2s ${((x + y) % 5) * 0.5}s ease-in-out infinite` } : undefined}
           />,
         );
       }

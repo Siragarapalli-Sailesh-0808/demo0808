@@ -14,6 +14,7 @@ import { RelatedServices } from "@/components/page/RelatedServices";
 import { JsonLd } from "@/components/page/JsonLd";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ArrowRight, Icon } from "@/components/Icons";
+import { toneVars } from "@/lib/tones";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -78,16 +79,16 @@ export default async function ServicePage({ params }: Props) {
           { label: s.title, href: `/services/${slug}` },
         ]}
         aside={
-          <div className="relative ml-auto hidden aspect-square w-full max-w-[340px] lg:block">
-            <div className="absolute inset-0 rounded-[40px] bg-white/80 shadow-[0_40px_80px_-40px_rgb(11_18_32/0.35)] ring-1 ring-white" />
-            <div className="absolute inset-0 grid place-items-center">
-              <span className="grid h-36 w-36 place-items-center rounded-[36px] bg-accent text-white shadow-lift" style={{ animation: "float 7s ease-in-out infinite" }}>
-                <Icon name={s.icon} size={64} strokeWidth={1.2} />
-              </span>
-            </div>
-            <ul className="absolute inset-x-6 bottom-6 flex flex-wrap justify-center gap-1.5">
-              {d.offerings.slice(0, 3).map((o) => (
-                <li key={o.title} className="rounded-full bg-tint px-3 py-1 text-[11.5px] font-semibold text-ink-2">
+          <div
+            style={toneVars(s.tone)}
+            className="relative ml-auto hidden w-full max-w-[360px] flex-col items-center gap-8 rounded-[40px] bg-white/85 px-7 pb-8 pt-12 shadow-[0_40px_80px_-40px_rgb(11_18_32/0.35)] ring-1 ring-white lg:flex"
+          >
+            <span className="tone-icon grid h-32 w-32 place-items-center rounded-[34px]" style={{ animation: "float 7s ease-in-out infinite" }}>
+              <Icon name={s.icon} size={58} strokeWidth={1.2} />
+            </span>
+            <ul className="flex flex-wrap justify-center gap-1.5">
+              {d.offerings.slice(0, 4).map((o) => (
+                <li key={o.title} className="tone-soft rounded-full px-3 py-1 text-[12px] font-semibold">
                   {o.title}
                 </li>
               ))}
@@ -122,7 +123,7 @@ export default async function ServicePage({ params }: Props) {
                   key={m.title}
                   data-reveal
                   style={{ ["--d" as string]: `${i * 70}ms` }}
-                  className="group relative overflow-hidden rounded-3xl bg-white p-7 ring-1 ring-line transition-[background-color,translate] duration-500 ease-out-expo hover:-translate-y-1 hover:bg-accent"
+                  className="group relative overflow-hidden rounded-3xl bg-white p-7 ring-1 ring-line transition-[background-color,translate] duration-500 ease-out-expo hover:-translate-y-1 hover:bg-[linear-gradient(140deg,#7c3aed,#2563eb)]"
                 >
                   <span className="font-display text-[13px] font-semibold text-accent transition-colors duration-500 group-hover:text-white/70">0{i + 1}</span>
                   <h3 className="mt-10 text-[22px] font-bold transition-colors duration-500 group-hover:text-white">{m.title}</h3>

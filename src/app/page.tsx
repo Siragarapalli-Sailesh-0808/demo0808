@@ -1,6 +1,7 @@
 import { site } from "@/lib/site";
 import { services } from "@/lib/content";
 import { Hero } from "@/components/sections/Hero";
+import { Stats } from "@/components/sections/Stats";
 import { WhatWeDo } from "@/components/sections/WhatWeDo";
 import { WhatWeOffer } from "@/components/sections/WhatWeOffer";
 import { WhoWeServe } from "@/components/sections/WhoWeServe";
@@ -47,6 +48,7 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Hero />
+      <Stats />
       <WhatWeDo />
       <WhatWeOffer />
       <WhoWeServe />

@@ -33,7 +33,9 @@ in local development it simply logs the enquiry to the terminal. Spam protection
 
 | What | File |
 |---|---|
-| Company name, logo mark, phone, email, offices, socials | `src/lib/site.ts` |
+| Company name, logo mark, phone, **WhatsApp number**, email, offices, socials | `src/lib/site.ts` |
+| Jobs in the "Now hiring" top bar, home-page stats | `src/lib/content.ts` (`openRoles`, `stats`) |
+| Brand gradient + per-service colours | `src/app/globals.css` (`--grad-brand`) and `src/lib/tones.ts` |
 | Home page copy (services, solutions, industries, case studies, partner tiles) | `src/lib/content.ts` |
 | Inner page copy (service/solution details, FAQs, industries, About, contact options) | `src/lib/content-pages.ts` |
 | Colours, fonts, spacing tokens | `src/app/globals.css` (`@theme` block) |
@@ -55,6 +57,10 @@ in local development it simply logs the enquiry to the terminal. Spam protection
 8. **Footer** — links, contact, US + India offices, legal links
 
 ## Performance safeguards
+
+- No CSS blur filters or backdrop blur anywhere: soft glows are radial gradients (blurs were the main cause of stuttery scrolling).
+- Looping animations pause automatically when their section is off-screen; the job ticker pauses once tucked away.
+- The hero shader draws at most ~20fps while the page is scrolling, and phones use a static gradient instead.
 
 - Shader starts only after the page has loaded, renders at reduced resolution, pauses off-screen and in hidden tabs, runs at 30fps on phones.
 - Devices without a real GPU, low-power devices and "reduce motion" users get a single still frame.

@@ -4,6 +4,7 @@ import { solutions } from "@/lib/content";
 import { PageHero } from "@/components/page/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ArrowRight, ArrowUpRight, Check, Icon } from "@/components/Icons";
+import { toneVars } from "@/lib/tones";
 
 export const metadata: Metadata = {
   title: "Solutions",
@@ -33,15 +34,16 @@ export default function SolutionsPage() {
               key={s.slug}
               href={`/solutions/${s.slug}`}
               data-reveal
-              style={{ ["--d" as string]: `${(i % 2) * 90}ms` }}
-              className="group relative isolate flex flex-col overflow-hidden rounded-[28px] bg-surface p-8 shadow-card ring-1 ring-line transition-[box-shadow,translate] duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-lift md:p-10"
+              style={{ ["--d" as string]: `${(i % 2) * 90}ms`, ...toneVars(s.tone) }}
+              className="group relative isolate flex flex-col overflow-hidden rounded-[28px] bg-surface p-8 shadow-card ring-1 ring-line transition-[box-shadow,translate] duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_var(--c)] hover:ring-[var(--c2)] md:p-10"
             >
               <span
                 aria-hidden
-                className="absolute -right-20 -top-20 -z-10 h-64 w-64 rounded-full bg-accent-100 opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-100"
+                className="orb -right-28 -top-28 -z-10 h-80 w-80 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+                style={{ ["--orb" as string]: "var(--cs)" }}
               />
               <div className="flex items-start justify-between">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-accent text-white">
+                <span className="tone-icon grid h-14 w-14 place-items-center rounded-2xl">
                   <Icon name={s.icon} size={26} />
                 </span>
                 <span className="grid h-11 w-11 place-items-center rounded-full ring-1 ring-line-2 transition-[background-color,color,rotate] duration-500 ease-out-expo group-hover:rotate-45 group-hover:bg-ink group-hover:text-white group-hover:ring-ink">
@@ -53,7 +55,7 @@ export default function SolutionsPage() {
               <ul className="mt-8 grid gap-2.5 border-t border-line pt-6 sm:grid-cols-2">
                 {s.items.map((it) => (
                   <li key={it} className="flex items-start gap-2.5 text-[14.5px] text-ink-2">
-                    <Check size={15} className="mt-1 shrink-0 text-accent" />
+                    <Check size={15} className="tone-text mt-1 shrink-0" />
                     {it}
                   </li>
                 ))}

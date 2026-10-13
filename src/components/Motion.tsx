@@ -17,19 +17,34 @@ export function Motion() {
     // Touch devices already have native momentum scrolling — skip Lenis there to save CPU.
     const touch = window.matchMedia("(pointer: coarse)").matches;
     if (reduce || touch) return;
-    const lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1, anchors: { offset: -88 } });
+    // Frame-rate independent easing; Lenis drives its own rAF loop and idles when nothing moves.
+    const lenis = new Lenis({
+      autoRaf: true,
+      lerp: 0.085,
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1,
+      anchors: { offset: -80 },
+    });
     (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
-    let raf = 0;
-    const loop = (t: number) => {
-      lenis.raf(t);
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop);
     return () => {
-      cancelAnimationFrame(raf);
       lenis.destroy();
+      delete (window as unknown as { __lenis?: Lenis }).__lenis;
     };
   }, []);
+
+  // Pause looping animations in any [data-anim-zone] that is off-screen (saves GPU/CPU while scrolling)
+  useEffect(() => {
+    const zones = document.querySelectorAll<HTMLElement>("[data-anim-zone]");
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) e.target.classList.toggle("anim-off", !e.isIntersecting);
+      },
+      { rootMargin: "80px 0px" },
+    );
+    zones.forEach((z) => io.observe(z));
+    return () => io.disconnect();
+  }, [pathname]);
 
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-in)");

@@ -37,7 +37,7 @@ export function CaseStudies() {
         <div className="mt-12 grid items-center gap-10 lg:grid-cols-12 lg:gap-16" data-reveal style={{ ["--d" as string]: "120ms" }}>
           {/* Visual */}
           <div className="relative lg:col-span-6">
-            <div aria-hidden className="absolute -left-6 -top-6 h-[70%] w-[75%] rounded-[32px] bg-accent-100" />
+            <div aria-hidden className="absolute -left-6 -top-6 h-[70%] w-[75%] rounded-[32px]" style={{ background: "linear-gradient(135deg, #ddd6fe, #bfdbfe 55%, #a5f3fc)" }} />
             <div key={c.slug} className="fade-up relative">
               <Dashboard bars={c.bars} title={c.service} />
             </div>
@@ -46,8 +46,8 @@ export function CaseStudies() {
           {/* Story */}
           <div key={c.slug + "-copy"} className="lg:col-span-6">
             <div className="fade-up flex flex-wrap gap-2" style={{ ["--d" as string]: "60ms" }}>
-              <span className="rounded-full bg-accent-50 px-3 py-1 text-[12.5px] font-semibold text-accent">{c.industry}</span>
-              <span className="rounded-full bg-tint px-3 py-1 text-[12.5px] font-semibold text-ink-2">{c.service}</span>
+              <span className="rounded-full bg-[#f3eeff] px-3 py-1 text-[12.5px] font-semibold text-[#6d28d9]">{c.industry}</span>
+              <span className="rounded-full bg-[#e2f8fc] px-3 py-1 text-[12.5px] font-semibold text-[#0e7490]">{c.service}</span>
             </div>
             <h3 className="fade-up mt-5 text-[clamp(1.6rem,1.2rem+1.4vw,2.35rem)] font-bold leading-[1.15]" style={{ ["--d" as string]: "120ms" }}>
               {c.title}
@@ -104,8 +104,9 @@ function Dashboard({ bars, title }: { bars: number[]; title: string }) {
             {bars.map((b, k) => (
               <div key={k} className="flex h-full flex-1 items-end">
                 <div
-                  className={`w-full origin-bottom rounded-md ${k === bars.length - 1 ? "bg-accent" : "bg-accent-100"}`}
-                  style={{ height: `${(b / max) * 100}%`, animation: `grow 1s ${0.15 + k * 0.06}s cubic-bezier(.16,1,.3,1) both` }}
+                  className="w-full origin-bottom rounded-md"
+                  style={{
+                    background: k === bars.length - 1 ? "linear-gradient(180deg, #7c3aed, #2563eb)" : "linear-gradient(180deg, #e0e7ff, #dbeafe)", height: `${(b / max) * 100}%`, animation: `grow 1s ${0.15 + k * 0.06}s cubic-bezier(.16,1,.3,1) both` }}
                 />
               </div>
             ))}

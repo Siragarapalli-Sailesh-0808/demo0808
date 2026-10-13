@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { solutions } from "@/lib/content";
 import { ArrowRight, Check, Icon } from "../Icons";
+import { toneVars } from "@/lib/tones";
 
 export function WhatWeOffer() {
   const [active, setActive] = useState(0);
@@ -36,30 +37,32 @@ export function WhatWeOffer() {
                 onFocus={() => setActive(i)}
                 tabIndex={0}
                 aria-expanded={on}
-                className={`relative min-w-0 cursor-pointer overflow-hidden rounded-3xl outline-none transition-[flex-grow,background-color,box-shadow] duration-700 ease-out-expo ${
-                  on
-                    ? "bg-accent text-white shadow-[0_40px_80px_-40px_rgb(36_83_255/0.7)]"
-                    : "bg-white text-ink ring-1 ring-line hover:ring-line-2"
+                className={`relative isolate min-w-0 cursor-pointer overflow-hidden rounded-3xl bg-white outline-none transition-[flex-grow,box-shadow] duration-700 ease-out-expo ${
+                  on ? "text-white shadow-[0_40px_80px_-40px_var(--c)]" : "text-ink ring-1 ring-line hover:ring-[var(--c2)]"
                 }`}
-                style={{ flexGrow: on ? 2.6 : 1, flexBasis: 0 }}
+                style={{ ...toneVars(s.tone), flexGrow: on ? 2.6 : 1, flexBasis: 0 }}
               >
-                {/* soft light in the active panel */}
+                {/* colour layer fades in (opacity only — cheap) */}
                 <span
                   aria-hidden
-                  className={`pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white blur-3xl transition-opacity duration-700 ${
-                    on ? "opacity-25" : "opacity-0"
-                  }`}
+                  className={`pointer-events-none absolute inset-0 -z-10 transition-opacity duration-700 ${on ? "opacity-100" : "opacity-0"}`}
+                  style={{ background: "linear-gradient(160deg, var(--c) 0%, var(--cd) 75%)" }}
+                />
+                <span
+                  aria-hidden
+                  className={`orb -right-24 -top-24 -z-10 h-80 w-80 transition-opacity duration-700 ${on ? "opacity-100" : "opacity-0"}`}
+                  style={{ ["--orb" as string]: "rgb(255 255 255 / 0.35)" }}
                 />
                 <div className="relative flex h-full w-full flex-col p-7 xl:p-8">
                   <div className="flex items-start justify-between">
                     <span
                       className={`grid h-14 w-14 place-items-center rounded-2xl transition-colors duration-700 ${
-                        on ? "bg-white/15 text-white ring-1 ring-white/30" : "bg-accent-50 text-accent"
+                        on ? "bg-white/20 text-white ring-1 ring-white/40" : "tone-soft"
                       }`}
                     >
                       <Icon name={s.icon} size={26} />
                     </span>
-                    <span className={`font-display text-[13px] font-semibold tabular-nums transition-opacity duration-500 ${on ? "text-white/50" : "opacity-0"}`}>
+                    <span className={`font-display text-[13px] font-semibold tabular-nums transition-opacity duration-500 ${on ? "text-white/70" : "opacity-0"}`}>
                       0{i + 1}
                     </span>
                   </div>
@@ -123,7 +126,8 @@ export function WhatWeOffer() {
             return (
               <div
                 key={s.slug}
-                className={`overflow-hidden rounded-2xl transition-colors duration-500 ${on ? "bg-accent text-white" : "bg-white ring-1 ring-line"}`}
+                className={`overflow-hidden rounded-2xl transition-colors duration-500 ${on ? "text-white" : "bg-white ring-1 ring-line"}`}
+                style={{ ...toneVars(s.tone), ...(on ? { background: "linear-gradient(160deg, var(--c) 0%, var(--cd) 75%)" } : {}) }}
               >
                 <button
                   type="button"
@@ -131,7 +135,7 @@ export function WhatWeOffer() {
                   aria-expanded={on}
                   onClick={() => setActive(on ? -1 : i)}
                 >
-                  <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl ${on ? "bg-white/15" : "bg-accent-50 text-accent"}`}>
+                  <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl ${on ? "bg-white/20" : "tone-soft"}`}>
                     <Icon name={s.icon} size={22} />
                   </span>
                   <span className="flex-1 font-display text-[17px] font-semibold leading-snug">{s.title}</span>

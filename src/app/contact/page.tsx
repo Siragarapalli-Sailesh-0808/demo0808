@@ -49,12 +49,12 @@ export default function ContactPage() {
           </div>
 
           <aside className="space-y-4 lg:col-span-5">
-            <div className="rounded-[28px] bg-ink p-8 text-white" data-reveal style={{ ["--d" as string]: "80ms" }}>
+            <div className="rounded-[28px] p-8 text-white" data-reveal style={{ ["--d" as string]: "80ms", background: "linear-gradient(140deg, #1e1b4b, #312e81 50%, #1e3a8a)" }}>
               <p className="text-[12.5px] font-semibold uppercase tracking-[0.08em] text-white/60">Prefer to reach out directly?</p>
               <ul className="mt-6 space-y-4">
                 <li>
                   <a href={`mailto:${site.email}`} className="group flex items-center gap-4">
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 transition-colors duration-300 group-hover:bg-accent">
+                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 transition-colors duration-300 group-hover:bg-[#7c3aed]">
                       <Mail />
                     </span>
                     <span>
@@ -65,7 +65,7 @@ export default function ContactPage() {
                 </li>
                 <li>
                   <a href={`tel:${site.phone.replace(/[^+\d]/g, "")}`} className="group flex items-center gap-4">
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 transition-colors duration-300 group-hover:bg-accent">
+                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 transition-colors duration-300 group-hover:bg-[#7c3aed]">
                       <Phone />
                     </span>
                     <span>
@@ -83,7 +83,7 @@ export default function ContactPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className="grid h-10 w-10 place-items-center rounded-full bg-white/10 transition-colors duration-300 hover:bg-accent"
+                      className="grid h-10 w-10 place-items-center rounded-full bg-white/10 transition-colors duration-300 hover:bg-[#7c3aed]"
                     >
                       <Social name={s.icon} />
                     </a>

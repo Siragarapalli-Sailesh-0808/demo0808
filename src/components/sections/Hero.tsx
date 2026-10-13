@@ -1,59 +1,79 @@
 import Link from "next/link";
 import { ArrowRight } from "../Icons";
-import { HeroBackdrop, HeroCards } from "./HeroVisual";
+import { HeroBackdrop, HeroPanel } from "./HeroVisual";
 
-const line1 = ["Building", "enterprise", "technology", "that", "stays"];
+const line2 = ["Stronger", "teams."];
 
 export function Hero() {
   return (
-    <section className="grain relative isolate flex min-h-[min(100svh,980px)] items-center overflow-hidden pb-20 pt-32 md:pb-28 md:pt-40">
+    <section data-anim-zone className="relative isolate overflow-hidden pb-24 pt-40 md:pb-32 md:pt-52">
       <HeroBackdrop />
 
-      <div className="container-x relative z-10 grid items-center gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-7">
-          <p className="eyebrow fade-up" style={{ ["--d" as string]: "0ms" }}>
-            IT Consulting &amp; Talent Solutions
+      <div className="container-x relative z-10 grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-6 xl:col-span-7">
+          <p
+            className="fade-up inline-flex items-center gap-2.5 rounded-full py-2 pl-2.5 pr-5 text-[13.5px] font-semibold text-white shadow-[0_14px_30px_-14px_rgb(79_70_229/0.8)]"
+            style={{ ["--d" as string]: "0ms", background: "var(--grad-brand)" }}
+          >
+            <span className="grid h-6 w-6 place-items-center rounded-full bg-white/20">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#fde68a" aria-hidden style={{ animation: "spin-slow 8s linear infinite" }}>
+                <path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z" />
+              </svg>
+            </span>
+            Technology · Talent · Transformation
           </p>
 
-          <h1 className="mt-6 text-[clamp(2.6rem,1.6rem+4.4vw,5.25rem)] font-extrabold leading-[1.02] tracking-[-0.035em]">
-            {line1.map((w, i) => (
-              <span key={w + i} className="word" style={{ ["--i" as string]: i }}>
+          <h1 className="mt-7 text-[clamp(2.8rem,1.4rem+4.6vw,4.6rem)] font-extrabold leading-[1.02] tracking-[-0.04em]">
+            <span className="word" style={{ ["--i" as string]: 0 }}>
+              <span>
+                <span className="text-gradient-live pb-[0.06em]">Smarter systems.</span>
+              </span>
+            </span>
+            <br />
+            {line2.map((w, i) => (
+              <span key={w} className="word" style={{ ["--i" as string]: i + 2 }}>
                 <span>{w}</span>
-                {" "}
+                {i < line2.length - 1 && " "}
               </span>
             ))}
-            <span className="word" style={{ ["--i" as string]: line1.length }}>
-              <span className="accent-word">resilient.</span>
-            </span>
           </h1>
 
           <p
-            className="fade-up mt-7 max-w-[34rem] text-[17.5px] leading-relaxed text-ink-2 md:text-[19px]"
+            className="fade-up mt-7 max-w-[36rem] text-[17.5px] leading-relaxed text-ink-2 md:text-[19px]"
             style={{ ["--d" as string]: "320ms" }}
           >
-            We design, modernize and run mission-critical systems — and bring in the expert talent that keeps them
-            moving. Proven architecture, security-first delivery and outcomes you can measure.
+            We design, modernize and run mission-critical technology — and supply the vetted experts who keep it
+            moving. Consulting, cloud, data &amp; AI, applications and talent from one accountable partner.
           </p>
 
           <div className="fade-up mt-10 flex flex-wrap items-center gap-3" style={{ ["--d" as string]: "440ms" }}>
-            <Link href="/contact" className="btn btn-primary">
-              Get in touch <ArrowRight />
+            <Link href="/services" className="btn btn-primary h-[54px] px-7 text-[15.5px]">
+              Explore our services <ArrowRight />
             </Link>
-            <Link href="#what-we-do" className="btn btn-ghost">
-              Explore services
+            <Link href="/services/talent-staffing-solutions" className="btn btn-ghost h-[54px] px-7 text-[15.5px]">
+              Hire top talent
             </Link>
+          </div>
+
+          <div className="fade-up mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-[14px] text-muted" style={{ ["--d" as string]: "560ms" }}>
+            {[
+              ["#7c3aed", "Offices in USA & India"],
+              ["#0891b2", "Vetted experts in days"],
+              ["#059669", "Security-first delivery"],
+            ].map(([c, t]) => (
+              <span key={t} className="inline-flex items-center gap-2 font-medium">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>
+                  <circle cx="12" cy="12" r="10" fill={c} opacity=".14" />
+                  <path d="m7.5 12.5 3 3 6-6.5" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                {t}
+              </span>
+            ))}
           </div>
         </div>
 
-        <div className="relative hidden h-[540px] lg:col-span-5 lg:block">
-          <HeroCards />
-        </div>
-      </div>
-
-      {/* Scroll cue */}
-      <div aria-hidden className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 md:block">
-        <div className="relative h-11 w-[26px] rounded-full ring-1 ring-ink/20">
-          <span className="absolute left-1/2 top-2 h-2 w-[3px] -translate-x-1/2 animate-bounce rounded-full bg-ink/50" />
+        <div className="relative lg:col-span-6 xl:col-span-5">
+          <HeroPanel />
         </div>
       </div>
     </section>

@@ -4,7 +4,7 @@ export const metadata = { title: "Page not found" };
 
 export default function NotFound() {
   return (
-    <section className="container-x flex min-h-[80svh] flex-col items-start justify-center pt-32">
+    <section className="container-x flex min-h-[80svh] flex-col items-start justify-center pt-44">
       <p className="eyebrow">404</p>
       <h1 className="mt-4 text-[clamp(2.4rem,1.6rem+3vw,4rem)] font-extrabold">
         This page is <span className="accent-word">on its way.</span>

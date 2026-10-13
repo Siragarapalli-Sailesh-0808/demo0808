@@ -21,19 +21,20 @@ export function PageHero({
   aside?: ReactNode;
 }) {
   return (
-    <section className="grain relative isolate overflow-hidden pb-20 pt-36 md:pb-28 md:pt-44">
+    <section data-anim-zone className="relative isolate overflow-hidden pb-20 pt-44 md:pb-28 md:pt-52">
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div
-          className="absolute -right-[10%] -top-[160px] h-[640px] w-[640px] rounded-full bg-accent/25 blur-[110px] will-change-transform"
-          style={{ animation: "drift 20s ease-in-out infinite" }}
+        {/* colour glows: radial gradients, not blur filters, so they cost nothing while scrolling */}
+        <span
+          className="orb -right-[12%] -top-[220px] h-[760px] w-[760px]"
+          style={{ ["--orb" as string]: "rgb(124 58 237 / 0.28)", animation: "drift 22s ease-in-out infinite" }}
         />
-        <div
-          className="absolute right-[18%] top-[220px] h-[420px] w-[420px] rounded-full bg-[rgb(178_230_245)]/60 blur-[100px] will-change-transform"
-          style={{ animation: "drift 24s -8s ease-in-out infinite reverse" }}
+        <span
+          className="orb right-[16%] top-[160px] h-[560px] w-[560px]"
+          style={{ ["--orb" as string]: "rgb(6 182 212 / 0.24)", animation: "drift 26s -8s ease-in-out infinite reverse" }}
         />
-        <div
-          className="absolute -right-[5%] top-[380px] h-[380px] w-[380px] rounded-full bg-[rgb(210_200_255)]/70 blur-[100px] will-change-transform"
-          style={{ animation: "drift 28s -4s ease-in-out infinite" }}
+        <span
+          className="orb -right-[6%] top-[320px] h-[480px] w-[480px]"
+          style={{ ["--orb" as string]: "rgb(236 72 153 / 0.16)", animation: "drift 30s -4s ease-in-out infinite" }}
         />
         {/* fine blueprint grid */}
         <div

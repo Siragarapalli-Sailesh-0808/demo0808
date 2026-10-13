@@ -48,10 +48,10 @@ export function Steps({ steps }: { steps: Step[] }) {
   return (
     <ol ref={ref} className="relative">
       <span aria-hidden className="absolute bottom-6 left-[23px] top-6 w-px bg-line-2" />
-      <span ref={fill} aria-hidden className="absolute bottom-6 left-[23px] top-6 w-px origin-top bg-accent" style={{ transform: "scaleY(0)" }} />
+      <span ref={fill} aria-hidden className="absolute bottom-6 left-[22px] top-6 w-[3px] origin-top rounded-full" style={{ transform: "scaleY(0)", background: "linear-gradient(180deg, #7c3aed, #2563eb, #06b6d4)" }} />
       {steps.map((s, i) => (
         <li key={s.title} data-step className="group relative flex gap-6 pb-12 last:pb-0">
-          <span className="relative z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white font-display text-[15px] font-bold text-muted ring-1 ring-line-2 transition-[background-color,color,box-shadow] duration-500 group-data-[on]:bg-accent group-data-[on]:text-white group-data-[on]:ring-accent">
+          <span className="relative z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white font-display text-[15px] font-bold text-muted ring-1 ring-line-2 transition-[background-color,color,box-shadow] duration-500 group-data-[on]:bg-[#5b3df5] group-data-[on]:text-white group-data-[on]:ring-[#a78bfa] group-data-[on]:shadow-[0_10px_24px_-10px_#5b3df5]">
             {i + 1}
           </span>
           <div className="pt-2.5">

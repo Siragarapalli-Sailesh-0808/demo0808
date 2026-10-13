@@ -23,7 +23,7 @@ export function Trust() {
                     key={i}
                     className="group grid h-20 place-items-center rounded-2xl bg-bg ring-1 ring-line transition-[box-shadow,translate,background-color] duration-500 ease-out-expo hover:-translate-y-1 hover:bg-white hover:shadow-card"
                   >
-                    <span className="flex items-center gap-2 text-[13px] font-semibold text-muted/70 grayscale transition-colors duration-500 group-hover:text-accent">
+                    <span className="flex items-center gap-2 text-[13px] font-semibold text-muted/70 transition-colors duration-500 group-hover:text-[#6d28d9]">
                       <span className="h-5 w-5 rounded-md bg-current opacity-30" />
                       {it}
                     </span>

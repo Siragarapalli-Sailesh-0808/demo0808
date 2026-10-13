@@ -23,7 +23,7 @@ export function Faq({ items }: { items: FaqItem[] }) {
                 <span
                   aria-hidden
                   className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ring-1 transition-[rotate,background-color,color] duration-500 ease-out-expo ${
-                    on ? "rotate-45 bg-accent text-white ring-accent" : "ring-line-2"
+                    on ? "rotate-45 bg-[linear-gradient(135deg,#7c3aed,#2563eb)] text-white ring-transparent" : "ring-line-2"
                   }`}
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
