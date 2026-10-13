@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { industryGroups } from "@/lib/content";
 import { industryDetails } from "@/lib/content-pages";
 import { PageHero } from "@/components/page/PageHero";

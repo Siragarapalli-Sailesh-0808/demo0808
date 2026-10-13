@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useState } from "react";
 import { solutions } from "@/lib/content";
 import { ArrowRight, Check, Icon } from "../Icons";
@@ -33,6 +33,7 @@ export function WhatWeOffer() {
             return (
               <article
                 key={s.slug}
+                data-cursor={on ? undefined : "Open"}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
                 tabIndex={0}

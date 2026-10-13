@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useRef } from "react";
 
 /** A link that leans gently toward the cursor. Pointer-only; touch and keyboard behave normally. */
@@ -19,7 +19,7 @@ export function MagneticLink({ href, className, children }: { href: string; clas
   };
 
   return (
-    <span className="inline-block p-4 -m-4" onPointerMove={move} onPointerLeave={leave}>
+    <span data-magnetic className="inline-block p-4 -m-4" onPointerMove={move} onPointerLeave={leave}>
       <Link ref={ref} href={href} className={className}>
         {children}
       </Link>

@@ -34,6 +34,48 @@ export function Motion() {
     };
   }, []);
 
+  // Buttons: click ripple + gentle magnetic pull toward the cursor (desktop)
+  useEffect(() => {
+    const fine = window.matchMedia("(pointer: fine)").matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let current: HTMLElement | null = null;
+
+    const onDown = (e: PointerEvent) => {
+      const btn = (e.target as Element | null)?.closest?.<HTMLElement>(".btn");
+      if (!btn || reduce) return;
+      const r = btn.getBoundingClientRect();
+      const dot = document.createElement("span");
+      dot.className = "ripple";
+      dot.style.left = `${e.clientX - r.left}px`;
+      dot.style.top = `${e.clientY - r.top}px`;
+      btn.appendChild(dot);
+      dot.addEventListener("animationend", () => dot.remove(), { once: true });
+    };
+    const release = () => {
+      if (!current) return;
+      current.style.removeProperty("--bx");
+      current.style.removeProperty("--by");
+      current = null;
+    };
+    const onMove = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse") return;
+      const btn = (e.target as Element | null)?.closest?.<HTMLElement>(".btn");
+      if (!btn || btn.closest("[data-magnetic]")) return release();
+      if (current && current !== btn) release();
+      current = btn;
+      const r = btn.getBoundingClientRect();
+      btn.style.setProperty("--bx", `${(e.clientX - (r.left + r.width / 2)) * 0.18}px`);
+      btn.style.setProperty("--by", `${(e.clientY - (r.top + r.height / 2)) * 0.28}px`);
+    };
+
+    document.addEventListener("pointerdown", onDown, { passive: true });
+    if (fine && !reduce) document.addEventListener("pointermove", onMove, { passive: true });
+    return () => {
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("pointermove", onMove);
+    };
+  }, []);
+
   // Pause looping animations in any [data-anim-zone] that is off-screen (saves GPU/CPU while scrolling)
   useEffect(() => {
     const zones = document.querySelectorAll<HTMLElement>("[data-anim-zone]");

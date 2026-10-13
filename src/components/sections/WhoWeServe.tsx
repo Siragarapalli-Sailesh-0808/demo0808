@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useEffect, useRef, useState } from "react";
 import { industryGroups } from "@/lib/content";
 import { ArrowRight } from "../Icons";
@@ -126,7 +126,7 @@ export function WhoWeServe() {
 function Slide({ group, on }: { group: (typeof industryGroups)[number]; on: boolean }) {
   return (
     <div className="relative h-full w-full overflow-hidden bg-gradient-to-br from-white via-tint to-tint-2">
-      <div aria-hidden className="absolute -right-10 top-0 h-full w-full opacity-40 md:w-[62%] md:opacity-100">
+      <div aria-hidden className="sd-parallax absolute -right-10 top-0 h-full w-full opacity-40 md:w-[62%] md:opacity-100" style={{ ["--p" as string]: "28px" }}>
         <Art kind={group.art} />
       </div>
       <div aria-hidden className="absolute inset-0 bg-white/75 md:bg-transparent md:bg-gradient-to-r md:from-white md:via-white/70 md:to-transparent" />

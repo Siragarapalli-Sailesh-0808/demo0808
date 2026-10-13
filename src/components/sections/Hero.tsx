@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { ArrowRight } from "../Icons";
 import { HeroBackdrop, HeroPanel } from "./HeroVisual";
 

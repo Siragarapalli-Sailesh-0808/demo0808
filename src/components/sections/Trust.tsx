@@ -1,36 +1,57 @@
 import { trustGroups } from "@/lib/content";
 
-/** Partner / accreditation logos. Each tile is a placeholder until real logos are supplied. */
+/**
+ * Partners, accreditations and memberships as an endless, slow marquee.
+ * Pure CSS (transform only); pauses on hover; tiles go from grey to colour.
+ * Each tile is a placeholder until the real logos are supplied.
+ */
+const tileColors = ["#7c3aed", "#2563eb", "#0891b2", "#db2777", "#059669", "#d97706"];
+
 export function Trust() {
+  const tiles = trustGroups.flatMap((g) => g.items.map((label) => ({ label, group: g.title })));
   return (
-    <section aria-labelledby="trust-title" className="relative border-y border-line bg-white py-20 md:py-24">
+    <section aria-labelledby="trust-title" data-anim-zone className="relative border-y border-line bg-white py-16 md:py-20">
       <div className="container-x">
         <h2 id="trust-title" className="sr-only">
           Partnerships, accreditations and memberships
         </h2>
-        <div className="grid gap-12 md:grid-cols-12 md:gap-8">
-          {trustGroups.map((g, gi) => (
-            <div
-              key={g.title}
-              data-reveal
-              style={{ ["--d" as string]: `${gi * 90}ms` }}
-              className={g.items.length > 2 ? "md:col-span-6" : "md:col-span-3"}
-            >
-              <p className="text-center text-[13px] font-semibold uppercase tracking-[0.08em] text-muted md:text-left">{g.title}</p>
-              <ul className={`mt-6 grid gap-3 ${g.items.length > 2 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-2"}`}>
-                {g.items.map((it, i) => (
+        <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-center" data-reveal>
+          {trustGroups.map((g, i) => (
+            <li key={g.title} className="flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.08em] text-muted">
+              <span className="h-2 w-2 rounded-full" style={{ background: tileColors[i * 2] }} />
+              {g.title}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div
+        className="group relative mt-10 overflow-hidden"
+        style={{
+          maskImage: "linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)",
+          WebkitMaskImage: "linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)",
+        }}
+      >
+        <div className="marquee flex w-max group-hover:[animation-play-state:paused]">
+          {[0, 1].map((copy) => (
+            <ul key={copy} aria-hidden={copy === 1} className="flex shrink-0 gap-4 pr-4">
+              {[...tiles, ...tiles].map((t, i) => {
+                const c = tileColors[i % tileColors.length];
+                return (
                   <li
                     key={i}
-                    className="group grid h-20 place-items-center rounded-2xl bg-bg ring-1 ring-line transition-[box-shadow,translate,background-color] duration-500 ease-out-expo hover:-translate-y-1 hover:bg-white hover:shadow-card"
+                    title={t.group}
+                    style={{ ["--tc" as string]: c }}
+                    className="logo-tile grid h-20 w-48 shrink-0 place-items-center rounded-2xl bg-bg ring-1 ring-line"
                   >
-                    <span className="flex items-center gap-2 text-[13px] font-semibold text-muted/70 transition-colors duration-500 group-hover:text-[#6d28d9]">
-                      <span className="h-5 w-5 rounded-md bg-current opacity-30" />
-                      {it}
+                    <span className="flex items-center gap-2.5 text-[14px] font-semibold">
+                      <span className="logo-mark h-7 w-7 rounded-lg" />
+                      {t.label}
                     </span>
                   </li>
-                ))}
-              </ul>
-            </div>
+                );
+              })}
+            </ul>
           ))}
         </div>
       </div>

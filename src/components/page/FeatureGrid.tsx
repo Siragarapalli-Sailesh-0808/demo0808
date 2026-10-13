@@ -2,23 +2,20 @@
 
 import type { Feature } from "@/lib/content-pages";
 import { toneOrder, toneVars } from "@/lib/tones";
+import { cardLeave, cardMove } from "@/lib/pointer";
 
 /** Numbered feature cards with a cursor-following spotlight. */
 export function FeatureGrid({ items, cols = 3 }: { items: Feature[]; cols?: 2 | 3 }) {
-  const spotlight = (e: React.PointerEvent<HTMLElement>) => {
-    const t = e.currentTarget;
-    const r = t.getBoundingClientRect();
-    t.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    t.style.setProperty("--my", `${e.clientY - r.top}px`);
-  };
   return (
     <ul className={`grid gap-4 md:grid-cols-2 ${cols === 3 ? "lg:grid-cols-3" : ""} lg:gap-5`}>
       {items.map((f, i) => (
         <li key={f.title} data-reveal style={{ ["--d" as string]: `${(i % 3) * 70}ms`, ...toneVars(toneOrder[i % toneOrder.length]) }}>
           <article
-            onPointerMove={spotlight}
-            className="group relative isolate h-full overflow-hidden rounded-3xl bg-surface p-7 shadow-card ring-1 ring-line transition-[box-shadow,translate] duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-lift md:p-8"
+            onPointerMove={cardMove}
+            onPointerLeave={cardLeave}
+            className="tilt-card group relative isolate h-full overflow-hidden rounded-3xl bg-surface p-7 shadow-card ring-1 ring-line hover:-translate-y-1 hover:shadow-lift md:p-8"
           >
+            <span aria-hidden className="glow-border" />
             <span
               aria-hidden
               className="pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"

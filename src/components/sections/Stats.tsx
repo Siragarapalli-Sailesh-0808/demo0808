@@ -34,42 +34,65 @@ export function Stats() {
   );
 }
 
+/**
+ * Odometer: each digit is a 0–9 strip that rolls into place when the stats come into view.
+ * Server HTML already shows the final number (SEO / no-JS); transform-only animation.
+ */
 function Counter({ to }: { to: number }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [n, setN] = useState(to); // SSR shows the real number (good for SEO and no-JS)
+  const [armed, setArmed] = useState(false); // false = show final digits
+  const [rolled, setRolled] = useState(true);
 
   useEffect(() => {
     const el = ref.current;
     if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    setN(0);
-    let raf = 0;
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) return; // already visible on load: leave as is
+    setArmed(true);
+    setRolled(false);
     const io = new IntersectionObserver(
       ([e]) => {
         if (!e.isIntersecting) return;
         io.disconnect();
-        const t0 = performance.now();
-        const dur = 1600;
-        const step = (t: number) => {
-          const p = Math.min(1, (t - t0) / dur);
-          const eased = 1 - Math.pow(1 - p, 4);
-          setN(Math.round(to * eased));
-          if (p < 1) raf = requestAnimationFrame(step);
-        };
-        raf = requestAnimationFrame(step);
+        requestAnimationFrame(() => setRolled(true));
       },
       { threshold: 0.4 },
     );
     io.observe(el);
-    return () => {
-      io.disconnect();
-      cancelAnimationFrame(raf);
-    };
-  }, [to]);
+    return () => io.disconnect();
+  }, []);
 
+  const chars = to.toLocaleString("en-US").split("");
+  let digitIndex = 0;
   return (
-    <span ref={ref} className="tabular-nums">
-      {n.toLocaleString("en-US")}
+    <>
+    <span className="sr-only">{to.toLocaleString("en-US")}</span>
+    <span ref={ref} className="odo tabular-nums" aria-hidden data-armed={armed || undefined}>
+      {chars.map((ch, i) => {
+        if (!/\d/.test(ch)) {
+          return (
+            <span key={i} aria-hidden>
+              {ch}
+            </span>
+          );
+        }
+        const d = Number(ch);
+        const idx = digitIndex++;
+        return (
+          <span key={i} className="odo-digit" aria-hidden>
+            <span
+              className="odo-strip"
+              style={{ transform: `translateY(-${(rolled ? d + 10 : 0) * 5}%)`, ["--od" as string]: `${idx * 90}ms` }}
+            >
+              {Array.from({ length: 20 }, (_, k) => (
+                <span key={k}>{k % 10}</span>
+              ))}
+            </span>
+          </span>
+        );
+      })}
     </span>
+    </>
   );
 }
 

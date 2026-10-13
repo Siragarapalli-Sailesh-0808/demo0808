@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useState } from "react";
 import { caseStudies } from "@/lib/content";
 import { ArrowLeft, ArrowRight, Check } from "../Icons";
@@ -37,8 +37,8 @@ export function CaseStudies() {
         <div className="mt-12 grid items-center gap-10 lg:grid-cols-12 lg:gap-16" data-reveal style={{ ["--d" as string]: "120ms" }}>
           {/* Visual */}
           <div className="relative lg:col-span-6">
-            <div aria-hidden className="absolute -left-6 -top-6 h-[70%] w-[75%] rounded-[32px]" style={{ background: "linear-gradient(135deg, #ddd6fe, #bfdbfe 55%, #a5f3fc)" }} />
-            <div key={c.slug} className="fade-up relative">
+            <div aria-hidden className="sd-parallax absolute -left-6 -top-6 h-[70%] w-[75%] rounded-[32px]" style={{ ["--p" as string]: "50px", background: "linear-gradient(135deg, #ddd6fe, #bfdbfe 55%, #a5f3fc)" }} />
+            <div key={c.slug} className="wipe-in relative">
               <Dashboard bars={c.bars} title={c.service} />
             </div>
           </div>

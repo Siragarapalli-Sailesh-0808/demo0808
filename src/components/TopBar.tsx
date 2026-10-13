@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { openRoles } from "@/lib/content";
 import { tones, toneOrder } from "@/lib/tones";
 import { ArrowRight } from "./Icons";

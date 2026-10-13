@@ -39,6 +39,7 @@ export function HeroPanel() {
       <div aria-hidden className="absolute left-1/2 top-1/2 aspect-square w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full ring-1 ring-[#7c3aed]/10" />
       <div aria-hidden className="absolute left-1/2 top-1/2 aspect-square w-[100%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#2563eb]/15" />
 
+      <div className="sd-parallax relative" style={{ ["--p" as string]: "-36px" }}>
       <div className="relative" style={{ animation: "float 8s ease-in-out infinite" }}>
         <TiltArt maskSrc={heroArt.src}>
         <Image
@@ -50,6 +51,7 @@ export function HeroPanel() {
           draggable={false}
         />
         </TiltArt>
+      </div>
       </div>
 
       {/* Glass badges */}

@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useEffect, useRef } from "react";
 import { services } from "@/lib/content";
 import { ArrowUpRight, Icon } from "../Icons";
 import { toneVars } from "@/lib/tones";
+import { cardLeave, cardMove } from "@/lib/pointer";
 
 /** Bento layout per card on large screens (6-column grid). */
 const spans = ["lg:col-span-3", "lg:col-span-3", "lg:col-span-2", "lg:col-span-2", "lg:col-span-2"];
@@ -29,13 +30,6 @@ export function WhatWeDo() {
     io.observe(el);
     return () => io.disconnect();
   }, []);
-
-  const spotlight = (e: React.PointerEvent<HTMLElement>) => {
-    const t = e.currentTarget;
-    const r = t.getBoundingClientRect();
-    t.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    t.style.setProperty("--my", `${e.clientY - r.top}px`);
-  };
 
   return (
     <section id="what-we-do" className="relative py-24 md:py-32">
@@ -97,17 +91,20 @@ export function WhatWeDo() {
                 <div key={s.slug} data-reveal style={{ ["--d" as string]: `${i * 70}ms` }} className={`${spans[i]} ${featured ? "md:col-span-2" : ""}`}>
                 <Link
                   href={`/services/${s.slug}`}
-                  onPointerMove={spotlight}
+                  data-cursor="Explore"
+                  onPointerMove={cardMove}
+                  onPointerLeave={cardLeave}
                   style={{
                     ...toneVars(s.tone),
                     ...(featured ? { background: "linear-gradient(140deg, #4c1d95 0%, #3730a3 45%, #0e7490 100%)" } : {}),
                   }}
-                  className={`group relative isolate flex h-full min-h-[280px] flex-col overflow-hidden rounded-3xl p-7 transition-[box-shadow,translate] duration-500 ease-out-expo hover:-translate-y-1 md:p-8 ${
+                  className={`tilt-card group relative isolate flex h-full min-h-[280px] flex-col overflow-hidden rounded-3xl p-7 hover:-translate-y-1 md:p-8 ${
                     featured
                       ? "text-white shadow-[0_40px_70px_-34px_rgb(76_29_149/0.75)]"
                       : "bg-surface shadow-card ring-1 ring-line hover:shadow-[0_30px_60px_-30px_var(--c)] hover:ring-[var(--c2)]"
                   }`}
                 >
+                  <span aria-hidden className="glow-border" style={featured ? { ["--glow" as string]: "rgb(255 255 255 / 0.85)" } : undefined} />
                   {/* cursor spotlight */}
                   <span
                     aria-hidden

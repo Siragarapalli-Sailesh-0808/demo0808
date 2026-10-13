@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { site } from "@/lib/site";
 
 /** Placeholder logo — swap for the real SVG logo when it arrives. */

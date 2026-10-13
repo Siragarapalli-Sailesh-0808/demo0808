@@ -1,6 +1,7 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { ArrowRight } from "../Icons";
 import { MagneticLink } from "../MagneticLink";
+import { RippleDots } from "../effects/RippleDots";
 
 /** Bold gradient call-to-action band. Glows are radial gradients (no blur filters) so scrolling stays smooth. */
 export function CtaBand() {
@@ -14,16 +15,7 @@ export function CtaBand() {
         >
           <span aria-hidden className="orb -left-24 -top-32 -z-10 h-[460px] w-[460px]" style={{ ["--orb" as string]: "rgb(236 72 153 / 0.45)", animation: "drift 20s ease-in-out infinite" }} />
           <span aria-hidden className="orb -bottom-40 -right-20 -z-10 h-[520px] w-[520px]" style={{ ["--orb" as string]: "rgb(34 211 238 / 0.45)", animation: "drift 24s -6s ease-in-out infinite reverse" }} />
-          <div
-            aria-hidden
-            className="absolute inset-0 -z-10 opacity-40"
-            style={{
-              backgroundImage: "radial-gradient(rgb(255 255 255 / 0.5) 1px, transparent 1.2px)",
-              backgroundSize: "24px 24px",
-              maskImage: "radial-gradient(60% 70% at 50% 50%, #000, transparent)",
-              WebkitMaskImage: "radial-gradient(60% 70% at 50% 50%, #000, transparent)",
-            }}
-          />
+          <RippleDots />
 
           <p className="mx-auto inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-[12.5px] font-bold uppercase tracking-[0.08em] ring-1 ring-white/25">
             <span className="h-2 w-2 rounded-full bg-[#fde68a]" /> Let&apos;s talk

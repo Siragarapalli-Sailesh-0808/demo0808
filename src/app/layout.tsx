@@ -7,6 +7,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Motion } from "@/components/Motion";
 import { FloatingContact } from "@/components/FloatingContact";
+import { Cursor } from "@/components/effects/Cursor";
+import { ViewTransitions } from "next-view-transitions";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -52,6 +54,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
+    <ViewTransitions>
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* Marks JS as available before paint, so reveal styles never hide content for no-JS visitors or crawlers */}
@@ -68,8 +71,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <FloatingContact />
+        <Cursor />
         <Motion />
       </body>
     </html>
+    </ViewTransitions>
   );
 }
