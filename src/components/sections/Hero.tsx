@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "../Icons";
 import { HeroBackdrop, HeroPanel } from "./HeroVisual";
 
-const line2 = ["Stronger", "teams."];
+const rotating = ["teams", "clouds", "data", "talent"];
 
 export function Hero() {
   return (
@@ -30,12 +30,21 @@ export function Hero() {
               </span>
             </span>
             <br />
-            {line2.map((w, i) => (
-              <span key={w} className="word" style={{ ["--i" as string]: i + 2 }}>
-                <span>{w}</span>
-                {i < line2.length - 1 && " "}
+            <span className="word" style={{ ["--i" as string]: 2 }}>
+              <span>Stronger</span>
+              {"\u00A0"}
+            </span>
+            {/* Rotating word — pure CSS cycle; screen readers and search engines get "teams." */}
+            <span className="fade-up inline-block" style={{ ["--d" as string]: "260ms" }}>
+              <span className="rotator" aria-hidden>
+                {rotating.map((w, i) => (
+                  <span key={w} style={{ animationDelay: `${i * 2.6 - 0.6}s` }}>
+                    <span className="text-rotator">{w}</span>.
+                  </span>
+                ))}
               </span>
-            ))}
+              <span className="sr-only">teams.</span>
+            </span>
           </h1>
 
           <p

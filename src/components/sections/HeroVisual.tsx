@@ -1,5 +1,7 @@
 import Image from "next/image";
 import heroArt from "../../../public/hero-3d.webp";
+import { Waves } from "../effects/Waves";
+import { TiltArt } from "../effects/TiltArt";
 
 /**
  * Hero background: static CSS colour mesh (no WebGL, no per-frame work → smooth scrolling).
@@ -14,16 +16,8 @@ export function HeroBackdrop() {
             "radial-gradient(42% 52% at 88% 30%, rgb(124 58 237 / 0.20), transparent 70%), radial-gradient(38% 46% at 72% 78%, rgb(6 182 212 / 0.16), transparent 70%), radial-gradient(30% 40% at 100% 95%, rgb(236 72 153 / 0.12), transparent 70%), radial-gradient(40% 40% at 0% 0%, rgb(124 58 237 / 0.07), transparent 70%), var(--color-bg)",
         }}
       />
-      {/* faint dot grid on the right half */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: "radial-gradient(rgb(91 61 245 / 0.16) 1px, transparent 1.2px)",
-          backgroundSize: "26px 26px",
-          maskImage: "radial-gradient(50% 60% at 78% 45%, #000, transparent 75%)",
-          WebkitMaskImage: "radial-gradient(50% 60% at 78% 45%, #000, transparent 75%)",
-        }}
-      />
+      {/* interactive waves — flow on their own and part around the cursor */}
+      <Waves />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-bg" />
     </div>
   );
@@ -45,7 +39,8 @@ export function HeroPanel() {
       <div aria-hidden className="absolute left-1/2 top-1/2 aspect-square w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full ring-1 ring-[#7c3aed]/10" />
       <div aria-hidden className="absolute left-1/2 top-1/2 aspect-square w-[100%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#2563eb]/15" />
 
-      <div className="relative will-change-transform" style={{ animation: "float 8s ease-in-out infinite" }}>
+      <div className="relative" style={{ animation: "float 8s ease-in-out infinite" }}>
+        <TiltArt maskSrc={heroArt.src}>
         <Image
           src={heroArt}
           alt="Colourful 3D shapes representing connected technology systems and teams"
@@ -54,6 +49,7 @@ export function HeroPanel() {
           className="h-auto w-full select-none"
           draggable={false}
         />
+        </TiltArt>
       </div>
 
       {/* Glass badges */}
