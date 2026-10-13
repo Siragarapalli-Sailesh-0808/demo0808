@@ -20,9 +20,10 @@ export function Motion() {
     // Frame-rate independent easing; Lenis drives its own rAF loop and idles when nothing moves.
     const lenis = new Lenis({
       autoRaf: true,
-      lerp: 0.085,
+      duration: 1.1,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo-out: quick start, silky stop
       smoothWheel: true,
-      wheelMultiplier: 0.95,
+      wheelMultiplier: 1,
       touchMultiplier: 1,
       anchors: { offset: -80 },
     });

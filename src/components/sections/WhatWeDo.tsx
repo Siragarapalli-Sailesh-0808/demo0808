@@ -13,39 +13,21 @@ export function WhatWeDo() {
   const wrap = useRef<HTMLDivElement>(null);
   const path = useRef<SVGPathElement>(null);
 
-  // Draw the connecting line as the grid scrolls through the viewport
+  // Draw the connecting line once when the grid enters view (one CSS transition, no per-scroll work)
   useEffect(() => {
     const el = wrap.current;
     const p = path.current;
     if (!el || !p) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      p.style.strokeDashoffset = "0";
-      return;
-    }
-    let raf = 0;
-    let active = false;
-    const update = () => {
-      raf = 0;
-      const r = el.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const prog = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.2)));
-      p.style.strokeDashoffset = String(1 - prog);
-    };
-    const onScroll = () => {
-      if (active && !raf) raf = requestAnimationFrame(update);
-    };
-    const io = new IntersectionObserver(([e]) => {
-      active = e.isIntersecting;
-      if (active) onScroll();
-    });
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        p.style.strokeDashoffset = "0";
+        io.disconnect();
+      },
+      { threshold: 0.15 },
+    );
     io.observe(el);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    update();
-    return () => {
-      io.disconnect();
-      window.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(raf);
-    };
+    return () => io.disconnect();
   }, []);
 
   const spotlight = (e: React.PointerEvent<HTMLElement>) => {
@@ -104,7 +86,7 @@ export function WhatWeDo() {
               vectorEffect="non-scaling-stroke"
               pathLength={1}
               strokeDasharray="1"
-              style={{ strokeDashoffset: 1 }}
+              style={{ strokeDashoffset: 1, transition: "stroke-dashoffset 2.4s cubic-bezier(.16,1,.3,1) .2s" }}
             />
           </svg>
 

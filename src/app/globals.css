@@ -132,11 +132,10 @@
   }
   .text-gradient-live {
     background-image: linear-gradient(100deg, #7c3aed, #4f46e5, #2563eb, #06b6d4, #7c3aed);
-    background-size: 220% 100%;
+    background-size: 100% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: gradient-pan 7s ease-in-out infinite alternate;
   }
 
   .btn {

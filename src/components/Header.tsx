@@ -19,6 +19,7 @@ export function Header() {
   const [indicator, setIndicator] = useState({ x: 0, w: 0, o: 0 });
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const bar = useRef<HTMLSpanElement>(null);
+  const scrolledRef = useRef(false);
   const closeTimer = useRef<number | undefined>(undefined);
 
   const activeIndex = nav.findIndex((n) => pathname === n.href || pathname.startsWith(n.href + "/"));
@@ -31,7 +32,11 @@ export function Header() {
       ticking = true;
       requestAnimationFrame(() => {
         const y = window.scrollY;
-        setScrolled(y > 8);
+        const next = y > 8;
+        if (next !== scrolledRef.current) {
+          scrolledRef.current = next;
+          setScrolled(next);
+        }
         const max = document.documentElement.scrollHeight - window.innerHeight;
         if (bar.current) bar.current.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
         ticking = false;
