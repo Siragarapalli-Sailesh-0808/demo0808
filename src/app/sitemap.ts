@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
-import { services, solutions } from "@/lib/content";
+import { services } from "@/lib/content";
+import { jobs } from "@/lib/jobs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -9,10 +10,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", priority: 0.8 },
     { path: "/services", priority: 0.9 },
     ...services.map((s) => ({ path: `/services/${s.slug}`, priority: 0.8 })),
-    { path: "/solutions", priority: 0.8 },
-    ...solutions.map((s) => ({ path: `/solutions/${s.slug}`, priority: 0.7 })),
-    { path: "/industries", priority: 0.8 },
-    { path: "/contact", priority: 0.7 },
+    { path: "/industries", priority: 0.7 },
+    { path: "/careers", priority: 0.8 },
+    ...jobs.map((j) => ({ path: `/careers/${j.slug}`, priority: 0.6 })),
+    { path: "/contact", priority: 0.8 },
+    { path: "/privacy-policy", priority: 0.2 },
+    { path: "/terms-of-use", priority: 0.2 },
+    { path: "/equal-opportunity", priority: 0.2 },
   ];
   return routes.map((r) => ({
     url: `${site.url}${r.path}`,

@@ -1,38 +1,37 @@
 /**
- * Global brand + contact settings.
- * Replace the placeholder values below once the final company name,
- * logo and contact details are confirmed — every page reads from here.
+ * Global brand + contact settings — every page reads from here.
+ * Details taken from the existing mandkstaffing.com website.
  */
 export const site = {
-  name: "Your Company",
-  legalName: "Your Company Group Inc.",
-  /** Two-letter mark used in the placeholder logo until the real logo arrives. */
-  mark: "YC",
-  url: "https://www.example.com",
-  tagline: "IT Consulting & Talent Solutions",
+  name: "M & K Technovations",
+  legalName: "M & K Technovations Inc.",
+  shortName: "M & K",
+  url: "https://mandkstaffing.com",
+  founded: 2013,
+  tagline: "IT Staffing, Database & Technology Services",
   description:
-    "We design, modernize and run mission-critical technology for enterprises and public institutions — and provide the expert talent that keeps it moving.",
-  phone: "+1 (000) 000-0000",
-  /** WhatsApp number in international format, digits only (country code first). */
-  whatsapp: "910000000000",
-  email: "hello@example.com",
+    "M & K Technovations delivers the right people, with the right skills, at the right price — IT staff augmentation, 100% US-based database administration, ERP support and managed IT services for enterprises and government agencies since 2013.",
+  phone: "(347) 944-9929",
+  phoneHref: "+13479449929",
+  /** WhatsApp number in international format, digits only. Leave empty to hide the WhatsApp button. */
+  whatsapp: "",
+  email: "mandip@mandkstaffing.com",
+  emails: ["mandip@mandkstaffing.com", "deep@mandkstaffing.com"],
+  address: {
+    street: "225 Market Street, Suite #510",
+    city: "Harrisburg",
+    region: "PA",
+    postalCode: "17101",
+    country: "US",
+  },
   offices: [
     {
-      country: "USA",
-      lines: ["0000 Business Park Drive, Suite 000", "City, Texas 00000", "United States"],
-    },
-    {
-      country: "India",
-      lines: ["Office No. 000, Tower Name", "Madhapur, Hyderabad", "Telangana 500000"],
+      country: "Headquarters — Harrisburg, PA",
+      lines: ["225 Market Street, Suite #510", "Harrisburg, PA 17101", "United States"],
     },
   ],
-  socials: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/", icon: "linkedin" },
-    { label: "X", href: "https://x.com/", icon: "x" },
-    { label: "Facebook", href: "https://www.facebook.com/", icon: "facebook" },
-    { label: "Instagram", href: "https://www.instagram.com/", icon: "instagram" },
-    { label: "YouTube", href: "https://www.youtube.com/", icon: "youtube" },
-  ],
+  /** Add real profile URLs here (LinkedIn etc.). Empty = hidden everywhere. */
+  socials: [] as { label: string; href: string; icon: string }[],
 } as const;
 
 export type Site = typeof site;

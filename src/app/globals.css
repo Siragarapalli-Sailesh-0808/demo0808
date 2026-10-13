@@ -830,3 +830,11 @@ header {
     opacity: 0;
   }
 }
+
+/* Policy pages */
+.legal { color: var(--color-ink-2); font-size: 16.5px; line-height: 1.75; }
+.legal h2 { margin: 2.4em 0 0.6em; font-size: 1.35rem; font-weight: 700; color: var(--color-ink); }
+.legal p, .legal ul { margin: 0 0 1em; }
+.legal ul { padding-left: 1.25em; list-style: disc; }
+.legal li { margin: 0.35em 0; }
+.legal a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }

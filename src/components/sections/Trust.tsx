@@ -13,7 +13,7 @@ export function Trust() {
     <section aria-labelledby="trust-title" data-anim-zone className="relative border-y border-line bg-white py-16 md:py-20">
       <div className="container-x">
         <h2 id="trust-title" className="sr-only">
-          Partnerships, accreditations and memberships
+          Technologies we support
         </h2>
         <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-center" data-reveal>
           {trustGroups.map((g, i) => (
@@ -42,7 +42,7 @@ export function Trust() {
                     key={i}
                     title={t.group}
                     style={{ ["--tc" as string]: c }}
-                    className="logo-tile grid h-20 w-48 shrink-0 place-items-center rounded-2xl bg-bg ring-1 ring-line"
+                    className="logo-tile grid h-20 min-w-40 px-8 shrink-0 place-items-center rounded-2xl bg-bg ring-1 ring-line"
                   >
                     <span className="flex items-center gap-2.5 text-[14px] font-semibold">
                       <span className="logo-mark h-7 w-7 rounded-lg" />

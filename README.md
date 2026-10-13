@@ -1,7 +1,7 @@
-# Company Website — Phases 1 & 2
+# M & K Technovations Inc. — website
 
-Next.js 15 (App Router) · TypeScript · Tailwind CSS v4 · OGL shader · Lenis smooth scroll.
-Light theme only. Typography: Plus Jakarta Sans (headings) + Inter (body), self-hosted.
+Next.js 15 (App Router) · TypeScript · Tailwind CSS v4 · Lenis smooth scroll. Light theme only.
+Typography: Plus Jakarta Sans (headings) + Inter (body), self-hosted. Replaces the WordPress site at mandkstaffing.com.
 
 ## Run it
 
@@ -11,83 +11,53 @@ npm run dev        # http://localhost:3000
 npm run build      # production build
 ```
 
-## Deploy to Vercel
-
-1. Push this folder to a GitHub repo.
-2. In Vercel: **Add New → Project → Import** the repo. Framework is detected automatically; no settings needed.
-3. After you connect your domain, update `url` in `src/lib/site.ts` so the sitemap, canonical links and social previews use it.
-
-## Contact form setup (do this once on Vercel)
-
-The form at `/contact` emails each enquiry to you through [Resend](https://resend.com) (free tier is plenty).
-
-1. Create a Resend account and verify your company domain.
-2. In Vercel → Project → **Settings → Environment Variables**, add the three values from `.env.example`:
-   `RESEND_API_KEY`, `CONTACT_FROM` (an address on your verified domain) and `CONTACT_TO` (where enquiries should land).
-3. Redeploy. Replies go straight to the visitor (their address is set as reply-to).
-
-Without these values the form shows a friendly "temporarily unavailable — email us" message in production;
-in local development it simply logs the enquiry to the terminal. Spam protection: hidden honeypot field + basic rate limit.
-
 ## Where to edit things
 
 | What | File |
-|---|---|
-| Company name, logo mark, phone, **WhatsApp number**, email, offices, socials | `src/lib/site.ts` |
-| Jobs in the "Now hiring" top bar, home-page stats | `src/lib/content.ts` (`openRoles`, `stats`) |
-| Brand gradient + per-service colours | `src/app/globals.css` (`--grad-brand`) and `src/lib/tones.ts` |
-| Home page copy (services, solutions, industries, case studies, partner tiles) | `src/lib/content.ts` |
-| Inner page copy (service/solution details, FAQs, industries, About, contact options) | `src/lib/content-pages.ts` |
-| Colours, fonts, spacing tokens | `src/app/globals.css` (`@theme` block) |
-| Logo (placeholder until the real one arrives) | `src/components/Logo.tsx` |
-| SEO defaults (title, description, keywords) | `src/app/layout.tsx` |
-| Pages listed in the sitemap | `src/app/sitemap.ts` |
+| --- | --- |
+| Phone, emails, address, social links, WhatsApp | `src/lib/site.ts` |
+| Home page content, services, engagement models, stats | `src/lib/content.ts` |
+| Service pages, About page, "Who we serve" details | `src/lib/content-pages.ts` |
+| **Job openings** | `src/lib/jobs.ts` — copy the example, fill it in, push. Each job gets its own page and Google for Jobs data. |
+| Logo files | `public/brand/` (`logo.svg`, `logo-white.svg`, `logo-navy.svg`, `mark.svg`) |
+| Redirects from old WordPress URLs | `next.config.ts` |
 
-## Home page sections
+Empty `socials` / `whatsapp` values hide those buttons everywhere.
 
-`src/components/sections/`
+## Forms (contact + job applications)
 
-1. **Hero** — live "liquid light" WebGL shader + floating cards that follow the mouse
-2. **What we do** — 5 service cards (bento), cursor spotlight, connecting line that draws on scroll
-3. **What we offer** — 4 solution panels that expand on hover (accordion on mobile)
-4. **Who we serve** — 4 industry groups, auto-playing tabs with a wipe transition
-5. **Case studies** — 3 sample stories with an animated dashboard
-6. **Partnerships / accreditations / memberships** — placeholder logo tiles
-7. **Call to action** — drifting light background, magnetic button
-8. **Footer** — links, contact, US + India offices, legal links
+Both forms email you through [Resend](https://resend.com). Applications arrive with the résumé attached
+(PDF/DOC/DOCX, max 4 MB, file type checked on the server). Spam protection: hidden honeypot + rate limit.
 
-## Performance safeguards
+1. Create a Resend account and add the domain `mandkstaffing.com`. Resend gives you a few DNS records
+   (on the `send.` subdomain and `resend._domainkey`). **Add them alongside your existing records — they
+   don't replace your current email records.**
+2. In Vercel → Project → **Settings → Environment Variables**, add the values from `.env.example`.
+3. Redeploy.
 
-- No CSS blur filters or backdrop blur anywhere: soft glows are radial gradients (blurs were the main cause of stuttery scrolling).
-- Looping animations pause automatically when their section is off-screen; the job ticker pauses once tucked away.
-- The hero shader draws at most ~20fps while the page is scrolling, and phones use a static gradient instead.
+## Going live on mandkstaffing.com — cutover checklist
 
-- Shader starts only after the page has loaded, renders at reduced resolution, pauses off-screen and in hidden tabs, runs at 30fps on phones.
-- Devices without a real GPU, low-power devices and "reduce motion" users get a single still frame.
-- Smooth scrolling is desktop-only (phones keep native scrolling).
-- Animations use transform/opacity only; no layout shift (CLS ≈ 0).
-- First-load JavaScript: ~118 KB.
+The domain's **email (mandip@ / deep@mandkstaffing.com) must keep working**. Only the website records change.
 
-## SEO included
+**Before**
+1. Back up the WordPress site (files + database) from the current host. Keep that hosting for 2–4 weeks after launch.
+2. Find out where DNS is managed (registrar or host). Screenshot every existing DNS record.
+3. Lower the TTL of the website records (`@` A record and `www`) to 300 seconds a day ahead.
+4. In Vercel → Project → Settings → **Domains**, add `mandkstaffing.com` and `www.mandkstaffing.com`.
+   Vercel shows the exact records to use.
+5. Set up the Resend environment variables (above) and send a test from both forms on the preview link.
 
-Static pre-rendering, per-page metadata, Open Graph + Twitter cards, auto-generated social image,
-`sitemap.xml`, `robots.txt`, Organization + WebSite JSON-LD structured data, semantic headings, skip link.
+**Cutover — change only these**
+- `@` (apex) **A** record → the IP Vercel shows (currently `76.76.21.21`)
+- `www` **CNAME** → the value Vercel shows (e.g. `cname.vercel-dns.com`)
 
-## Pages
+**Do not touch:** MX records, SPF (`TXT v=spf1 …`), DKIM, DMARC, autodiscover/mail records, or anything
+else unrelated to the website. Don't switch nameservers to Vercel — that would move email records too.
 
-| Route | What's on it |
-|---|---|
-| `/` | Home (sections above) |
-| `/about` | Stats, story, mission & vision, values, how we work, leadership, offices |
-| `/services` + 5 detail pages | Capabilities, engagement models (staffing), approach timeline, outcomes, FAQ, related services |
-| `/solutions` + 4 detail pages | Capabilities, outcomes, supporting services, other solutions |
-| `/industries` | Sticky section nav; challenges and how we help for each industry group |
-| `/contact` | Enquiry form, direct contact, offices, what happens next |
-
-Every page has its own title, description, canonical URL, breadcrumbs (with structured data),
-and the sitemap lists them all. Service pages also publish Service + FAQ structured data for rich Google results.
-
-## Not built yet (next phase)
-
-Insights (blog + case-study articles), Careers (blank until content is provided), and the legal pages
-(Privacy, Terms, Cookies, Security). Links to these currently show the custom "page on its way" screen.
+**After**
+1. Check https://mandkstaffing.com and https://www.mandkstaffing.com load with a padlock (Vercel issues SSL automatically).
+2. Send and receive a test email on mandip@ and deep@.
+3. Spot-check old URLs redirect, e.g. `/about-us/`, `/contact-us/`, `/services/support-services/`, `/jobs/`.
+4. Google Search Console: verify the domain, submit `https://mandkstaffing.com/sitemap.xml`, and use URL Inspection on the home page.
+5. Update the website link on Google Business Profile, LinkedIn and directories if needed.
+6. After 2–4 weeks with no issues, cancel the old WordPress hosting (not the domain or email!).

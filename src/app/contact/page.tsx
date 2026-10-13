@@ -29,9 +29,18 @@ export default function ContactPage() {
           mainEntity: {
             "@type": "Organization",
             name: site.legalName,
+            url: site.url,
             email: site.email,
-            telephone: site.phone,
-            contactPoint: [{ "@type": "ContactPoint", contactType: "sales", email: site.email, telephone: site.phone, availableLanguage: ["English"] }],
+            telephone: site.phoneHref,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: site.address.street,
+              addressLocality: site.address.city,
+              addressRegion: site.address.region,
+              postalCode: site.address.postalCode,
+              addressCountry: site.address.country,
+            },
+            contactPoint: site.emails.map((email) => ({ "@type": "ContactPoint", contactType: "sales", email, telephone: site.phoneHref, areaServed: "US", availableLanguage: ["English"] })),
           },
         }}
       />
@@ -52,19 +61,21 @@ export default function ContactPage() {
             <div className="rounded-[28px] p-8 text-white" data-reveal style={{ ["--d" as string]: "80ms", background: "linear-gradient(140deg, #1e1b4b, #312e81 50%, #1e3a8a)" }}>
               <p className="text-[12.5px] font-semibold uppercase tracking-[0.08em] text-white/60">Prefer to reach out directly?</p>
               <ul className="mt-6 space-y-4">
-                <li>
-                  <a href={`mailto:${site.email}`} className="group flex items-center gap-4">
+                {site.emails.map((email) => (
+                <li key={email}>
+                  <a href={`mailto:${email}`} className="group flex items-center gap-4">
                     <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 transition-colors duration-300 group-hover:bg-[#7c3aed]">
                       <Mail />
                     </span>
                     <span>
                       <span className="block text-[13px] text-white/60">Email</span>
-                      <span className="block font-display text-[17px] font-semibold">{site.email}</span>
+                      <span className="block break-all font-display text-[17px] font-semibold">{email}</span>
                     </span>
                   </a>
                 </li>
+                ))}
                 <li>
-                  <a href={`tel:${site.phone.replace(/[^+\d]/g, "")}`} className="group flex items-center gap-4">
+                  <a href={`tel:${site.phoneHref}`} className="group flex items-center gap-4">
                     <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 transition-colors duration-300 group-hover:bg-[#7c3aed]">
                       <Phone />
                     </span>
@@ -75,6 +86,7 @@ export default function ContactPage() {
                   </a>
                 </li>
               </ul>
+              {site.socials.length > 0 && (
               <ul className="mt-8 flex gap-2 border-t border-white/10 pt-6">
                 {site.socials.map((s) => (
                   <li key={s.label}>
@@ -90,6 +102,7 @@ export default function ContactPage() {
                   </li>
                 ))}
               </ul>
+              )}
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">

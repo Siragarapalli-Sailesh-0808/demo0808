@@ -1,14 +1,19 @@
 import { Link } from "next-view-transitions";
-import { openRoles } from "@/lib/content";
+import { tickerHighlights } from "@/lib/content";
+import { jobs } from "@/lib/jobs";
 import { tones, toneOrder } from "@/lib/tones";
 import { ArrowRight } from "./Icons";
 
 /**
- * Scrolling "Now hiring" ticker above the header.
+ * Scrolling bar above the header: live job openings when there are any, otherwise company highlights.
  * Pure CSS marquee (transform only), pauses on hover/focus, static for reduced-motion users.
  */
 export function TopBar() {
-  const items = openRoles.map((r, i) => ({ r, dot: tones[toneOrder[i % toneOrder.length]].c2 }));
+  const hiring = jobs.length > 0;
+  const list = hiring
+    ? jobs.map((j) => ({ text: `${j.title} – ${j.location}`, href: `/careers/${j.slug}` }))
+    : tickerHighlights;
+  const items = list.map((it, i) => ({ ...it, dot: tones[toneOrder[i % toneOrder.length]].c2 }));
   return (
     <div
       className="relative h-10 overflow-hidden text-white"
@@ -20,7 +25,7 @@ export function TopBar() {
             <span className="ticker-dot absolute h-2 w-2 rounded-full bg-emerald-400" style={{ animation: "ping-soft 1.8s ease-out infinite" }} />
             <span className="h-2 w-2 rounded-full bg-emerald-400" />
           </span>
-          Now hiring
+          {hiring ? "Now hiring" : "Since 2013"}
         </span>
 
         <div
@@ -33,15 +38,15 @@ export function TopBar() {
           <div className="ticker flex w-max group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]">
             {[0, 1].map((copy) => (
               <ul key={copy} aria-hidden={copy === 1} className="flex shrink-0 items-center">
-                {items.map(({ r, dot }) => (
-                  <li key={r} className="flex items-center">
+                {items.map(({ text, href, dot }) => (
+                  <li key={text} className="flex items-center">
                     <Link
-                      href="/careers"
+                      href={href}
                       tabIndex={copy === 1 ? -1 : undefined}
                       className="flex items-center gap-2 whitespace-nowrap px-5 text-[13.5px] font-semibold text-white/90 transition-colors hover:text-white"
                     >
                       <span className="h-2.5 w-2.5 rounded-full" style={{ background: dot, boxShadow: `0 0 0 3px ${dot}33` }} />
-                      {r}
+                      {text}
                     </Link>
                     <span aria-hidden className="text-white/25">|</span>
                   </li>
@@ -55,7 +60,7 @@ export function TopBar() {
           href="/careers"
           className="relative z-10 hidden shrink-0 items-center gap-1.5 text-[13px] font-semibold text-white/90 transition-colors hover:text-white md:inline-flex"
         >
-          All openings <ArrowRight size={14} />
+          {hiring ? "All openings" : "Careers"} <ArrowRight size={14} />
         </Link>
       </div>
     </div>

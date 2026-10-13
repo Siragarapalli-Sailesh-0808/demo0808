@@ -14,6 +14,7 @@ export function FloatingContact() {
   const wa = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`Hi ${site.name}, I'd like to know more about your services.`)}`;
   return (
     <>
+      {site.socials.length > 0 && (
       <nav aria-label="Social media" className="fixed right-0 top-1/2 z-40 hidden -translate-y-1/2 min-[1340px]:block">
         <ul className="flex flex-col gap-1.5">
           {site.socials.map((s) => (
@@ -32,7 +33,9 @@ export function FloatingContact() {
           ))}
         </ul>
       </nav>
+      )}
 
+      {site.whatsapp && (
       <a
         href={wa}
         target="_blank"
@@ -48,6 +51,7 @@ export function FloatingContact() {
           Chat with us
         </span>
       </a>
+      )}
     </>
   );
 }

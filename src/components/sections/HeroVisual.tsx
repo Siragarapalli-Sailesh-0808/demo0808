@@ -44,7 +44,7 @@ export function HeroPanel() {
         <TiltArt maskSrc={heroArt.src}>
         <Image
           src={heroArt}
-          alt="Colourful 3D shapes representing connected technology systems and teams"
+          alt="Colourful 3D shapes representing connected IT systems and teams"
           priority
           sizes="(min-width: 1280px) 560px, (min-width: 1024px) 46vw, 90vw"
           className="h-auto w-full select-none"
@@ -70,8 +70,8 @@ export function HeroPanel() {
               </svg>
             </span>
             <span>
-              <span className="block font-display text-[17px] font-extrabold leading-tight text-ink">2,500+</span>
-              <span className="block text-[12.5px] font-medium text-muted">experts placed</span>
+              <span className="block font-display text-[17px] font-extrabold leading-tight text-ink">Since 2013</span>
+              <span className="block text-[12.5px] font-medium text-muted">IT staffing &amp; services</span>
             </span>
           </div>
         </div>
@@ -88,8 +88,8 @@ export function HeroPanel() {
               </svg>
             </span>
             <span>
-              <span className="block font-display text-[17px] font-extrabold leading-tight text-ink">98%</span>
-              <span className="block text-[12.5px] font-medium text-muted">client retention</span>
+              <span className="block font-display text-[17px] font-extrabold leading-tight text-ink">100% US-based</span>
+              <span className="block text-[12.5px] font-medium text-muted">DBA support team</span>
             </span>
           </div>
         </div>

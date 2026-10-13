@@ -55,7 +55,7 @@ export default async function ServicePage({ params }: Props) {
               description: d.intro,
               serviceType: s.title,
               provider: { "@type": "Organization", name: site.legalName, url: site.url },
-              areaServed: ["United States", "India"],
+              areaServed: "United States",
               hasOfferCatalog: {
                 "@type": "OfferCatalog",
                 name: s.title,
@@ -113,11 +113,28 @@ export default async function ServicePage({ params }: Props) {
         </div>
       </section>
 
-      {d.models && (
+      {d.platforms && (
         <section className="bg-tint py-24 md:py-32">
           <div className="container-x">
-            <SectionHead eyebrow="Engagement models" title="Hire the way" accent="you work" center />
-            <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <SectionHead eyebrow={d.platforms.eyebrow} title={d.platforms.title} accent={d.platforms.accent} />
+            <div className="mt-12">
+              <FeatureGrid items={d.platforms.items} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {d.models && (
+        <section className={`py-24 md:py-32 ${d.platforms ? "" : "bg-tint"}`}>
+          <div className="container-x">
+            <SectionHead
+              eyebrow={d.modelsHead?.eyebrow ?? "Engagement models"}
+              title={d.modelsHead?.title ?? "Hire the way"}
+              accent={d.modelsHead?.accent ?? "you work"}
+              intro={d.modelsHead?.intro}
+              center
+            />
+            <ul className={`mx-auto mt-14 grid gap-4 sm:grid-cols-2 ${d.models.length === 2 ? "max-w-4xl" : d.models.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>
               {d.models.map((m, i) => (
                 <li
                   key={m.title}
@@ -139,7 +156,7 @@ export default async function ServicePage({ params }: Props) {
         <div className="container-x grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-32">
-              <SectionHead eyebrow="Our approach" title="How we" accent="work" intro="A clear, repeatable path from first conversation to lasting results — with checkpoints so you always know where things stand." />
+              <SectionHead eyebrow="Our approach" title="How we" accent="work" intro={d.approachIntro ?? "A clear, repeatable path from first conversation to lasting results — with checkpoints so you always know where things stand."} />
             </div>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">

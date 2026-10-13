@@ -1,15 +1,18 @@
 import { Link } from "next-view-transitions";
 import { site } from "@/lib/site";
 
-/** Placeholder logo — swap for the real SVG logo when it arrives. */
-export function Logo({ className = "" }: { className?: string }) {
+/** Official logo (Refined Classic). Vector file with outlined lettering: /public/brand/logo.svg */
+export function Logo({ className = "", variant = "color" }: { className?: string; variant?: "color" | "white" }) {
   return (
-    <Link href="/" className={`group inline-flex items-center gap-2.5 ${className}`}>
-      <span aria-hidden style={{ background: "var(--grad-brand)" }} className="relative grid h-9 w-9 place-items-center rounded-[10px] text-[13px] font-bold tracking-tight text-white font-display shadow-[0_8px_18px_-8px_rgb(79_70_229/0.8)] transition-transform duration-500 group-hover:-rotate-6">
-        {site.mark}
-        <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-[#22d3ee] ring-2 ring-white" />
-      </span>
-      <span className="font-display text-[17px] font-bold tracking-tight text-ink">{site.name}</span>
+    <Link href="/" aria-label={`${site.legalName} — home`} className={`group inline-flex items-center ${className}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={variant === "white" ? "/brand/logo-white.svg" : "/brand/logo.svg"}
+        alt={site.legalName}
+        width={146}
+        height={60}
+        className="h-11 w-auto transition-transform duration-500 ease-out-expo group-hover:scale-[1.02] md:h-12"
+      />
     </Link>
   );
 }

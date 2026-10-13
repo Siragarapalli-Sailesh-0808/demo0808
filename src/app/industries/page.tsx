@@ -9,9 +9,9 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { ArrowRight, Check } from "@/components/Icons";
 
 export const metadata: Metadata = {
-  title: "Industries",
+  title: "Who we serve",
   description:
-    "Technology consulting and IT staffing for financial services, healthcare, manufacturing, government, retail, technology and specialized sectors.",
+    "IT staffing, database administration and managed IT support for global enterprises, government agencies and small and mid-sized businesses.",
   alternates: { canonical: "/industries" },
 };
 
@@ -19,10 +19,10 @@ export default function IndustriesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Industries"
-        title={["Deep context for ", "every sector we serve."]}
-        intro="Regulated, asset-intensive and fast-growing organizations each face different pressures. We bring the domain knowledge, delivery experience and specialist talent each one needs."
-        crumbs={[{ label: "Industries", href: "/industries" }]}
+        eyebrow="Who we serve"
+        title={["Built for the organizations ", "we know best."]}
+        intro="Enterprises, government agencies and growing businesses each need something different. We bring the right people and the right level of support to each."
+        crumbs={[{ label: "Who we serve", href: "/industries" }]}
       />
 
       <SubNav items={industryGroups.map((g) => ({ id: g.key, label: g.label }))} />
@@ -56,7 +56,7 @@ export default function IndustriesPage() {
 
               <div className="grid gap-4 md:grid-cols-2 lg:col-span-12">
                 <div className="rounded-3xl bg-white p-8 ring-1 ring-line" data-reveal>
-                  <h3 className="text-[19px] font-bold">The challenges</h3>
+                  <h3 className="text-[19px] font-bold">Common challenges</h3>
                   <ul className="mt-5 space-y-3">
                     {d.challenges.map((c) => (
                       <li key={c} className="flex items-start gap-3 text-[15.5px] text-ink-2">
@@ -79,7 +79,7 @@ export default function IndustriesPage() {
                     ))}
                   </ul>
                   <Link href="/contact" className="mt-7 inline-flex items-center gap-2 text-[14.5px] font-semibold text-white">
-                    Talk to an industry lead <ArrowRight />
+                    Talk to our team <ArrowRight />
                   </Link>
                 </div>
               </div>

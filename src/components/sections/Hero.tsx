@@ -2,7 +2,7 @@ import { Link } from "next-view-transitions";
 import { ArrowRight } from "../Icons";
 import { HeroBackdrop, HeroPanel } from "./HeroVisual";
 
-const rotating = ["teams", "clouds", "data", "talent"];
+const rotating = ["teams", "talent", "databases", "support"];
 
 export function Hero() {
   return (
@@ -20,7 +20,7 @@ export function Hero() {
                 <path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z" />
               </svg>
             </span>
-            Technology · Talent · Transformation
+            IT Staffing · Database · Managed IT
           </p>
 
           <h1 className="mt-7 text-[clamp(2.8rem,1.4rem+4.6vw,4.6rem)] font-extrabold leading-[1.02] tracking-[-0.04em]">
@@ -51,24 +51,24 @@ export function Hero() {
             className="fade-up mt-7 max-w-[36rem] text-[17.5px] leading-relaxed text-ink-2 md:text-[19px]"
             style={{ ["--d" as string]: "320ms" }}
           >
-            We design, modernize and run mission-critical technology — and supply the vetted experts who keep it
-            moving. Consulting, cloud, data &amp; AI, applications and talent from one accountable partner.
+            M &amp; K Technovations delivers the right people, with the right skills, at the right price — IT staffing,
+            100% US-based database administration, ERP support and managed IT for enterprises and government agencies.
           </p>
 
           <div className="fade-up mt-10 flex flex-wrap items-center gap-3" style={{ ["--d" as string]: "440ms" }}>
             <Link href="/services" className="btn btn-primary h-[54px] px-7 text-[15.5px]">
               Explore our services <ArrowRight />
             </Link>
-            <Link href="/services/talent-staffing-solutions" className="btn btn-ghost h-[54px] px-7 text-[15.5px]">
-              Hire top talent
+            <Link href="/services/it-staffing" className="btn btn-ghost h-[54px] px-7 text-[15.5px]">
+              Hire IT talent
             </Link>
           </div>
 
           <div className="fade-up mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-[14px] text-muted" style={{ ["--d" as string]: "560ms" }}>
             {[
-              ["#7c3aed", "Offices in USA & India"],
-              ["#0891b2", "Vetted experts in days"],
-              ["#059669", "Security-first delivery"],
+              ["#7c3aed", "Serving clients since 2013"],
+              ["#0891b2", "Harrisburg, PA headquarters"],
+              ["#059669", "Background-checked talent"],
             ].map(([c, t]) => (
               <span key={t} className="inline-flex items-center gap-2 font-medium">
                 <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>

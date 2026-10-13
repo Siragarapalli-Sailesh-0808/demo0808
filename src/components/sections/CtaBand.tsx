@@ -37,7 +37,7 @@ export function CtaBand() {
             <MagneticLink href="/contact" className="btn btn-white h-14 px-8 text-[16px]">
               Get in touch <ArrowRight />
             </MagneticLink>
-            <Link href="/services/talent-staffing-solutions" className="btn h-14 px-8 text-[16px] text-white ring-1 ring-white/40 transition-colors hover:bg-white/10">
+            <Link href="/services/it-staffing" className="btn h-14 px-8 text-[16px] text-white ring-1 ring-white/40 transition-colors hover:bg-white/10">
               Hire talent
             </Link>
           </div>

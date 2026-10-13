@@ -19,7 +19,7 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About us"
-        title={["Technology and talent, ", "under one roof."]}
+        title={["The right people, ", "since 2013."]}
         intro={about.intro}
         crumbs={[{ label: "About", href: "/about" }]}
       >
@@ -34,17 +34,16 @@ export default function AboutPage() {
       {/* Stats */}
       <section className="pb-20">
         <div className="container-x">
-          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-[28px] bg-line ring-1 ring-line lg:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-[28px] bg-line ring-1 ring-line lg:grid-cols-4">
             {about.stats.map((s, i) => (
-              <div key={s.label} className="bg-white p-7 md:p-10" data-reveal style={{ ["--d" as string]: `${i * 70}ms` }}>
-                <dt className="sr-only">{s.label}</dt>
-                <dd className="font-display text-[clamp(2.2rem,1.6rem+2.4vw,3.6rem)] font-extrabold leading-none tracking-[-0.04em]">
+              <li key={s.label} className="bg-white p-7 md:p-10" data-reveal style={{ ["--d" as string]: `${i * 70}ms` }}>
+                <p className="font-display text-[clamp(2.2rem,1.6rem+2.4vw,3.6rem)] font-extrabold leading-none tracking-[-0.04em]">
                   {s.value}
-                </dd>
-                <dd className="mt-3 text-[14.5px] text-muted">{s.label}</dd>
-              </div>
+                </p>
+                <p className="mt-3 text-[14.5px] text-muted">{s.label}</p>
+              </li>
             ))}
-          </dl>
+          </ul>
         </div>
       </section>
 
@@ -52,7 +51,7 @@ export default function AboutPage() {
       <section className="py-20 md:py-28">
         <div className="container-x grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <SectionHead eyebrow="Our story" title="Why we" accent="exist" />
+            <SectionHead eyebrow="Our story" title="How we" accent="started" />
           </div>
           <div className="space-y-6 lg:col-span-7">
             {about.story.map((p, i) => (
@@ -112,7 +111,7 @@ export default function AboutPage() {
                 eyebrow="How we work"
                 title="A simple way of"
                 accent="working"
-                intro="Whether we're advising, building or placing talent, every engagement follows the same honest, transparent rhythm."
+                intro="Whether we're placing talent, supporting your databases or running your IT, every engagement follows the same honest, transparent rhythm."
               />
             </div>
           </div>
@@ -122,35 +121,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership */}
-      <section className="border-t border-line py-24 md:py-32">
-        <div className="container-x">
-          <SectionHead eyebrow="Leadership" title="The people" accent="behind the work" />
-          <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {about.leaders.map((l, i) => (
-              <li key={i} data-reveal style={{ ["--d" as string]: `${i * 70}ms` }} className="group">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-gradient-to-br from-tint to-tint-2 ring-1 ring-line">
-                  <div aria-hidden className="absolute inset-0 grid place-items-center">
-                    <svg viewBox="0 0 120 150" className="h-3/4 w-3/4 text-white transition-transform duration-700 ease-out-expo group-hover:scale-105">
-                      <circle cx="60" cy="52" r="26" fill="currentColor" />
-                      <path d="M10 150c4-36 24-56 50-56s46 20 50 56Z" fill="currentColor" />
-                    </svg>
-                  </div>
-                  <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3 py-1 text-[11.5px] font-semibold text-muted">Photo coming soon</span>
-                </div>
-                <p className="mt-5 font-display text-[18px] font-semibold">{l.name}</p>
-                <p className="mt-1 text-[14px] text-muted">{l.role}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       {/* Offices */}
       <section className="bg-tint py-24 md:py-28">
         <div className="container-x">
           <SectionHead eyebrow="Offices" title="Where to" accent="find us" />
-          <ul className="mt-12 grid gap-5 md:grid-cols-2">
+          <ul className="mt-12 grid max-w-xl gap-5">
             {site.offices.map((o, i) => (
               <li key={o.country} data-reveal style={{ ["--d" as string]: `${i * 80}ms` }} className="rounded-3xl bg-white p-8 ring-1 ring-line md:p-10">
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-accent-50 text-accent">

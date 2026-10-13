@@ -150,7 +150,7 @@ function Slide({ group, on }: { group: (typeof industryGroups)[number]; on: bool
         </div>
 
         <div>
-          <p className="text-[13px] font-semibold text-muted">Sectors we serve</p>
+          <p className="text-[13px] font-semibold text-muted">How we help</p>
           <ul className="mt-3 flex max-w-3xl flex-wrap gap-2">
             {group.sectors.map((s, i) => (
               <li

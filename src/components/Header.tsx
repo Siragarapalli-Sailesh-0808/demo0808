@@ -3,7 +3,7 @@
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { nav, services, solutions, industryGroups } from "@/lib/content";
+import { nav, services, industryGroups } from "@/lib/content";
 import { Logo } from "./Logo";
 import { ArrowRight, Icon } from "./Icons";
 import { TopBar } from "./TopBar";
@@ -263,10 +263,7 @@ function MegaPanel({ which }: { which: Mega }) {
     );
   }
 
-  const list =
-    which === "services"
-      ? services.map((s) => ({ href: `/services/${s.slug}`, title: s.title, sub: s.short, icon: s.icon, tone: s.tone }))
-      : solutions.map((s) => ({ href: `/solutions/${s.slug}`, title: s.title, sub: s.items.slice(0, 2).join(" · "), icon: s.icon, tone: s.tone }));
+  const list = services.map((s) => ({ href: `/services/${s.slug}`, title: s.title, sub: s.short, icon: s.icon, tone: s.tone }));
 
   return (
     <div className="grid grid-cols-12 gap-8">
@@ -286,7 +283,7 @@ function MegaPanel({ which }: { which: Mega }) {
         ))}
       </ul>
       <Link
-        href={which === "services" ? "/services" : "/solutions"}
+        href="/services"
         className="group relative col-span-4 flex flex-col justify-end overflow-hidden rounded-2xl p-6 text-white"
         style={{ background: "var(--grad-brand)" }}
       >
@@ -296,10 +293,10 @@ function MegaPanel({ which }: { which: Mega }) {
           style={{ ["--orb" as string]: "rgb(255 255 255 / 0.35)" }}
         />
         <span className="relative text-[12px] font-semibold uppercase tracking-[0.08em] text-white/60">
-          {which === "services" ? "Services" : "Solutions"}
+          Services
         </span>
         <span className="relative mt-2 font-display text-xl font-semibold leading-tight">
-          {which === "services" ? "End-to-end capability, engaged your way." : "Built for complex, regulated operations."}
+          The right people, with the right skills, at the right price.
         </span>
         <span className="relative mt-4 inline-flex items-center gap-2 text-[14px] font-semibold">
           Explore all <ArrowRight />

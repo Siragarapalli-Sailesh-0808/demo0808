@@ -1,5 +1,5 @@
 /**
- * Placeholder copy for inner pages (Phase 2). Original draft text — edit freely.
+ * Inner-page copy. Based on the content of the existing mandkstaffing.com website — edit freely.
  * Keys match the slugs in content.ts.
  */
 
@@ -7,298 +7,264 @@ export type Faq = { q: string; a: string };
 export type Feature = { title: string; body: string };
 export type Step = { title: string; body: string };
 
-export const serviceDetails: Record<
-  string,
-  {
-    headline: [string, string]; // [plain, accent]
-    intro: string;
-    offerings: Feature[];
-    approach: Step[];
-    outcomes: string[];
-    models?: Feature[];
-    faqs: Faq[];
-  }
-> = {
-  "consulting-transformation": {
-    headline: ["Strategy that turns into ", "results."],
-    intro:
-      "We help leadership teams decide where technology should take the business — then build the roadmap, operating model and governance to get there without disrupting what already works.",
-    offerings: [
-      { title: "Technology strategy", body: "A clear, prioritized view of where to invest, what to retire and how each move supports business goals." },
-      { title: "Transformation roadmaps", body: "Sequenced, realistic plans with milestones, dependencies and budgets your board can sign off." },
-      { title: "Operating model design", body: "Team structures, processes and decision rights shaped for faster, more accountable delivery." },
-      { title: "Architecture & governance", body: "Target architectures and guardrails that keep teams aligned as the estate evolves." },
-      { title: "Vendor & portfolio review", body: "An objective look at platforms, contracts and spend to find savings and reduce risk." },
-      { title: "Program leadership", body: "Experienced program and change leads who keep complex initiatives on time and on budget." },
-    ],
-    approach: [
-      { title: "Discover", body: "Interviews, system reviews and data analysis to understand where you really stand today." },
-      { title: "Define", body: "Agree on the target state, the business case and the metrics that will prove success." },
-      { title: "Plan", body: "Break the journey into funded, low-risk phases with clear owners and checkpoints." },
-      { title: "Guide", body: "Stay alongside your teams through delivery, adjusting the plan as reality changes." },
-    ],
-    outcomes: [
-      "A roadmap tied directly to business outcomes",
-      "Lower technology spend through portfolio rationalization",
-      "Faster, clearer decision-making across IT and the business",
-      "Reduced delivery risk on large programs",
-    ],
-    faqs: [
-      { q: "How long does a strategy engagement take?", a: "Most assessments and roadmaps take 6–10 weeks, depending on the size of your estate and how many stakeholders are involved." },
-      { q: "Do you also deliver the roadmap you create?", a: "Yes. Many clients keep us on to deliver all or part of the plan, but the roadmap is yours and is written so any capable team can execute it." },
-      { q: "Can you work alongside our existing partners?", a: "Absolutely. We regularly coordinate with in-house teams and other vendors, and focus on outcomes rather than ownership." },
-    ],
-  },
-  "cloud-infrastructure-operations": {
-    headline: ["Cloud and infrastructure that ", "never blinks."],
-    intro:
-      "We plan, migrate and run secure cloud, hybrid and on-premise environments for workloads that can't afford downtime — with the monitoring and automation to keep them healthy.",
-    offerings: [
-      { title: "Cloud strategy & migration", body: "Assessments, landing zones and phased migrations to AWS, Azure or Google Cloud." },
-      { title: "Hybrid & private cloud", body: "Consistent operations across data centers and public cloud, without lock-in." },
-      { title: "Managed infrastructure", body: "24×7 monitoring, patching and incident response run by certified engineers." },
-      { title: "DevOps & platform engineering", body: "CI/CD pipelines, infrastructure-as-code and self-service platforms for faster releases." },
-      { title: "Security & compliance", body: "Identity, network security and continuous compliance built into every layer." },
-      { title: "Cost optimization (FinOps)", body: "Visibility and guardrails that cut cloud waste without slowing teams down." },
-    ],
-    approach: [
-      { title: "Assess", body: "Map applications, dependencies, risks and costs to decide what moves, when and how." },
-      { title: "Build the foundation", body: "Set up secure, compliant landing zones and automation before anything migrates." },
-      { title: "Migrate in waves", body: "Move workloads in small, tested batches with rollback plans for every step." },
-      { title: "Operate & optimize", body: "Run, monitor and continually tune the environment for performance and cost." },
-    ],
-    outcomes: [
-      "Higher availability for critical services",
-      "Lower and more predictable hosting costs",
-      "Faster, safer software releases",
-      "Security and compliance built in, not bolted on",
-    ],
-    faqs: [
-      { q: "Which cloud providers do you work with?", a: "We work across AWS, Microsoft Azure and Google Cloud, as well as private cloud and on-premise platforms." },
-      { q: "Can you take over day-to-day operations?", a: "Yes. Our managed services cover monitoring, incident response, patching and reporting against agreed service levels." },
-      { q: "How do you avoid downtime during migration?", a: "We migrate in small waves, test each one in parallel and keep a tested rollback plan until the new environment is proven." },
-    ],
-  },
-  "data-ai-analytics": {
-    headline: ["From scattered data to ", "decisions."],
-    intro:
-      "We build governed data platforms, trustworthy analytics and practical AI that people actually use — so leaders get answers in minutes instead of weeks.",
-    offerings: [
-      { title: "Data platform engineering", body: "Modern warehouses and lakehouses that bring scattered data into one reliable place." },
-      { title: "Data governance & quality", body: "Ownership, cataloging and quality checks so every number can be trusted." },
-      { title: "Business intelligence", body: "Executive dashboards and self-service reporting designed around real decisions." },
-      { title: "Advanced analytics", body: "Forecasting, optimization and predictive models for operations and finance." },
-      { title: "Applied AI & ML", body: "Machine learning and generative AI use cases taken from pilot to production." },
-      { title: "MLOps", body: "Pipelines, monitoring and controls that keep models accurate and compliant over time." },
-    ],
-    approach: [
-      { title: "Prioritize", body: "Identify the decisions and use cases that create the most value soonest." },
-      { title: "Prepare the data", body: "Integrate, clean and govern the data those use cases depend on." },
-      { title: "Build & prove", body: "Deliver a working solution quickly and measure its impact against a baseline." },
-      { title: "Scale", body: "Industrialize what works and roll it out across teams and regions." },
-    ],
-    outcomes: [
-      "A single, trusted source of truth",
-      "Faster reporting cycles and fewer spreadsheets",
-      "AI use cases that reach production, not just pilots",
-      "Clear governance that satisfies auditors and regulators",
-    ],
-    faqs: [
-      { q: "We have messy data. Where do we start?", a: "Start with one high-value decision. We fix the data that decision needs first, then expand — value arrives early and the platform grows with it." },
-      { q: "Do you build generative AI solutions?", a: "Yes — from document processing and knowledge assistants to agentic workflows, always with security, evaluation and human review designed in." },
-      { q: "Which tools do you use?", a: "We are tool-agnostic and work with leading cloud data platforms and BI tools, choosing what fits your existing environment and skills." },
-    ],
-  },
-  "application-digital-experience": {
-    headline: ["Applications people ", "enjoy using."],
-    intro:
-      "We modernize legacy applications and design digital products that are fast, accessible and easy to evolve — for customers, citizens and employees alike.",
-    offerings: [
-      { title: "Application modernization", body: "Re-platform, re-architect or rebuild legacy systems with minimal disruption." },
-      { title: "Custom software development", body: "Web, mobile and API products engineered for scale and long-term maintainability." },
-      { title: "UX & product design", body: "Research-led design that makes complex tasks simple and accessible." },
-      { title: "Enterprise platforms", body: "Implementation and extension of CRM, ERP and service-management platforms." },
-      { title: "Integration & APIs", body: "Clean, secure connections between systems, partners and data sources." },
-      { title: "Quality engineering", body: "Automated testing, performance and accessibility checks built into delivery." },
-    ],
-    approach: [
-      { title: "Understand", body: "Research users, map journeys and review the existing code and architecture." },
-      { title: "Design", body: "Prototype and test the experience before committing to a build." },
-      { title: "Build iteratively", body: "Ship in short cycles so stakeholders see working software every few weeks." },
-      { title: "Evolve", body: "Measure usage, gather feedback and keep improving after launch." },
-    ],
-    outcomes: [
-      "Faster, more reliable applications",
-      "Higher adoption and satisfaction",
-      "Lower maintenance and licensing costs",
-      "A codebase your teams can confidently change",
-    ],
-    faqs: [
-      { q: "Should we rebuild or modernize our legacy system?", a: "It depends on the business value, code quality and risk. We assess each application and recommend the lowest-risk path to the outcome you need." },
-      { q: "Do you design for accessibility?", a: "Yes. Everything we build targets WCAG 2.1 AA as a minimum, and we test with assistive technologies." },
-      { q: "Can you support the application after launch?", a: "We offer ongoing support and enhancement retainers, or a structured handover to your in-house team." },
-    ],
-  },
-  "talent-staffing-solutions": {
-    headline: ["The right experts, ", "right when you need them."],
-    intro:
-      "Contract, contract-to-hire, direct hire and dedicated teams of vetted technologists — sourced quickly, screened rigorously and supported every step of the way.",
-    offerings: [
-      { title: "Contract staffing", body: "Skilled professionals for short and long-term projects, ready to start in days." },
-      { title: "Contract-to-hire", body: "Evaluate talent on the job before making a permanent offer." },
-      { title: "Direct hire", body: "Executive and specialist search for permanent roles that are hard to fill." },
-      { title: "Dedicated teams", body: "Complete, managed delivery teams that integrate with your processes." },
-      { title: "Offshore & nearshore delivery", body: "Cost-effective capacity from our delivery center in Hyderabad, India." },
-      { title: "Workforce consulting", body: "Skills planning, vendor consolidation and managed service programs." },
-    ],
-    approach: [
-      { title: "Understand the role", body: "We learn the skills, culture and outcomes you need — not just the job title." },
-      { title: "Source & screen", body: "Our recruiters search our network and run technical and background checks." },
-      { title: "Present a shortlist", body: "You interview only qualified, interested candidates, usually within days." },
-      { title: "Onboard & support", body: "We handle paperwork and onboarding and stay in touch to ensure success." },
-    ],
-    models: [
-      { title: "Contract", body: "Flexible, project-based capacity with no long-term commitment." },
-      { title: "Contract-to-hire", body: "A trial period before converting the right people to permanent." },
-      { title: "Direct hire", body: "Permanent placements with a replacement guarantee." },
-      { title: "Dedicated team", body: "A managed team with its own lead, aligned to your goals." },
-    ],
-    outcomes: [
-      "Qualified shortlists in days, not months",
-      "Lower hiring risk with technical vetting",
-      "Flexible capacity that scales up or down",
-      "One partner for local and offshore talent",
-    ],
-    faqs: [
-      { q: "How quickly can you provide candidates?", a: "For most technology roles we share a qualified shortlist within 3–5 business days." },
-      { q: "Which skills do you recruit for?", a: "Cloud, data, AI, software engineering, cybersecurity, ERP/CRM platforms, project management and more." },
-      { q: "Do you offer a replacement guarantee?", a: "Yes. If a placement doesn't work out within the agreed period, we find a replacement at no extra cost." },
-      { q: "Can you build a full offshore team?", a: "Yes. We build and manage dedicated teams from our India delivery center, with overlapping hours for collaboration." },
-    ],
-  },
+export type ServiceDetail = {
+  headline: [string, string]; // [plain, accent]
+  intro: string;
+  offerings: Feature[];
+  /** Optional extra block (e.g. supported database platforms). */
+  platforms?: { eyebrow: string; title: string; accent: string; items: Feature[] };
+  approach: Step[];
+  approachIntro?: string;
+  outcomes: string[];
+  models?: Feature[];
+  modelsHead?: { eyebrow: string; title: string; accent: string; intro?: string };
+  faqs: Faq[];
 };
 
-export const solutionDetails: Record<
-  string,
-  { headline: [string, string]; intro: string; capabilities: Feature[]; outcomes: string[]; services: string[] }
-> = {
-  "digital-operations": {
-    headline: ["Operations that run ", "smoother every day."],
+export const serviceDetails: Record<string, ServiceDetail> = {
+  "it-staffing": {
+    headline: ["The right people, with the right skills, ", "at the right price."],
     intro:
-      "We streamline how work flows across IT and the business — fewer handoffs, better service levels and operations that scale without adding headcount.",
-    capabilities: [
-      { title: "IT service & incident management", body: "Modern service desks and incident processes that restore services faster." },
-      { title: "Workflow & process automation", body: "Automate repetitive approvals, requests and handoffs end to end." },
-      { title: "Application modernization", body: "Retire fragile legacy tools that slow operations down." },
-      { title: "Service reliability & observability", body: "See problems early with unified monitoring and alerting." },
-      { title: "Experience & performance analytics", body: "Measure what employees and customers actually experience." },
+      "IT staff augmentation for enterprises and government agencies — qualified, background-checked technology professionals on contract, contract-to-hire or direct-hire terms.",
+    offerings: [
+      { title: "IT staff augmentation", body: "Add skilled technologists to your team for a project, a peak period or an ongoing need." },
+      { title: "Project specialists", body: "Database, ERP, infrastructure and support specialists for defined pieces of work." },
+      { title: "Government staffing", body: "Compliant, well-documented hiring for public-sector teams, overseen by our in-house compliance officer." },
+      { title: "Background-checked talent", body: "Every candidate is screened, verified and background-checked before they reach you." },
+      { title: "Network-driven sourcing", body: "We recruit through a trusted network of professionals built up since 2013 — not just job boards." },
+      { title: "Satisfaction guarantee", body: "We stand behind every placement. If something isn't right, we work with you until it is." },
     ],
-    outcomes: ["Faster incident resolution", "Fewer manual tasks", "Better service-level performance", "Clear operational visibility"],
-    services: ["consulting-transformation", "cloud-infrastructure-operations", "application-digital-experience"],
+    models: [
+      { title: "Contract", body: "Flexible, project-based capacity for as long as you need it." },
+      { title: "Contract-to-hire", body: "See a professional's work on the job before making a permanent offer." },
+      { title: "Direct hire", body: "Permanent placement of the right person straight onto your payroll." },
+    ],
+    modelsHead: { eyebrow: "Engagement models", title: "Hire the way", accent: "you work" },
+    approach: [
+      { title: "Understand the role", body: "We learn the skills, environment and outcomes you need — not just the job title." },
+      { title: "Source through our network", body: "Our recruiters reach qualified professionals through our network and referrals." },
+      { title: "Screen & verify", body: "Technical screening, reference checks and background checks before anyone is presented." },
+      { title: "Place & support", body: "We handle onboarding paperwork and stay in touch to make sure the placement succeeds." },
+    ],
+    outcomes: [
+      "Qualified, vetted candidates — not a stack of résumés",
+      "Compliant, documented hiring for government work",
+      "Flexible capacity that scales up or down",
+      "One accountable partner, backed by a satisfaction guarantee",
+    ],
+    faqs: [
+      { q: "What kinds of IT roles do you fill?", a: "Database administrators and developers, ERP specialists, infrastructure and network engineers, help desk and support staff, project specialists and other technology roles." },
+      { q: "Do you work with government agencies?", a: "Yes. We staff for government agencies as well as enterprises, with an in-house compliance officer overseeing a documented, compliant hiring process." },
+      { q: "Are candidates background-checked?", a: "Yes. Every professional we present is screened and background-checked before they are introduced to you." },
+      { q: "Which engagement models do you offer?", a: "Contract, contract-to-hire and direct hire. We'll recommend the model that fits your timeline, budget and long-term plans." },
+    ],
   },
-  "supply-chain-asset-intelligence": {
-    headline: ["Supply chains with ", "full visibility."],
+
+  "database-administration": {
+    headline: ["Database administration, ", "100% US-based."],
     intro:
-      "We bring real-time visibility, accuracy and resilience to supply chains and asset-heavy operations — so you can plan with confidence and react before disruption hits.",
-    capabilities: [
-      { title: "Inventory accuracy & control", body: "Know what you have, where it is and what you need next." },
-      { title: "Logistics & network visibility", body: "Track shipments and network performance in one view." },
-      { title: "Predictive maintenance", body: "Use sensor and maintenance data to fix assets before they fail." },
-      { title: "Warehouse optimization", body: "Improve layout, picking and labor planning with data." },
-      { title: "Procurement insights", body: "Spot savings and supplier risk across your spend." },
+      "Remote and on-site DBA support for Oracle, SQL Server, DB2, MySQL and MongoDB — monitoring, maintenance, tuning, upgrades and backups by an experienced, fully US-based team.",
+    offerings: [
+      { title: "Monitoring & maintenance", body: "Proactive health checks, alerting and routine maintenance to keep databases stable." },
+      { title: "Patches & upgrades", body: "Planned, tested patching and version upgrades with minimal disruption." },
+      { title: "High availability", body: "Clustering, replication and failover set up and looked after by specialists." },
+      { title: "Backup & recovery", body: "Backup strategies that are tested regularly, so recovery works when it matters." },
+      { title: "Performance tuning", body: "Query, index and configuration tuning to keep applications fast." },
+      { title: "Data warehouse, BI & ETL", body: "Support for data warehouses, reporting and the ETL processes that feed them." },
     ],
-    outcomes: ["Lower inventory carrying costs", "Less unplanned downtime", "Faster, more reliable deliveries", "Earlier warning of supply risk"],
-    services: ["data-ai-analytics", "cloud-infrastructure-operations", "consulting-transformation"],
+    platforms: {
+      eyebrow: "Platforms",
+      title: "Databases we",
+      accent: "support",
+      items: [
+        { title: "Microsoft SQL Server", body: "SQL Server 2005 through current releases, plus SSIS, SSRS and SSAS — by DBAs averaging around 15 years of experience." },
+        { title: "Oracle", body: "Oracle 9i through 12c and later, databases up to 50 TB, and Oracle BI, Fusion Middleware, Hyperion and E-Business Suite." },
+        { title: "IBM DB2", body: "DB2 for z/OS and LUW (9.5 to 10.5 and later) administration and support." },
+        { title: "MySQL", body: "MySQL 5.1 / 5.6 and later, Percona and MariaDB, including replication setup and support." },
+        { title: "MongoDB", body: "Advisory support for MongoDB design, deployment and operations." },
+      ],
+    },
+    models: [
+      { title: "Full DBA", body: "We act as your complete database team — proactive monitoring, maintenance and support against agreed hours, with a dedicated DBA team assigned to you." },
+      { title: "Supplemental DBA", body: "We back up your in-house DBAs with extra hands and specialist skills. Buy a block of hours for a discount; a dedicated DBA team is assigned either way." },
+    ],
+    modelsHead: {
+      eyebrow: "Contracting options",
+      title: "Full or",
+      accent: "supplemental",
+      intro: "Engagements below the minimum monthly hours are handled as non-proactive support without an SLA.",
+    },
+    approach: [
+      { title: "Preliminary meeting", body: "We learn about your environment, pain points and what good support looks like for you." },
+      { title: "Analyze client architecture", body: "Our DBAs review your databases, servers, backups and processes in detail." },
+      { title: "Service assessment & contracting", body: "We recommend the right level of support and agree hours, scope and responsibilities." },
+      { title: "Start supporting", body: "Your dedicated DBA team takes over monitoring, maintenance and requests." },
+      { title: "Review periodically", body: "Regular reviews keep the service aligned with your systems and priorities as they change." },
+    ],
+    approachIntro: "Our five-step methodology takes you from first conversation to steady, proactive support.",
+    outcomes: [
+      "Stable, well-maintained databases",
+      "Fewer emergencies thanks to proactive monitoring",
+      "Experienced DBAs — 100% based in the United States",
+      "Predictable cost with block-of-hours pricing",
+    ],
+    faqs: [
+      { q: "Is your DBA team based in the US?", a: "Yes. Our Oracle, SQL Server and MySQL database support is delivered 100% by US-based staff." },
+      { q: "What's the difference between Full and Supplemental DBA?", a: "With Full DBA we act as your entire database team. With Supplemental DBA we work alongside your in-house DBAs, adding capacity and specialist skills. A dedicated DBA team is assigned in both cases." },
+      { q: "Is there a minimum commitment?", a: "Proactive support with an SLA requires a minimum number of hours per month, and buying a block of hours earns a discount. Below the minimum, we provide non-proactive support without an SLA." },
+      { q: "Can you work on-site?", a: "Most support is delivered remotely, and on-site work can be arranged when your project needs it." },
+    ],
   },
-  "industry-platforms": {
-    headline: ["Platforms built for ", "your industry."],
+
+  "erp-support": {
+    headline: ["ERP support for ", "SAP, Oracle and Dynamics."],
     intro:
-      "Purpose-built solutions for the realities of regulated and asset-intensive industries — integrating core systems, simplifying compliance and serving customers and citizens better.",
-    capabilities: [
-      { title: "Core industry system integration", body: "Connect core banking, insurance, healthcare or government systems cleanly." },
-      { title: "Operations & capacity planning", body: "Plan resources and capacity against real demand." },
-      { title: "Asset lifecycle management", body: "Track assets from acquisition through maintenance to retirement." },
-      { title: "Regulatory & compliance reporting", body: "Automate the evidence and reports regulators ask for." },
-      { title: "Citizen & customer portals", body: "Secure, accessible self-service experiences." },
+      "Skilled ERP professionals and support for SAP, the Oracle application suite and Microsoft Dynamics — to keep the systems that run your business running well.",
+    offerings: [
+      { title: "SAP", body: "Functional and technical SAP professionals for support, enhancements and projects." },
+      { title: "Oracle applications", body: "Oracle E-Business Suite, Hyperion and the wider Oracle application suite." },
+      { title: "Microsoft Dynamics", body: "Support and specialists for Microsoft Dynamics business applications." },
+      { title: "ERP database support", body: "The database administration that ERP platforms depend on, from the same team." },
+      { title: "Upgrades & projects", body: "Additional ERP capacity for upgrades, rollouts and integration work." },
+      { title: "Ongoing support", body: "Day-to-day help for users and administrators after go-live." },
     ],
-    outcomes: ["Simpler, auditable compliance", "Connected core systems", "Better self-service experiences", "Lower cost to serve"],
-    services: ["application-digital-experience", "data-ai-analytics", "consulting-transformation"],
+    approach: [
+      { title: "Understand your landscape", body: "We review your ERP platform, versions, integrations and support needs." },
+      { title: "Match the right skills", body: "We provide functional, technical or database specialists for the work at hand." },
+      { title: "Deliver & support", body: "Our people work alongside your team on projects or ongoing support." },
+      { title: "Review regularly", body: "We check in on progress and adjust staffing as your needs change." },
+    ],
+    outcomes: [
+      "ERP specialists without a long hiring cycle",
+      "Database and application support from one partner",
+      "Flexible capacity for upgrades and projects",
+      "Steady, reliable day-to-day support",
+    ],
+    faqs: [
+      { q: "Which ERP platforms do you support?", a: "SAP, the Oracle application suite (including E-Business Suite and Hyperion) and Microsoft Dynamics." },
+      { q: "Can you provide ERP consultants on contract?", a: "Yes. We place ERP professionals on contract, contract-to-hire and direct-hire terms through our IT staffing service." },
+      { q: "Do you also support the ERP database?", a: "Yes. Our US-based DBA team supports the Oracle, SQL Server and DB2 databases that ERP systems run on." },
+    ],
   },
-  accelerators: {
-    headline: ["Get to value ", "faster."],
+
+  "managed-it-support": {
+    headline: ["IT support that ", "keeps you working."],
     intro:
-      "Proven, reusable frameworks for data, AI and automation programs — so you start from a working foundation instead of a blank page.",
-    capabilities: [
-      { title: "Enterprise data platform blueprints", body: "Ready-made architecture and pipelines for modern data platforms." },
-      { title: "Executive KPI dashboards", body: "Pre-built metric models and dashboards you can tailor in weeks." },
-      { title: "Predictive & prescriptive analytics", body: "Reusable model templates for forecasting and optimization." },
-      { title: "AI / ML enablement kits", body: "Secure patterns for deploying and governing AI use cases." },
-      { title: "Intelligent automation starters", body: "Process automation templates for common back-office tasks." },
+      "Managed IT and tech support for growing businesses — networks, security, help desk and migrations, delivered on-site, remotely or by phone, from per-incident help to yearly contracts.",
+    offerings: [
+      { title: "Help desk outsourcing", body: "A responsive help desk for your staff without hiring an in-house team." },
+      { title: "Network setup & integration", body: "Design, set-up and integration of reliable office networks." },
+      { title: "Security & virus protection", body: "Protection, clean-up and good security practice across your devices." },
+      { title: "Email migration", body: "Smooth moves between email platforms with minimal disruption." },
+      { title: "Setup, installation & repair", body: "New equipment set up correctly, plus diagnosis and repair when things go wrong." },
+      { title: "Project planning & documentation", body: "Planned IT projects and clear documentation of your environment." },
     ],
-    outcomes: ["Weeks saved on every program", "Lower delivery risk", "Proven, secure patterns", "Consistent quality across teams"],
-    services: ["data-ai-analytics", "cloud-infrastructure-operations", "talent-staffing-solutions"],
+    models: [
+      { title: "Per incident", body: "Pay only when you need help — ideal for occasional issues." },
+      { title: "Block of hours", body: "Pre-purchased support hours at a better rate, used as you need them." },
+      { title: "Yearly contract", body: "Ongoing managed support with predictable costs across the year." },
+    ],
+    modelsHead: { eyebrow: "Support plans", title: "Support that fits", accent: "your budget", intro: "Delivered on-site, remotely or by phone." },
+    approach: [
+      { title: "Assess", body: "We review your systems, network and current pain points." },
+      { title: "Recommend", body: "We suggest practical fixes and the support plan that suits you." },
+      { title: "Support", body: "We resolve issues on-site, remotely or by phone as they come up." },
+      { title: "Improve", body: "We keep documentation current and suggest improvements over time." },
+    ],
+    outcomes: [
+      "Less downtime and faster fixes",
+      "Better-protected devices and data",
+      "IT expertise without a full-time hire",
+      "Predictable support costs",
+    ],
+    faqs: [
+      { q: "Do you offer on-site support?", a: "Yes. We provide support on-site, remotely and by phone, depending on what the issue needs." },
+      { q: "Do I need a contract?", a: "No. You can use us per incident, buy a block of hours, or choose a yearly contract for ongoing managed support." },
+      { q: "Can you take over our help desk?", a: "Yes. Help desk outsourcing is one of our core managed services." },
+    ],
+  },
+
+  "it-consulting": {
+    headline: ["Practical IT advice from ", "people who do the work."],
+    intro:
+      "IT consulting for planning, assessments and projects — from database and infrastructure reviews to IT outsourcing decisions — grounded in hands-on delivery experience.",
+    offerings: [
+      { title: "IT assessments", body: "An honest review of your systems, databases and processes, with clear recommendations." },
+      { title: "Database architecture reviews", body: "Health, performance and resilience reviews by experienced DBAs." },
+      { title: "IT outsourcing advice", body: "Help deciding what to keep in-house and what to outsource — and how." },
+      { title: "Project planning", body: "Scoped, documented plans for upgrades, migrations and new systems." },
+      { title: "Upgrade & migration planning", body: "Low-risk paths for database, platform and email migrations." },
+      { title: "Staffing strategy", body: "Advice on the mix of contract, permanent and managed resources you need." },
+    ],
+    approach: [
+      { title: "Listen", body: "We start by understanding your goals, constraints and current environment." },
+      { title: "Assess", body: "Our specialists review the systems and processes in question." },
+      { title: "Recommend", body: "You get clear, prioritized recommendations you can act on." },
+      { title: "Deliver", body: "If you'd like, we provide the people or managed services to carry out the plan." },
+    ],
+    outcomes: [
+      "A clear, prioritized plan",
+      "Advice grounded in real delivery experience",
+      "Lower risk on upgrades and migrations",
+      "The option to have us deliver the plan",
+    ],
+    faqs: [
+      { q: "Can you deliver what you recommend?", a: "Yes. Our staffing, database and managed IT teams can carry out the plan — or your team can, using our documentation." },
+      { q: "What areas do you advise on?", a: "Databases, infrastructure, ERP, IT support and outsourcing decisions, and staffing strategy." },
+    ],
   },
 };
 
 export const industryDetails: Record<string, { challenges: string[]; help: string[] }> = {
-  core: {
-    challenges: ["Aging core systems that are risky to change", "Strict regulatory and audit requirements", "Pressure to cut cost while improving service"],
-    help: ["Phased core modernization with zero-downtime cutovers", "Compliance and audit evidence built into delivery", "Data and AI that improve decisions and efficiency"],
+  enterprise: {
+    challenges: ["Specialist IT skills that are hard to hire quickly", "Critical databases that can't afford downtime", "Projects that need extra hands for a defined period"],
+    help: ["Vetted IT professionals on contract, contract-to-hire or direct hire", "100% US-based database administration", "ERP and IT consulting from one accountable partner"],
   },
-  public: {
-    challenges: ["Policy-driven deadlines and public accountability", "Legacy systems serving millions of citizens", "Tight budgets and procurement rules"],
-    help: ["Secure, compliant cloud foundations for public services", "Accessible digital services for every citizen", "Transparent delivery with clear reporting"],
+  government: {
+    challenges: ["Strict hiring, documentation and compliance requirements", "Background checks and verification for every hire", "Tight timelines and budgets"],
+    help: ["A documented, compliant hiring process", "In-house compliance officer oversight", "Background-checked professionals, ready to start"],
   },
-  commercial: {
-    challenges: ["Fast-changing customer expectations", "Scaling technology and teams quickly", "Competing on digital experience"],
-    help: ["Modern digital products and platforms", "Flexible talent to scale delivery up or down", "Analytics that reveal what customers want"],
-  },
-  emerging: {
-    challenges: ["Niche skills that are hard to hire", "Evolving regulation and business models", "Limited in-house technology capacity"],
-    help: ["Specialist talent sourced quickly", "Right-sized solutions that grow with you", "Practical guidance from domain experts"],
+  smb: {
+    challenges: ["No in-house IT team", "Security threats and unreliable networks", "Unpredictable IT costs"],
+    help: ["Managed IT support on-site, remotely or by phone", "Network, security and help desk services", "Per-incident, block-of-hours or yearly plans"],
   },
 };
 
 export const about = {
   intro:
-    "We are a technology consulting and talent company helping enterprises and public institutions modernize, operate and grow — with offices in the United States and India.",
+    "M & K Technovations Inc. is an IT staffing and technology services company headquartered in Harrisburg, Pennsylvania, serving enterprises and government agencies since 2013.",
   story: [
-    "We started with a simple belief: great technology outcomes come from the right strategy and the right people working together. Too often, organizations had to choose between a consultancy that advised and a staffing firm that supplied. We decided to do both, properly.",
-    "Today we bring consulting, engineering and talent under one roof. Our teams design and deliver mission-critical systems, and our recruiters place the specialists who keep them running — across the United States and from our delivery center in Hyderabad.",
+    "We were founded in 2013 on a simple promise: the right people, with the right skills, at the right price. Too many organizations were paying for résumés instead of results — we set out to change that with careful screening and honest advice.",
+    "Today we help global enterprises, government agencies and growing businesses with IT staff augmentation, 100% US-based database administration, ERP support and managed IT services — all from one accountable partner.",
   ],
-  mission: "Help organizations build technology that lasts — through honest advice, excellent engineering and exceptional people.",
-  vision: "To be the partner enterprises trust most for both the technology they run and the talent that runs it.",
+  mission: "Deliver the right people, with the right skills, at the right price — every time.",
+  vision: "To be the staffing and technology partner our clients trust first for both critical systems and the people who run them.",
   values: [
-    { title: "Integrity first", body: "We give honest advice, even when it isn't what people want to hear." },
-    { title: "Outcomes over output", body: "We measure success by your results, not our hours." },
-    { title: "People make it work", body: "We invest in the growth, wellbeing and fit of every person we place." },
-    { title: "Security by default", body: "We treat your data and systems with the care they deserve." },
+    { title: "Integrity first", body: "Honest advice and transparent pricing, even when it isn't what people want to hear." },
+    { title: "Compliance built in", body: "A documented hiring process with in-house compliance oversight." },
+    { title: "Quality talent", body: "Every professional is screened and background-checked before we introduce them." },
+    { title: "Satisfaction guaranteed", body: "We stand behind our work and our people." },
   ],
   stats: [
-    { value: "15+", label: "years of delivery" },
-    { value: "200+", label: "clients served" },
-    { value: "2,500+", label: "professionals placed" },
-    { value: "2", label: "countries, one team" },
-  ],
-  leaders: [
-    { name: "Leader Name", role: "Founder & CEO" },
-    { name: "Leader Name", role: "Chief Operating Officer" },
-    { name: "Leader Name", role: "Head of Consulting" },
-    { name: "Leader Name", role: "Head of Talent Solutions" },
+    { value: "2013", label: "Serving clients since" },
+    { value: "100%", label: "US-based DBA support" },
+    { value: "5", label: "Database platforms supported" },
+    { value: "Total", label: "Satisfaction guarantee" },
   ],
   approach: [
-    { title: "Listen", body: "We start by understanding your goals, constraints and people." },
-    { title: "Advise", body: "We recommend the simplest path to a measurable outcome." },
-    { title: "Deliver", body: "Engineers and specialists execute with discipline and transparency." },
-    { title: "Sustain", body: "We support, improve and hand over so results last." },
+    { title: "Listen", body: "We start by understanding your goals, environment and constraints." },
+    { title: "Recommend", body: "We suggest the right people, service level or plan for the job." },
+    { title: "Deliver", body: "Our professionals and support teams get to work, transparently." },
+    { title: "Review", body: "We check in regularly and adjust as your needs change." },
   ],
 };
 
 export const contactInterests = [
-  "Consulting & Transformation",
-  "Cloud, Infrastructure & Operations",
-  "Data, AI & Analytics",
-  "Application & Digital Experience",
-  "Talent & Staffing Solutions",
+  "IT Staffing",
+  "Database Administration",
+  "ERP Support",
+  "Managed IT Support",
+  "IT Consulting",
+  "Job opportunities",
   "Something else",
 ];

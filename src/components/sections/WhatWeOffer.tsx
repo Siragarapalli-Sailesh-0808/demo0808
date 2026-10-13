@@ -15,14 +15,13 @@ export function WhatWeOffer() {
       <div className="container-x">
         <div className="mx-auto max-w-3xl text-center">
           <p className="eyebrow justify-center" data-reveal>
-            Solutions
+            Engagement models
           </p>
           <h2 className="h-section mt-4" data-reveal style={{ ["--d" as string]: "60ms" }}>
-            What we <span className="accent-word">offer</span>
+            How we work <span className="accent-word">with you</span>
           </h2>
           <p className="mt-6 text-[17px] leading-relaxed text-ink-2" data-reveal style={{ ["--d" as string]: "120ms" }}>
-            Enterprise solutions built around complex operational and industry-specific challenges. Each one fits into
-            your existing environment and is designed for continuity, efficiency and long-term value.
+            Flexible ways to bring in the people and support you need — from a single consultant to a dedicated DBA team. Every engagement is backed by our compliant hiring process and satisfaction guarantee.
           </p>
         </div>
 
@@ -89,13 +88,13 @@ export function WhatWeOffer() {
                   </div>
 
                   <Link
-                    href={`/solutions/${s.slug}`}
+                    href={s.href}
                     tabIndex={on ? 0 : -1}
                     className={`mt-auto inline-flex items-center gap-2 text-[14.5px] font-semibold transition-opacity duration-500 ${
                       on ? "text-white opacity-100" : "opacity-0"
                     }`}
                   >
-                    Explore solution <ArrowRight />
+                    Learn more<span className="sr-only"> about {s.title}</span> <ArrowRight />
                   </Link>
 
                   <div
@@ -111,7 +110,7 @@ export function WhatWeOffer() {
                       0{i + 1}
                     </span>
                     <span className="mt-3 flex items-center gap-2 text-[13.5px] font-medium text-muted">
-                      {s.items.length} focus areas <ArrowRight size={14} />
+                      See details <ArrowRight size={14} />
                     </span>
                   </div>
                 </div>
@@ -153,8 +152,8 @@ export function WhatWeOffer() {
                           </li>
                         ))}
                       </ul>
-                      <Link href={`/solutions/${s.slug}`} className="mt-5 inline-flex items-center gap-2 text-[14px] font-semibold">
-                        Explore solution <ArrowRight />
+                      <Link href={s.href} className="mt-5 inline-flex items-center gap-2 text-[14px] font-semibold">
+                        Learn more<span className="sr-only"> about {s.title}</span> <ArrowRight />
                       </Link>
                     </div>
                   </div>

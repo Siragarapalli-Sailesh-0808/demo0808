@@ -91,18 +91,30 @@ export function Motion() {
 
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-in)");
+    // Clip-path-masked headings have no visible area until revealed, and Chrome then never reports
+    // them as intersecting — so watch their (unclipped) parent and reveal the heading through it.
+    const proxyFor = new Map<Element, HTMLElement[]>();
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
           if (e.isIntersecting) {
-            e.target.classList.add("is-in");
+            const targets = proxyFor.get(e.target) ?? [e.target as HTMLElement];
+            targets.forEach((t) => t.classList.add("is-in"));
             io.unobserve(e.target);
           }
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.01 },
     );
-    els.forEach((el) => io.observe(el));
+    els.forEach((el) => {
+      const watch = el.classList.contains("h-section") && el.parentElement ? el.parentElement : el;
+      if (watch !== el) {
+        const list = proxyFor.get(watch);
+        if (list) list.push(el);
+        else proxyFor.set(watch, el.hasAttribute("data-reveal") && watch.hasAttribute("data-reveal") ? [watch, el] : [el]);
+      }
+      io.observe(watch);
+    });
     return () => io.disconnect();
   }, [pathname]);
 

@@ -20,8 +20,8 @@ export function Stats() {
               </span>
               <p>
                 <span className="block font-display text-[clamp(1.7rem,1.3rem+1.6vw,2.6rem)] font-extrabold leading-none tracking-[-0.03em] text-ink">
-                  <Counter to={s.value} />
-                  <span className="tone-text">{s.suffix}</span>
+                  {s.text ? <span className="tone-text">{s.text}</span> : <Counter to={s.value ?? 0} grouping={s.grouping !== false} />}
+                  {s.suffix && <span className="tone-text">{s.suffix}</span>}
                 </span>
                 <span className="mt-1.5 block text-[13.5px] font-medium text-muted md:text-[14.5px]">{s.label}</span>
               </p>
@@ -38,7 +38,7 @@ export function Stats() {
  * Odometer: each digit is a 0–9 strip that rolls into place when the stats come into view.
  * Server HTML already shows the final number (SEO / no-JS); transform-only animation.
  */
-function Counter({ to }: { to: number }) {
+function Counter({ to, grouping = true }: { to: number; grouping?: boolean }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [armed, setArmed] = useState(false); // false = show final digits
   const [rolled, setRolled] = useState(true);
@@ -62,11 +62,12 @@ function Counter({ to }: { to: number }) {
     return () => io.disconnect();
   }, []);
 
-  const chars = to.toLocaleString("en-US").split("");
+  const label = grouping ? to.toLocaleString("en-US") : String(to);
+  const chars = label.split("");
   let digitIndex = 0;
   return (
     <>
-    <span className="sr-only">{to.toLocaleString("en-US")}</span>
+    <span className="sr-only">{label}</span>
     <span ref={ref} className="odo tabular-nums" aria-hidden data-armed={armed || undefined}>
       {chars.map((ch, i) => {
         if (!/\d/.test(ch)) {
@@ -98,27 +99,26 @@ function Counter({ to }: { to: number }) {
 
 function StatIcon({ label }: { label: string }) {
   const p = { width: 24, height: 24, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
-  if (label.startsWith("Years"))
+  if (label.startsWith("Serving"))
     return (
       <svg {...p}>
         <circle cx="12" cy="12" r="9" />
         <path d="M12 7v5l3 2" />
       </svg>
     );
-  if (label.startsWith("Enterprise"))
+  if (label.startsWith("US-based"))
     return (
       <svg {...p}>
-        <path d="M4 21V8l8-5 8 5v13" />
-        <path d="M9 21v-6h6v6M9 10h.01M15 10h.01" />
+        <path d="M12 3 19 6v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3Z" />
+        <path d="m9 12 2 2 4-4" />
       </svg>
     );
-  if (label.startsWith("Professionals"))
+  if (label.startsWith("Database"))
     return (
       <svg {...p}>
-        <circle cx="9" cy="8" r="3.2" />
-        <path d="M3.5 19a5.5 5.5 0 0 1 11 0" />
-        <circle cx="17" cy="9.5" r="2.4" />
-        <path d="M16 14.6a4.5 4.5 0 0 1 5 4.4" />
+        <ellipse cx="12" cy="6" rx="7" ry="3" />
+        <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6" />
+        <path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" />
       </svg>
     );
   return (
