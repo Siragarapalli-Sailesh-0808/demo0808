@@ -4,6 +4,7 @@ import { industryGroups, services } from "@/lib/content";
 import { Logo } from "./Logo";
 import { Mail, Phone, Pin, Social } from "./Icons";
 import { BackToTop } from "./BackToTop";
+import { EVerifyBadge } from "./EVerifyBadge";
 
 const company = [
   { label: "About us", href: "/about" },
@@ -25,7 +26,7 @@ export function Footer() {
       <div className="container-x">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Logo />
+            <Logo imgClassName="h-[72px] md:h-20" />
             <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-muted">
               The right people, with the right skills, at the right price. IT staffing, database administration, ERP and
               managed IT services since {site.founded}.
@@ -52,6 +53,7 @@ export function Footer() {
                 </address>
               </li>
             </ul>
+            <EVerifyBadge className="mt-7" />
             {site.socials.length > 0 && (
               <ul className="mt-7 flex gap-2">
                 {site.socials.map((s) => (
@@ -79,9 +81,14 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-4 border-t border-line-2/70 py-8 text-[13.5px] text-muted md:flex-row md:items-center md:justify-between">
-          <p>
-            © {year} {site.legalName}. All rights reserved.
-          </p>
+          <div>
+            <p>
+              © {year} {site.legalName} All rights reserved.
+            </p>
+            {site.everify.enabled && (
+              <p className="mt-1 text-[12px]">E-Verify® is a registered trademark of the U.S. Department of Homeland Security.</p>
+            )}
+          </div>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {legal.map((l) => (
               <li key={l.href}>

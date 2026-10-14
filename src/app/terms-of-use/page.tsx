@@ -18,7 +18,7 @@ export default function TermsPage() {
       </p>
       <h2>About this website</h2>
       <p>
-        This website is operated by {site.legalName}. Its content is provided for general information about our services and job opportunities. It does not
+        This website is operated by {site.legalName} Its content is provided for general information about our services and job opportunities. It does not
         form an offer or a contract; services are provided under separate written agreements.
       </p>
       <h2>Job postings</h2>

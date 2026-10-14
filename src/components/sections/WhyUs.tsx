@@ -1,6 +1,7 @@
 import { strengths } from "@/lib/content";
 import { FeatureGrid } from "../page/FeatureGrid";
 import { SectionHead } from "../page/SectionHead";
+import { EVerifyBadge } from "../EVerifyBadge";
 
 /** "Why M & K" — real strengths from the company's own materials (replaces sample case studies). */
 export function WhyUs() {
@@ -18,6 +19,9 @@ export function WhyUs() {
         </div>
         <div className="mt-12">
           <FeatureGrid items={strengths} />
+        </div>
+        <div className="mt-6" data-reveal>
+          <EVerifyBadge variant="strip" />
         </div>
       </div>
     </section>

@@ -22,7 +22,7 @@ export function SubNav({ items }: { items: { id: string; label: string }[] }) {
   }, [items]);
 
   return (
-    <div className="sticky top-[68px] z-30 border-y border-line bg-bg">
+    <div className="sticky top-[76px] z-30 border-y border-line bg-bg">
       <nav aria-label="On this page" className="container-x">
         <ul className="-mx-5 flex gap-1 overflow-x-auto px-5 py-3 md:mx-0 md:px-0">
           {items.map((i) => (

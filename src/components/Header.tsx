@@ -116,10 +116,10 @@ export function Header() {
         />
         <div
           className={`container-x flex items-center justify-between transition-[height] duration-500 ease-out-expo ${
-            scrolled ? "h-[68px]" : "h-[84px]"
+            scrolled ? "h-[76px]" : "h-[96px]"
           }`}
         >
-          <Logo />
+          <Logo imgClassName={scrolled ? "h-14" : "h-14 lg:h-[72px]"} />
 
           <nav aria-label="Primary" className="hidden lg:block" onMouseLeave={() => { rest(); scheduleClose(); }}>
             <ul className="relative flex items-center gap-1">
@@ -213,7 +213,7 @@ export function Header() {
       {/* Mobile sheet (positioned under the nav bar; the header itself is transformed) */}
       <div
         data-lenis-prevent
-        className={`absolute inset-x-0 top-full ${scrolled ? "h-[calc(100dvh-68px)]" : "h-[calc(100dvh-124px)]"} overflow-y-auto bg-white transition-[opacity,visibility] duration-500 ease-out-expo lg:hidden ${
+        className={`absolute inset-x-0 top-full ${scrolled ? "h-[calc(100dvh-76px)]" : "h-[calc(100dvh-136px)]"} overflow-y-auto bg-white transition-[opacity,visibility] duration-500 ease-out-expo lg:hidden ${
           mobile ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >

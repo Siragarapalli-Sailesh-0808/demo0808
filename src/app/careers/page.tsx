@@ -7,6 +7,7 @@ import { SectionHead } from "@/components/page/SectionHead";
 import { FeatureGrid } from "@/components/page/FeatureGrid";
 import { ApplyForm } from "@/components/page/ApplyForm";
 import { ArrowRight, Pin } from "@/components/Icons";
+import { EVerifyBadge } from "@/components/EVerifyBadge";
 
 export const metadata: Metadata = {
   title: "Careers — IT jobs",
@@ -81,6 +82,28 @@ export default function CareersPage() {
           <div className="mt-12">
             <FeatureGrid items={perks} />
           </div>
+          {site.everify.enabled && (
+            <div className="mt-6 space-y-4" data-reveal>
+              <EVerifyBadge variant="strip" />
+              <p className="text-[14px] leading-relaxed text-muted">
+                E-Verify is used only after a job offer is accepted and Form I-9 is completed — never to screen applicants.
+                {site.everify.posters.length > 0 && (
+                  <>
+                    {" "}
+                    Read our notices:{" "}
+                    {site.everify.posters.map((p, i) => (
+                      <span key={p.href}>
+                        {i > 0 && " · "}
+                        <a href={p.href} target="_blank" rel="noopener noreferrer" className="font-semibold text-accent underline underline-offset-2">
+                          {p.label}
+                        </a>
+                      </span>
+                    ))}
+                  </>
+                )}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
