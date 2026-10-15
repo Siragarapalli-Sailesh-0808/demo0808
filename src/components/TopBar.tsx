@@ -1,6 +1,5 @@
 import { Link } from "next-view-transitions";
 import { tickerHighlights } from "@/lib/content";
-import { jobs } from "@/lib/jobs";
 import { tones, toneOrder } from "@/lib/tones";
 import { ArrowRight } from "./Icons";
 
@@ -8,7 +7,9 @@ import { ArrowRight } from "./Icons";
  * Scrolling bar above the header: live job openings when there are any, otherwise company highlights.
  * Pure CSS marquee (transform only), pauses on hover/focus, static for reduced-motion users.
  */
-export function TopBar() {
+export type TickerJob = { slug: string; title: string; location: string };
+
+export function TopBar({ jobs = [] }: { jobs?: TickerJob[] }) {
   const hiring = jobs.length > 0;
   const list = hiring
     ? jobs.map((j) => ({ text: `${j.title} – ${j.location}`, href: `/careers/${j.slug}` }))

@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import { Link } from "next-view-transitions";
-import { jobs } from "@/lib/jobs";
+import { getJobs } from "@/lib/jobs";
 import { site } from "@/lib/site";
 import { PageHero } from "@/components/page/PageHero";
 import { SectionHead } from "@/components/page/SectionHead";
 import { FeatureGrid } from "@/components/page/FeatureGrid";
-import { ApplyForm } from "@/components/page/ApplyForm";
 import { ArrowRight, Pin } from "@/components/Icons";
 import { EVerifyBadge } from "@/components/EVerifyBadge";
 
+export const revalidate = 300; // seconds — keep in sync with JOBS_REVALIDATE in src/lib/jobs.ts
+
 export const metadata: Metadata = {
   title: "Careers — IT jobs",
-  description: `Open IT positions with ${site.legalName}: contract, contract-to-hire and direct-hire roles in database administration, ERP, infrastructure and IT support. Send us your résumé.`,
+  description: `Open IT positions with ${site.legalName}: contract, contract-to-hire and direct-hire roles in database administration, ERP, infrastructure and IT support. Updated regularly.`,
   alternates: { canonical: "/careers" },
 };
 
@@ -21,33 +22,34 @@ const perks = [
   { title: "A recruiter on your side", body: "We prepare you for interviews, handle paperwork and stay in touch throughout your assignment." },
 ];
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const jobs = await getJobs();
   return (
     <>
       <PageHero
         eyebrow="Careers"
         title={["Find your next ", "IT role."]}
-        intro="We place skilled technology professionals with enterprises and government agencies across the United States. Browse our openings, or send us your résumé and we'll reach out when the right role comes up."
+        intro="We place skilled technology professionals with enterprises and government agencies across the United States. Browse our current openings below."
         crumbs={[{ label: "Careers", href: "/careers" }]}
       >
         <a href="#openings" className="btn btn-primary">
-          {jobs.length ? "View openings" : "Send your résumé"} <ArrowRight />
+          View openings <ArrowRight />
         </a>
       </PageHero>
 
       <section id="openings" className="scroll-mt-32 py-20 md:py-28">
         <div className="container-x">
-          <SectionHead eyebrow="Open positions" title={jobs.length ? `${jobs.length} open` : "Current"} accent={jobs.length === 1 ? "role" : jobs.length ? "roles" : "openings"} />
+          <SectionHead eyebrow="Open positions" title={jobs.length ? `Current openings (${jobs.length})` : "Current openings"} />
           {jobs.length ? (
             <ul className="mt-12 grid gap-4">
               {jobs.map((j, i) => (
                 <li key={j.slug} data-reveal style={{ ["--d" as string]: `${i * 60}ms` }}>
                   <Link
                     href={`/careers/${j.slug}`}
-                    className="group flex flex-col gap-4 rounded-lg bg-white p-7 ring-1 ring-line transition-[box-shadow,translate] duration-500 ease-out-expo hover:-translate-y-0.5 hover:shadow-lift md:flex-row md:items-center md:justify-between"
+                    className="group flex flex-col gap-4 rounded-lg border border-line bg-white p-7 transition-[border-color,box-shadow] duration-300 hover:border-line-2 hover:shadow-card md:flex-row md:items-center md:justify-between"
                   >
-                    <div>
-                      <h3 className="text-[21px] font-bold transition-colors group-hover:text-accent">{j.title}</h3>
+                    <div className="max-w-3xl">
+                      <h3 className="text-[20px] font-semibold transition-colors group-hover:text-accent">{j.title}</h3>
                       <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[14.5px] text-muted">
                         <span className="inline-flex items-center gap-1.5">
                           <Pin size={15} /> {j.location}
@@ -55,10 +57,12 @@ export default function CareersPage() {
                         </span>
                         <span>{j.type}</span>
                         {j.experience && <span>{j.experience}</span>}
+                        <span>Posted {formatDate(j.posted)}</span>
                       </p>
+                      {j.summary && <p className="mt-3 line-clamp-2 text-[15px] leading-relaxed text-ink-2">{j.summary}</p>}
                     </div>
                     <span className="inline-flex items-center gap-2 text-[15px] font-semibold text-accent">
-                      View & apply <ArrowRight />
+                      View details <ArrowRight />
                     </span>
                   </Link>
                 </li>
@@ -68,8 +72,7 @@ export default function CareersPage() {
             <div className="mt-12 rounded-lg bg-tint p-8 ring-1 ring-line md:p-10" data-reveal>
               <p className="font-display text-[20px] font-semibold">There are no published openings right now.</p>
               <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-ink-2">
-                New roles open often, and many are filled before they&apos;re ever posted. Send us your résumé below and our recruiters will contact you when a
-                role matches your skills.
+                New roles open often. Please check back soon for the latest IT openings with {site.legalName}
               </p>
             </div>
           )}
@@ -107,16 +110,11 @@ export default function CareersPage() {
         </div>
       </section>
 
-      <section id="apply" className="scroll-mt-32 py-24 md:py-28">
-        <div className="container-x grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <SectionHead eyebrow="Apply" title="Send us your" accent="résumé" intro="Tell us a little about yourself and attach your résumé. We review every application." />
-          </div>
-          <div className="lg:col-span-7 lg:col-start-6">
-            <ApplyForm />
-          </div>
-        </div>
-      </section>
     </>
   );
+}
+
+function formatDate(iso: string) {
+  const d = new Date(`${iso}T12:00:00Z`);
+  return Number.isNaN(d.getTime()) ? iso : d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
 }

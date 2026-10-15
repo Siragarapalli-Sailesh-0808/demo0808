@@ -5,16 +5,19 @@ export const metadata = { title: "Page not found" };
 export default function NotFound() {
   return (
     <section className="container-x flex min-h-[80svh] flex-col items-start justify-center pt-44">
-      <p className="eyebrow">404</p>
-      <h1 className="mt-4 text-[clamp(2.4rem,1.6rem+3vw,4rem)] font-extrabold">
-        This page is <span className="accent-word">on its way.</span>
-      </h1>
+      <p className="eyebrow">Page not found</p>
+      <h1 className="mt-4 text-[clamp(2.2rem,1.6rem+2.4vw,3.4rem)] font-semibold">We couldn&apos;t find that page.</h1>
       <p className="mt-5 max-w-lg text-[17px] text-ink-2">
-        We&apos;re still building this part of the site. In the meantime, head back home or get in touch.
+        It may have moved, or — if you followed a job link — the position may have been filled. Browse our current
+        openings or head back to the home page.
       </p>
-      <div className="mt-8 flex gap-3">
-        <Link href="/" className="btn btn-primary">Back to home</Link>
-        <Link href="/contact" className="btn btn-ghost">Contact us</Link>
+      <div className="mt-8 flex flex-wrap gap-3">
+        <Link href="/careers" className="btn btn-primary">
+          Current openings
+        </Link>
+        <Link href="/" className="btn btn-ghost">
+          Back to home
+        </Link>
       </div>
     </section>
   );

@@ -4,6 +4,7 @@ import "@fontsource-variable/plus-jakarta-sans";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { Header } from "@/components/Header";
+import { getJobs } from "@/lib/jobs";
 import { Footer } from "@/components/Footer";
 import { Motion } from "@/components/Motion";
 import { FloatingContact } from "@/components/FloatingContact";
@@ -51,7 +52,8 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const jobs = (await getJobs()).map(({ slug, title, location }) => ({ slug, title, location }));
   return (
     <ViewTransitions>
     <html lang="en" suppressHydrationWarning>
@@ -66,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <Header />
+        <Header jobs={jobs} />
         <main id="main">{children}</main>
         <Footer />
         <FloatingContact />

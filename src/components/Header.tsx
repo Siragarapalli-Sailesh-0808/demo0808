@@ -6,12 +6,12 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { nav, services, industryGroups } from "@/lib/content";
 import { Logo } from "./Logo";
 import { ArrowRight, Icon } from "./Icons";
-import { TopBar } from "./TopBar";
+import { TopBar, type TickerJob } from "./TopBar";
 import { toneVars } from "@/lib/tones";
 
 type Mega = "services" | "solutions" | "industries";
 
-export function Header() {
+export function Header({ jobs = [] }: { jobs?: TickerJob[] }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState<Mega | null>(null);
@@ -101,7 +101,7 @@ export function Header() {
       data-scrolled={scrolled}
       className={`fixed inset-x-0 top-0 z-50 transition-transform duration-500 ease-out-expo ${scrolled ? "-translate-y-10" : "translate-y-0"}`}
     >
-      <TopBar />
+      <TopBar jobs={jobs} />
       <div
         className={`relative transition-[background-color,box-shadow] duration-500 ease-out-expo ${
           scrolled || open || mobile ? "bg-white shadow-[0_1px_0_var(--color-line),0_10px_30px_-20px_rgb(11_18_32/0.25)]" : "bg-transparent"

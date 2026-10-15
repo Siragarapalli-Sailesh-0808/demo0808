@@ -1,10 +1,13 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { services } from "@/lib/content";
-import { jobs } from "@/lib/jobs";
+import { getJobs } from "@/lib/jobs";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 300; // seconds — keep in sync with JOBS_REVALIDATE in src/lib/jobs.ts
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const jobs = await getJobs();
   const routes: { path: string; priority: number }[] = [
     { path: "", priority: 1 },
     { path: "/about", priority: 0.8 },

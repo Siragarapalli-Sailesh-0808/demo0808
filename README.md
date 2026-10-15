@@ -18,16 +18,34 @@ npm run build      # production build
 | Phone, emails, address, social links, WhatsApp | `src/lib/site.ts` |
 | Home page content, services, engagement models, stats | `src/lib/content.ts` |
 | Service pages, About page, "Who we serve" details | `src/lib/content-pages.ts` |
-| **Job openings** | `src/lib/jobs.ts` — copy the example, fill it in, push. Each job gets its own page and Google for Jobs data. |
+| **Job openings** | A Google Sheet — see "Posting jobs" below. No code changes needed. |
 | Logo files | `public/brand/` (`logo.svg`, `logo-white.svg`, `logo-navy.svg`, `mark.svg`) |
 | Redirects from old WordPress URLs | `next.config.ts` |
 
 Empty `socials` / `whatsapp` values hide those buttons everywhere.
 
-## Forms (contact + job applications)
+## Posting jobs (Google Sheet — free, no backend)
 
-Both forms email you through [Resend](https://resend.com). Applications arrive with the résumé attached
-(PDF/DOC/DOCX, max 4 MB, file type checked on the server). Spam protection: hidden honeypot + rate limit.
+The careers page reads open jobs from a Google Sheet. Visitors only view jobs; there is no apply form.
+
+**One-time setup**
+1. In Google Sheets: **File → Import → Upload** `docs/jobs-template.csv` (choose "Replace spreadsheet").
+2. **File → Share → Publish to web** → pick the jobs sheet (not "Entire document") → **Comma-separated values (.csv)** → **Publish**. Copy the link.
+3. Paste that link into `jobsSheetUrl` in `src/lib/site.ts` (or set `JOBS_SHEET_URL` in Vercel → Settings → Environment Variables) and redeploy once.
+
+**Day to day (the admin)**
+- Add a row per job. Required: **Title** and **Status = Open**.
+- **Responsibilities / Requirements**: one item per line inside the cell (Alt+Enter on Windows, Ctrl+Option+Enter on Mac).
+- **Posted / Closing date**: `YYYY-MM-DD`. After the closing date the job hides itself.
+- To take a job down, set **Status = Closed** (or delete the row).
+- Changes appear on the website within about 5–10 minutes (Google updates the published file every few minutes, and the site re-checks every 5 minutes).
+- Everything in the sheet is public once published — don't add private notes or pay rates you don't want shown.
+
+Each open job gets its own page (`/careers/<job-title-location>`), appears in the "Now hiring" bar at the top of every page, in the sitemap, and is marked up for Google's job search.
+
+## Contact form
+
+The contact form emails you through [Resend](https://resend.com). Spam protection: hidden honeypot + rate limit.
 
 1. Create a Resend account and add the domain `mandkstaffing.com`. Resend gives you a few DNS records
    (on the `send.` subdomain and `resend._domainkey`). **Add them alongside your existing records — they
@@ -45,7 +63,7 @@ The domain's **email (mandip@ / deep@mandkstaffing.com) must keep working**. Onl
 3. Lower the TTL of the website records (`@` A record and `www`) to 300 seconds a day ahead.
 4. In Vercel → Project → Settings → **Domains**, add `mandkstaffing.com` and `www.mandkstaffing.com`.
    Vercel shows the exact records to use.
-5. Set up the Resend environment variables (above) and send a test from both forms on the preview link.
+5. Set up the Resend environment variables (above) and send a test from the contact form on the preview link.
 
 **Cutover — change only these**
 - `@` (apex) **A** record → the IP Vercel shows (currently `76.76.21.21`)

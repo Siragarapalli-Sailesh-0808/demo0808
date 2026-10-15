@@ -31,6 +31,11 @@ export const site = {
     },
   ],
   /**
+   * Google Sheet that lists job openings (see src/lib/jobs.ts). Paste the "Publish to web" CSV link here,
+   * e.g. https://docs.google.com/spreadsheets/d/e/XXXX/pub?gid=0&single=true&output=csv
+   */
+  jobsSheetUrl: "",
+  /**
    * E-Verify participation badge (footer, home page, careers page).
    * Using the E-Verify logo needs DHS approval (Trademark & Logo Licensing Agreement → uscis.verlogo@uscis.dhs.gov).
    * Replace /public/brand/e-verify.webp with the official file DHS sends.

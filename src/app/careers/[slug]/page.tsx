@@ -1,27 +1,33 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { jobs, type Job } from "@/lib/jobs";
+import { Link } from "next-view-transitions";
+import { getJobs, type Job } from "@/lib/jobs";
 import { site } from "@/lib/site";
 import { PageHero } from "@/components/page/PageHero";
 import { JsonLd } from "@/components/page/JsonLd";
-import { ApplyForm } from "@/components/page/ApplyForm";
-import { ArrowRight, Check } from "@/components/Icons";
+import { ArrowLeft, Check } from "@/components/Icons";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export const dynamicParams = false;
+// New rows in the jobs sheet get their own page on first visit; existing pages refresh every few minutes.
+export const revalidate = 300; // seconds — keep in sync with JOBS_REVALIDATE in src/lib/jobs.ts
+export const dynamicParams = true;
 
-export function generateStaticParams() {
-  return jobs.map((j) => ({ slug: j.slug }));
+export async function generateStaticParams() {
+  return (await getJobs()).map((j) => ({ slug: j.slug }));
+}
+
+async function findJob(slug: string) {
+  return (await getJobs()).find((x) => x.slug === slug);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const j = jobs.find((x) => x.slug === slug);
-  if (!j) return {};
+  const j = await findJob(slug);
+  if (!j) return { title: "Job not found", robots: { index: false } };
   return {
     title: `${j.title} — ${j.location}`,
-    description: j.summary,
+    description: j.summary || `${j.type} ${j.title} role in ${j.location} with ${site.legalName}.`,
     alternates: { canonical: `/careers/${slug}` },
   };
 }
@@ -34,13 +40,19 @@ const employmentType: Record<Job["type"], string[]> = {
   Temporary: ["TEMPORARY"],
 };
 
+const esc = (s: string) => s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]!);
+
 export default async function JobPage({ params }: Props) {
   const { slug } = await params;
-  const j = jobs.find((x) => x.slug === slug);
+  const j = await findJob(slug);
   if (!j) notFound();
 
   const [city, region] = j.location.split(",").map((s) => s.trim());
-  const list = (items: string[]) => `<ul>${items.map((i) => `<li>${i}</li>`).join("")}</ul>`;
+  const list = (items: string[]) => (items.length ? `<ul>${items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : "");
+  const blocks = [
+    { h: "What you'll do", items: j.responsibilities },
+    { h: "What you'll bring", items: j.requirements },
+  ].filter((b) => b.items.length);
 
   return (
     <>
@@ -49,7 +61,9 @@ export default async function JobPage({ params }: Props) {
           "@context": "https://schema.org",
           "@type": "JobPosting",
           title: j.title,
-          description: `<p>${j.summary}</p><h3>Responsibilities</h3>${list(j.responsibilities)}<h3>Requirements</h3>${list(j.requirements)}`,
+          description: `<p>${esc(j.summary || j.title)}</p>${j.responsibilities.length ? `<h3>Responsibilities</h3>${list(j.responsibilities)}` : ""}${
+            j.requirements.length ? `<h3>Requirements</h3>${list(j.requirements)}` : ""
+          }`,
           datePosted: j.posted,
           ...(j.validThrough ? { validThrough: j.validThrough } : {}),
           employmentType: employmentType[j.type],
@@ -62,59 +76,62 @@ export default async function JobPage({ params }: Props) {
                   address: { "@type": "PostalAddress", addressLocality: city, addressRegion: region, addressCountry: "US" },
                 },
               }),
-          directApply: true,
         }}
       />
       <PageHero
-        eyebrow={`${j.type}${j.experience ? ` · ${j.experience}` : ""}`}
-        title={[`${j.title} `, `— ${j.location}${j.remote ? " (Remote)" : ""}`]}
+        eyebrow={[j.location, j.remote ? "Remote" : "", j.type, j.experience].filter(Boolean).join(" · ")}
+        title={[j.title, ""]}
         intro={j.summary}
         crumbs={[
           { label: "Careers", href: "/careers" },
           { label: j.title, href: `/careers/${j.slug}` },
         ]}
-      >
-        <a href="#apply" className="btn btn-primary">
-          Apply now <ArrowRight />
-        </a>
-      </PageHero>
+      />
 
       <section className="py-20">
-        <div className="container-x grid gap-6 md:grid-cols-2">
-          {[
-            { h: "What you'll do", items: j.responsibilities },
-            { h: "What you'll bring", items: j.requirements },
-          ].map((b) => (
-            <div key={b.h} className="rounded-lg bg-white p-8 ring-1 ring-line" data-reveal>
-              <h2 className="text-[22px] font-bold">{b.h}</h2>
-              <ul className="mt-5 space-y-3">
-                {b.items.map((t) => (
-                  <li key={t} className="flex items-start gap-3 text-[15.5px] leading-relaxed text-ink-2">
-                    <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent-50 text-accent">
-                      <Check size={11} />
-                    </span>
-                    {t}
-                  </li>
-                ))}
-              </ul>
+        <div className="container-x">
+          {blocks.length > 0 && (
+            <div className={`grid gap-6 ${blocks.length === 2 ? "md:grid-cols-2" : "max-w-3xl"}`}>
+              {blocks.map((b) => (
+                <div key={b.h} className="rounded-lg border border-line bg-white p-8" data-reveal>
+                  <h2 className="text-[21px] font-semibold">{b.h}</h2>
+                  <ul className="mt-5 space-y-3">
+                    {b.items.map((t) => (
+                      <li key={t} className="flex items-start gap-3 text-[15.5px] leading-relaxed text-ink-2">
+                        <Check size={15} className="mt-[5px] shrink-0 text-brand-green" />
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
+          )}
 
-      <section id="apply" className="scroll-mt-32 border-t border-line bg-tint py-24">
-        <div className="container-x grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <h2 className="text-[clamp(1.8rem,1.4rem+1.4vw,2.6rem)] font-bold">
-              Apply for <span className="accent-word">this role</span>
-            </h2>
-            <p className="mt-4 text-[16px] leading-relaxed text-muted">Attach your résumé and we&apos;ll be in touch if your experience is a match.</p>
-          </div>
-          <div className="lg:col-span-7 lg:col-start-6">
-            <ApplyForm job={j.slug} />
-          </div>
+          <dl className="mt-8 grid gap-x-10 gap-y-4 border-t border-line pt-8 text-[15px] sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["Job type", j.type],
+              ["Location", `${j.location}${j.remote ? " (Remote)" : ""}`],
+              ["Posted", fmt(j.posted)],
+              ...(j.validThrough ? [["Open until", fmt(j.validThrough)]] : []),
+            ].map(([k, v]) => (
+              <div key={k}>
+                <dt className="text-muted">{k}</dt>
+                <dd className="mt-1 font-semibold text-ink">{v}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <Link href="/careers" className="mt-12 inline-flex items-center gap-2 text-[15px] font-semibold text-accent hover:underline hover:underline-offset-4">
+            <ArrowLeft size={15} /> All openings
+          </Link>
         </div>
       </section>
     </>
   );
+}
+
+function fmt(iso: string) {
+  const d = new Date(`${iso}T12:00:00Z`);
+  return Number.isNaN(d.getTime()) ? iso : d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 }

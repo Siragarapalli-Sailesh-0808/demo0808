@@ -174,10 +174,10 @@ export const strengths = [
 
 /**
  * Highlights for the scrolling bar at the top of every page.
- * When jobs are listed in src/lib/jobs.ts, the bar shows those openings instead.
+ * When the jobs Google Sheet has open roles (see src/lib/jobs.ts), the bar shows those instead.
  */
 export const tickerHighlights = [
-  { text: "Join our talent network — send us your résumé", href: "/careers" },
+  { text: "See our current IT job openings", href: "/careers" },
   { text: "100% US-based DBA support for Oracle, SQL Server, DB2 & MySQL", href: "/services/database-administration" },
   { text: "IT staff augmentation for enterprises & government agencies", href: "/services/it-staffing" },
   { text: "ERP support for SAP, Oracle Suite & Microsoft Dynamics", href: "/services/erp-support" },
