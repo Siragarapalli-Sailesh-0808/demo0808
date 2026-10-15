@@ -149,8 +149,13 @@ export function rowsToJobs(rows: string[][], today = new Date().toISOString().sl
 
 /** Current open jobs from the Google Sheet (cached for JOBS_REVALIDATE seconds). */
 export async function getJobs(): Promise<Job[]> {
-  const url = process.env.JOBS_SHEET_URL || site.jobsSheetUrl;
+  let url = (process.env.JOBS_SHEET_URL || site.jobsSheetUrl).trim();
   if (!url) return fallbackJobs;
+  // Accept the "web page" publish link too, by switching it to the CSV version.
+  if (url.includes("/pubhtml")) {
+    url = url.replace("/pubhtml", "/pub");
+    if (!/[?&]output=csv/.test(url)) url += (url.includes("?") ? "&" : "?") + "output=csv";
+  }
   try {
     const res = await fetch(url, { next: { revalidate: JOBS_REVALIDATE, tags: ["jobs"] } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
