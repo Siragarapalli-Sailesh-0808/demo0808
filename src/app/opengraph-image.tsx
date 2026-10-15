@@ -20,23 +20,21 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
-          backgroundColor: "#fbfaff",
-          backgroundImage:
-            "radial-gradient(55% 75% at 92% 15%, rgba(124,58,237,0.28), transparent 60%), radial-gradient(50% 60% at 75% 95%, rgba(6,182,212,0.25), transparent 70%)",
-          color: "#0b1220",
+          backgroundColor: "#ffffff",
+          color: "#0d2b45",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={logo} width={292} height={120} alt="" />
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 70, fontWeight: 800, letterSpacing: -2.5, lineHeight: 1.04, maxWidth: 980 }}>
+          <div style={{ fontSize: 70, fontWeight: 700, letterSpacing: -2, lineHeight: 1.04, maxWidth: 980 }}>
             The right people, with the right skills, at the right price.
           </div>
-          <div style={{ marginTop: 26, fontSize: 28, color: "#5b3df5", fontWeight: 600 }}>
+          <div style={{ marginTop: 26, fontSize: 28, color: "#0f6fa8", fontWeight: 600 }}>
             {`${site.tagline} · Since ${site.founded}`}
           </div>
         </div>
-        <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 10, display: "flex", backgroundImage: "linear-gradient(90deg,#7c3aed,#2563eb,#06b6d4)" }} />
+        <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 10, display: "flex", backgroundImage: "linear-gradient(90deg,#0f8c6f 0 33.3%,#1592d6 33.3% 66.6%,#f2961e 66.6%)" }} />
       </div>
     ),
     size,

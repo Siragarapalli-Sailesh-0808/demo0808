@@ -10,8 +10,8 @@ export function EVerifyBadge({ variant = "compact", className = "" }: { variant?
 
   if (variant === "strip") {
     return (
-      <div className={`flex flex-col items-start gap-5 rounded-3xl bg-white p-6 ring-1 ring-line sm:flex-row sm:items-center sm:gap-8 md:p-7 ${className}`}>
-        <span className="shrink-0 rounded-2xl bg-white px-4 py-3 ring-1 ring-line">{logo}</span>
+      <div className={`flex flex-col items-start gap-5 rounded-lg bg-white p-6 ring-1 ring-line sm:flex-row sm:items-center sm:gap-8 md:p-7 ${className}`}>
+        <span className="shrink-0 rounded-lg bg-white px-4 py-3 ring-1 ring-line">{logo}</span>
         <div>
           <p className="font-display text-[18px] font-semibold text-ink">E-Verify® participating employer</p>
           <p className="mt-1.5 max-w-2xl text-[15px] leading-relaxed text-muted">
@@ -24,7 +24,7 @@ export function EVerifyBadge({ variant = "compact", className = "" }: { variant?
   }
 
   return (
-    <div className={`inline-flex items-center gap-4 rounded-2xl bg-white px-4 py-3 ring-1 ring-line ${className}`}>
+    <div className={`inline-flex items-center gap-4 rounded-lg bg-white px-4 py-3 ring-1 ring-line ${className}`}>
       {logo}
       <span className="text-[12.5px] font-semibold leading-snug text-ink-2">
         Participating

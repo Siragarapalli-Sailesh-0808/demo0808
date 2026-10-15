@@ -17,9 +17,9 @@ export function RelatedServices({ slugs, title = "Related services" }: { slugs: 
               href={`/services/${s.slug}`}
               style={toneVars(s.tone)}
               data-cursor="Explore"
-              className="group flex h-full flex-col rounded-3xl bg-surface p-6 shadow-card ring-1 ring-line transition-[box-shadow,translate] duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-lift"
+              className="group flex h-full flex-col rounded-lg bg-surface p-6 shadow-card ring-1 ring-line transition-[box-shadow,translate] duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-lift"
             >
-              <span className="tone-icon grid h-12 w-12 place-items-center rounded-2xl transition-transform duration-500 group-hover:-rotate-6">
+              <span className="tone-icon grid h-12 w-12 place-items-center rounded-lg">
                 <Icon name={s.icon} size={22} />
               </span>
               <span className="mt-8 font-display text-[17px] font-semibold leading-snug text-ink">{s.title}</span>

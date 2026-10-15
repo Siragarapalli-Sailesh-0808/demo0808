@@ -1,17 +1,18 @@
 /**
  * Colour "tones" — each service/solution gets its own colour so the site feels
- * vibrant without becoming chaotic. Components read these through CSS variables:
+ * consistent with the logo. Components read these through CSS variables:
  *   --c  (main)  --c2 (lighter, for gradients)  --cs (soft tint)  --ci (readable text on tint)
  */
 export type Tone = "violet" | "blue" | "cyan" | "pink" | "emerald" | "amber";
 
 export const tones: Record<Tone, { c: string; c2: string; cs: string; ci: string; cd: string }> = {
-  violet: { c: "#7c3aed", c2: "#a78bfa", cs: "#f3eeff", ci: "#6d28d9", cd: "#4c1d95" },
-  blue: { c: "#2563eb", c2: "#60a5fa", cs: "#e8f0ff", ci: "#1d4ed8", cd: "#1e3a8a" },
-  cyan: { c: "#0891b2", c2: "#22d3ee", cs: "#e2f8fc", ci: "#0e7490", cd: "#164e63" },
-  pink: { c: "#db2777", c2: "#f472b6", cs: "#fdedf5", ci: "#be185d", cd: "#831843" },
-  emerald: { c: "#059669", c2: "#34d399", cs: "#e3f9ef", ci: "#047857", cd: "#064e3b" },
-  amber: { c: "#d97706", c2: "#fbbf24", cs: "#fef5e1", ci: "#b45309", cd: "#7c2d12" },
+  // All tones come from the M & K logo (navy, blue, green, orange) so the site stays calm and on-brand.
+  violet: { c: "#0d2b45", c2: "#2e4f6e", cs: "#e8eef4", ci: "#0d2b45", cd: "#0a2136" },
+  blue: { c: "#1592d6", c2: "#3aace8", cs: "#eaf4fb", ci: "#0f6fa8", cd: "#0b4f78" },
+  cyan: { c: "#1592d6", c2: "#3aace8", cs: "#eaf4fb", ci: "#0f6fa8", cd: "#0b4f78" },
+  pink: { c: "#0f6fa8", c2: "#1592d6", cs: "#eaf4fb", ci: "#0b5a8a", cd: "#0b4f78" },
+  emerald: { c: "#0f8c6f", c2: "#22a887", cs: "#e6f4f0", ci: "#0b6e57", cd: "#084c3c" },
+  amber: { c: "#f2961e", c2: "#f8b24e", cs: "#fdf2e3", ci: "#a35a04", cd: "#6e3d03" },
 };
 
 export const toneOrder: Tone[] = ["violet", "blue", "cyan", "pink", "emerald", "amber"];

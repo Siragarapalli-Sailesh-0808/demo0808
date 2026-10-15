@@ -81,9 +81,9 @@ export default async function ServicePage({ params }: Props) {
         aside={
           <div
             style={toneVars(s.tone)}
-            className="relative ml-auto hidden w-full max-w-[360px] flex-col items-center gap-8 rounded-[40px] bg-white/85 px-7 pb-8 pt-12 shadow-[0_40px_80px_-40px_rgb(11_18_32/0.35)] ring-1 ring-white lg:flex"
+            className="relative ml-auto hidden w-full max-w-[360px] flex-col items-center gap-8 rounded-lg bg-white/85 px-7 pb-8 pt-12 shadow-[0_40px_80px_-40px_rgb(11_18_32/0.35)] ring-1 ring-white lg:flex"
           >
-            <span className="tone-icon grid h-32 w-32 place-items-center rounded-[34px]" style={{ animation: "float 7s ease-in-out infinite" }}>
+            <span className="tone-icon grid h-32 w-32 place-items-center rounded-xl">
               <Icon name={s.icon} size={58} strokeWidth={1.2} />
             </span>
             <ul className="flex flex-wrap justify-center gap-1.5">
@@ -104,7 +104,7 @@ export default async function ServicePage({ params }: Props) {
         </Link>
       </PageHero>
 
-      <section className="pb-24 md:pb-32">
+      <section className="py-20 md:py-28">
         <div className="container-x">
           <SectionHead eyebrow="What we deliver" title="Capabilities" accent="in focus" />
           <div className="mt-12">
@@ -140,7 +140,7 @@ export default async function ServicePage({ params }: Props) {
                   key={m.title}
                   data-reveal
                   style={{ ["--d" as string]: `${i * 70}ms` }}
-                  className="group relative overflow-hidden rounded-3xl bg-white p-7 ring-1 ring-line transition-[background-color,translate] duration-500 ease-out-expo hover:-translate-y-1 hover:bg-[linear-gradient(140deg,#7c3aed,#2563eb)]"
+                  className="group relative overflow-hidden rounded-lg bg-white p-7 ring-1 ring-line transition-[background-color,translate] duration-500 ease-out-expo hover:-translate-y-1 hover:bg-navy"
                 >
                   <span className="font-display text-[13px] font-semibold text-accent transition-colors duration-500 group-hover:text-white/70">0{i + 1}</span>
                   <h3 className="mt-10 text-[22px] font-bold transition-colors duration-500 group-hover:text-white">{m.title}</h3>

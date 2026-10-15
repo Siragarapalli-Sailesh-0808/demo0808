@@ -1,88 +1,95 @@
 import { Link } from "next-view-transitions";
-import { ArrowRight } from "../Icons";
-import { HeroBackdrop, HeroPanel } from "./HeroVisual";
+import { site } from "@/lib/site";
+import { ArrowRight, Phone } from "../Icons";
 
-const rotating = ["teams", "talent", "databases", "support"];
+const paths = [
+  { title: "Hire IT talent", body: "Contract, contract-to-hire and direct-hire professionals", href: "/services/it-staffing" },
+  { title: "Database administration", body: "Oracle, SQL Server, DB2, MySQL — 100% US-based DBAs", href: "/services/database-administration" },
+  { title: "Managed IT support", body: "Help desk, networks and security for growing businesses", href: "/services/managed-it-support" },
+];
+
+/** Diamond lattice drawn from the logo's rotated-square motif. Static SVG, no animation. */
+function Lattice({ className = "" }: { className?: string }) {
+  return (
+    <svg aria-hidden className={className} width="100%" height="100%">
+      <defs>
+        <pattern id="mk-lattice" width="44" height="44" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <rect x="0.5" y="0.5" width="43" height="43" fill="none" stroke="currentColor" strokeWidth="1" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#mk-lattice)" />
+    </svg>
+  );
+}
 
 export function Hero() {
   return (
-    <section data-anim-zone className="relative isolate overflow-hidden pb-24 pt-40 md:pb-32 md:pt-52">
-      <HeroBackdrop />
+    <section className="relative isolate overflow-hidden border-b border-line bg-white pb-20 pt-40 md:pb-28 md:pt-48">
 
-      <div className="container-x relative z-10 grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
-        <div className="lg:col-span-6 xl:col-span-7">
-          <p
-            className="fade-up inline-flex items-center gap-2.5 rounded-full py-2 pl-2.5 pr-5 text-[13.5px] font-semibold text-white shadow-[0_14px_30px_-14px_rgb(79_70_229/0.8)]"
-            style={{ ["--d" as string]: "0ms", background: "var(--grad-brand)" }}
+      <div className="container-x grid items-center gap-14 lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-7">
+          <p className="eyebrow fade-up">IT staffing &amp; technology services since {site.founded}</p>
+
+          <h1
+            className="fade-up mt-6 max-w-[15ch] text-[clamp(2.5rem,1.5rem+3.6vw,4.1rem)] font-semibold leading-[1.06] tracking-[-0.03em]"
+            style={{ ["--d" as string]: "80ms" }}
           >
-            <span className="grid h-6 w-6 place-items-center rounded-full bg-white/20">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#fde68a" aria-hidden style={{ animation: "spin-slow 8s linear infinite" }}>
-                <path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z" />
-              </svg>
-            </span>
-            IT Staffing · Database · Managed IT
-          </p>
-
-          <h1 className="mt-7 text-[clamp(2.8rem,1.4rem+4.6vw,4.6rem)] font-extrabold leading-[1.02] tracking-[-0.04em]">
-            <span className="word" style={{ ["--i" as string]: 0 }}>
-              <span>
-                <span className="text-gradient-live pb-[0.06em]">Smarter systems.</span>
-              </span>
-            </span>
-            <br />
-            <span className="word" style={{ ["--i" as string]: 2 }}>
-              <span>Stronger</span>
-              {"\u00A0"}
-            </span>
-            {/* Rotating word — pure CSS cycle; screen readers and search engines get "teams." */}
-            <span className="fade-up inline-block" style={{ ["--d" as string]: "260ms" }}>
-              <span className="rotator" aria-hidden>
-                {rotating.map((w, i) => (
-                  <span key={w} style={{ animationDelay: `${i * 2.6 - 0.6}s` }}>
-                    <span className="text-rotator">{w}</span>.
-                  </span>
-                ))}
-              </span>
-              <span className="sr-only">teams.</span>
-            </span>
+            The right people, with the right skills, at the right price.
           </h1>
 
-          <p
-            className="fade-up mt-7 max-w-[36rem] text-[17.5px] leading-relaxed text-ink-2 md:text-[19px]"
-            style={{ ["--d" as string]: "320ms" }}
-          >
-            M &amp; K Technovations delivers the right people, with the right skills, at the right price — IT staffing,
-            100% US-based database administration, ERP support and managed IT for enterprises and government agencies.
+          <p className="fade-up mt-7 max-w-[38rem] text-[17.5px] leading-relaxed text-ink-2 md:text-[19px]" style={{ ["--d" as string]: "160ms" }}>
+            IT staff augmentation, 100% US-based database administration, ERP support and managed IT for enterprises and
+            government agencies — from our headquarters in Harrisburg, Pennsylvania.
           </p>
 
-          <div className="fade-up mt-10 flex flex-wrap items-center gap-3" style={{ ["--d" as string]: "440ms" }}>
-            <Link href="/services" className="btn btn-primary h-[54px] px-7 text-[15.5px]">
-              Explore our services <ArrowRight />
+          <div className="fade-up mt-10 flex flex-wrap items-center gap-3" style={{ ["--d" as string]: "240ms" }}>
+            <Link href="/contact" className="btn btn-primary h-[52px] px-7 text-[15.5px]">
+              Talk to our team <ArrowRight />
             </Link>
-            <Link href="/services/it-staffing" className="btn btn-ghost h-[54px] px-7 text-[15.5px]">
-              Hire IT talent
+            <Link href="/services" className="btn btn-ghost h-[52px] px-7 text-[15.5px]">
+              View our services
             </Link>
           </div>
 
-          <div className="fade-up mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-[14px] text-muted" style={{ ["--d" as string]: "560ms" }}>
-            {[
-              ["#7c3aed", "Serving clients since 2013"],
-              ["#0891b2", "Harrisburg, PA headquarters"],
-              ["#059669", "Background-checked talent"],
-            ].map(([c, t]) => (
-              <span key={t} className="inline-flex items-center gap-2 font-medium">
-                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>
-                  <circle cx="12" cy="12" r="10" fill={c} opacity=".14" />
-                  <path d="m7.5 12.5 3 3 6-6.5" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+          <ul className="fade-up mt-10 flex flex-wrap gap-x-7 gap-y-3 text-[14.5px] font-medium text-ink-2" style={{ ["--d" as string]: "320ms" }}>
+            {["Background-checked professionals", "In-house compliance officer", ...(site.everify.enabled ? ["E-Verify participating employer"] : [])].map((t) => (
+              <li key={t} className="inline-flex items-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden>
+                  <path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="var(--color-brand-green)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 {t}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
-        <div className="relative lg:col-span-6 xl:col-span-5">
-          <HeroPanel />
+        <div className="fade-up lg:col-span-5" style={{ ["--d" as string]: "200ms" }}>
+          <div className="relative overflow-hidden rounded-lg bg-navy text-white shadow-[0_30px_60px_-30px_rgb(13_43_69/0.55)]">
+            <Lattice className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 text-white/[0.07]" />
+            <div aria-hidden className="h-1" style={{ background: "var(--grad-brand)" }} />
+            <div className="relative p-7 md:p-9">
+              <h2 className="font-display text-[22px] font-semibold !text-white">How can we help?</h2>
+              <ul className="mt-5 divide-y divide-white/12 border-y border-white/12">
+                {paths.map((p) => (
+                  <li key={p.href}>
+                    <Link href={p.href} className="group flex items-center justify-between gap-6 py-5 transition-colors">
+                      <span>
+                        <span className="block font-display text-[17px] font-semibold text-white group-hover:underline group-hover:underline-offset-4">
+                          {p.title}
+                        </span>
+                        <span className="mt-1 block text-[14px] leading-snug text-white/65">{p.body}</span>
+                      </span>
+                      <ArrowRight className="shrink-0 text-[#7cc4ec] transition-transform duration-300 group-hover:translate-x-1" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <a href={`tel:${site.phoneHref}`} className="mt-6 inline-flex items-center gap-3 text-[15px] text-white/80 hover:text-white">
+                <Phone className="text-[#7cc4ec]" />
+                Prefer to talk? <span className="font-semibold text-white">{site.phone}</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

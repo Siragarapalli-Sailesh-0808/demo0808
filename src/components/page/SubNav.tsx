@@ -31,7 +31,7 @@ export function SubNav({ items }: { items: { id: string; label: string }[] }) {
                 href={`#${i.id}`}
                 aria-current={active === i.id ? "true" : undefined}
                 className={`block rounded-full px-4 py-2 text-[14px] font-medium transition-colors duration-300 ${
-                  active === i.id ? "bg-[linear-gradient(100deg,#7c3aed,#2563eb)] text-white shadow-[0_8px_20px_-10px_#4f46e5]" : "text-muted hover:bg-tint hover:text-ink"
+                  active === i.id ? "bg-navy text-white" : "text-muted hover:bg-tint hover:text-ink"
                 }`}
               >
                 {i.label}

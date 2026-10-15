@@ -7,7 +7,6 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Motion } from "@/components/Motion";
 import { FloatingContact } from "@/components/FloatingContact";
-import { Cursor } from "@/components/effects/Cursor";
 import { ViewTransitions } from "next-view-transitions";
 
 export const metadata: Metadata = {
@@ -46,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1e1b4b",
+  themeColor: "#0d2b45",
   colorScheme: "light",
   width: "device-width",
   initialScale: 1,
@@ -71,7 +70,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <FloatingContact />
-        <Cursor />
         <Motion />
       </body>
     </html>

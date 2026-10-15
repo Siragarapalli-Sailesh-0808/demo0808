@@ -35,7 +35,7 @@ export default function CareersPage() {
         </a>
       </PageHero>
 
-      <section id="openings" className="scroll-mt-32 pb-24 md:pb-28">
+      <section id="openings" className="scroll-mt-32 py-20 md:py-28">
         <div className="container-x">
           <SectionHead eyebrow="Open positions" title={jobs.length ? `${jobs.length} open` : "Current"} accent={jobs.length === 1 ? "role" : jobs.length ? "roles" : "openings"} />
           {jobs.length ? (
@@ -44,7 +44,7 @@ export default function CareersPage() {
                 <li key={j.slug} data-reveal style={{ ["--d" as string]: `${i * 60}ms` }}>
                   <Link
                     href={`/careers/${j.slug}`}
-                    className="group flex flex-col gap-4 rounded-3xl bg-white p-7 ring-1 ring-line transition-[box-shadow,translate] duration-500 ease-out-expo hover:-translate-y-0.5 hover:shadow-lift md:flex-row md:items-center md:justify-between"
+                    className="group flex flex-col gap-4 rounded-lg bg-white p-7 ring-1 ring-line transition-[box-shadow,translate] duration-500 ease-out-expo hover:-translate-y-0.5 hover:shadow-lift md:flex-row md:items-center md:justify-between"
                   >
                     <div>
                       <h3 className="text-[21px] font-bold transition-colors group-hover:text-accent">{j.title}</h3>
@@ -65,7 +65,7 @@ export default function CareersPage() {
               ))}
             </ul>
           ) : (
-            <div className="mt-12 rounded-3xl bg-tint p-8 ring-1 ring-line md:p-10" data-reveal>
+            <div className="mt-12 rounded-lg bg-tint p-8 ring-1 ring-line md:p-10" data-reveal>
               <p className="font-display text-[20px] font-semibold">There are no published openings right now.</p>
               <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-ink-2">
                 New roles open often, and many are filled before they&apos;re ever posted. Send us your résumé below and our recruiters will contact you when a

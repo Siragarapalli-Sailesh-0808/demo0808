@@ -79,13 +79,13 @@ export default async function JobPage({ params }: Props) {
         </a>
       </PageHero>
 
-      <section className="pb-20">
+      <section className="py-20">
         <div className="container-x grid gap-6 md:grid-cols-2">
           {[
             { h: "What you'll do", items: j.responsibilities },
             { h: "What you'll bring", items: j.requirements },
           ].map((b) => (
-            <div key={b.h} className="rounded-3xl bg-white p-8 ring-1 ring-line" data-reveal>
+            <div key={b.h} className="rounded-lg bg-white p-8 ring-1 ring-line" data-reveal>
               <h2 className="text-[22px] font-bold">{b.h}</h2>
               <ul className="mt-5 space-y-3">
                 {b.items.map((t) => (

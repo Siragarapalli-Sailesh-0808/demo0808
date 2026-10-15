@@ -24,7 +24,7 @@ export function FloatingContact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                style={{ ["--b" as string]: brand[s.icon] ?? "#5b3df5" }}
+                style={{ ["--b" as string]: brand[s.icon] ?? "#0f6fa8" }}
                 className="flex h-11 w-12 items-center justify-center rounded-l-xl bg-white text-[var(--b)] shadow-[0_8px_24px_-12px_rgb(11_18_32/0.35)] ring-1 ring-line transition-[transform,background-color,color] duration-300 ease-out-expo hover:-translate-x-1.5 hover:bg-[var(--b)] hover:text-white"
               >
                 <Social name={s.icon} size={19} />

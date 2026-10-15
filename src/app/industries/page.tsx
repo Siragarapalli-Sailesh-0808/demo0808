@@ -41,21 +41,21 @@ export default function IndustriesPage() {
                 </h2>
                 <ul className="mt-8 flex flex-wrap gap-2" data-reveal style={{ ["--d" as string]: "120ms" }}>
                   {g.sectors.map((s) => (
-                    <li key={s} className="rounded-full bg-white px-4 py-2 text-[14px] font-medium text-ink shadow-card ring-1 ring-line">
+                    <li key={s} className="rounded-md bg-white px-3.5 py-2 text-[14px] font-medium text-ink ring-1 ring-line">
                       {s}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="relative h-[260px] overflow-hidden rounded-[28px] bg-gradient-to-br from-white via-tint to-tint-2 ring-1 ring-line lg:col-span-6 lg:h-[340px]" data-reveal style={{ ["--d" as string]: "120ms" }}>
-                <div className="absolute inset-6 md:inset-8">
+              <div className="relative h-[220px] overflow-hidden rounded-lg bg-tint ring-1 ring-line lg:col-span-6 lg:h-[300px]" data-reveal style={{ ["--d" as string]: "120ms" }}>
+                <div className="absolute inset-0">
                   <Art kind={g.art} fit="meet" />
                 </div>
               </div>
 
               <div className="grid gap-4 md:grid-cols-2 lg:col-span-12">
-                <div className="rounded-3xl bg-white p-8 ring-1 ring-line" data-reveal>
+                <div className="rounded-lg bg-white p-8 ring-1 ring-line" data-reveal>
                   <h3 className="text-[19px] font-bold">Common challenges</h3>
                   <ul className="mt-5 space-y-3">
                     {d.challenges.map((c) => (
@@ -66,7 +66,7 @@ export default function IndustriesPage() {
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-3xl bg-ink p-8 text-white" data-reveal style={{ ["--d" as string]: "80ms" }}>
+                <div className="rounded-lg bg-ink p-8 text-white" data-reveal style={{ ["--d" as string]: "80ms" }}>
                   <h3 className="text-[19px] font-bold !text-white">How we help</h3>
                   <ul className="mt-5 space-y-3">
                     {d.help.map((c) => (

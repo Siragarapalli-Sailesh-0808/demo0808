@@ -51,20 +51,20 @@ export default function ContactPage() {
         crumbs={[{ label: "Contact", href: "/contact" }]}
       />
 
-      <section className="pb-24 md:pb-32">
+      <section className="py-20 md:py-28">
         <div className="container-x grid gap-8 lg:grid-cols-12 lg:gap-10">
-          <div className="rounded-[32px] bg-tint p-6 ring-1 ring-line sm:p-10 lg:col-span-7 lg:self-start" data-reveal>
+          <div className="rounded-lg bg-tint p-6 ring-1 ring-line sm:p-10 lg:col-span-7 lg:self-start" data-reveal>
             <ContactForm />
           </div>
 
           <aside className="space-y-4 lg:col-span-5">
-            <div className="rounded-[28px] p-8 text-white" data-reveal style={{ ["--d" as string]: "80ms", background: "linear-gradient(140deg, #1e1b4b, #312e81 50%, #1e3a8a)" }}>
+            <div className="rounded-lg p-8 text-white" data-reveal style={{ ["--d" as string]: "80ms", background: "#0d2b45" }}>
               <p className="text-[12.5px] font-semibold uppercase tracking-[0.08em] text-white/60">Prefer to reach out directly?</p>
               <ul className="mt-6 space-y-4">
                 {site.emails.map((email) => (
                 <li key={email}>
                   <a href={`mailto:${email}`} className="group flex items-center gap-4">
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 transition-colors duration-300 group-hover:bg-[#7c3aed]">
+                    <span className="grid h-12 w-12 place-items-center rounded-lg bg-white/10 transition-colors duration-300 group-hover:bg-brand-blue">
                       <Mail />
                     </span>
                     <span>
@@ -76,7 +76,7 @@ export default function ContactPage() {
                 ))}
                 <li>
                   <a href={`tel:${site.phoneHref}`} className="group flex items-center gap-4">
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 transition-colors duration-300 group-hover:bg-[#7c3aed]">
+                    <span className="grid h-12 w-12 place-items-center rounded-lg bg-white/10 transition-colors duration-300 group-hover:bg-brand-blue">
                       <Phone />
                     </span>
                     <span>
@@ -95,7 +95,7 @@ export default function ContactPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className="grid h-10 w-10 place-items-center rounded-full bg-white/10 transition-colors duration-300 hover:bg-[#7c3aed]"
+                      className="grid h-10 w-10 place-items-center rounded-full bg-white/10 transition-colors duration-300 hover:bg-brand-blue"
                     >
                       <Social name={s.icon} />
                     </a>
@@ -111,7 +111,7 @@ export default function ContactPage() {
                   key={o.country}
                   data-reveal
                   style={{ ["--d" as string]: `${140 + i * 60}ms` }}
-                  className="flex gap-4 rounded-[24px] bg-white p-6 not-italic ring-1 ring-line"
+                  className="flex gap-4 rounded-lg bg-white p-6 not-italic ring-1 ring-line"
                 >
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent-50 text-accent">
                     <Pin />
@@ -128,7 +128,7 @@ export default function ContactPage() {
               ))}
             </div>
 
-            <div className="rounded-[24px] bg-white p-6 ring-1 ring-line" data-reveal style={{ ["--d" as string]: "260ms" }}>
+            <div className="rounded-lg bg-white p-6 ring-1 ring-line" data-reveal style={{ ["--d" as string]: "260ms" }}>
               <p className="font-display text-[16px] font-semibold">What happens next</p>
               <ol className="mt-5 space-y-5">
                 {next.map((n, i) => (

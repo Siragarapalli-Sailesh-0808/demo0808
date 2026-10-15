@@ -35,7 +35,7 @@ export default function ServicesPage() {
         </Link>
       </PageHero>
 
-      <section className="pb-24 md:pb-32">
+      <section className="py-20 md:py-28">
         <div className="container-x">
           <ul className="border-t border-line">
             {services.map((s, i) => (
@@ -47,7 +47,7 @@ export default function ServicesPage() {
                 >
                   <span className="tone-text font-display text-[14px] font-bold tabular-nums md:col-span-1">0{i + 1}</span>
                   <div className="flex items-center gap-5 md:col-span-5">
-                    <span className="tone-icon grid h-14 w-14 shrink-0 place-items-center rounded-2xl transition-[rotate] duration-500 ease-out-expo group-hover:-rotate-6">
+                    <span className="tone-icon grid h-14 w-14 shrink-0 place-items-center rounded-lg">
                       <Icon name={s.icon} size={26} />
                     </span>
                     <h2 className="text-[clamp(1.4rem,1.1rem+1vw,2rem)] font-bold transition-colors duration-500 group-hover:text-[var(--ci)]">
@@ -81,7 +81,7 @@ export default function ServicesPage() {
           <SectionHead eyebrow="Engagement" title="Work with us" accent="your way" intro="Every organization buys differently. Choose the model that fits your goals, budget and in-house capacity — and change it as you grow." />
           <ul className="mt-14 grid gap-4 md:grid-cols-3">
             {engage.map((e, i) => (
-              <li key={e.title} data-reveal style={{ ["--d" as string]: `${i * 80}ms` }} className="rounded-3xl bg-white p-8 ring-1 ring-line">
+              <li key={e.title} data-reveal style={{ ["--d" as string]: `${i * 80}ms` }} className="rounded-lg bg-white p-8 ring-1 ring-line">
                 <span className="font-display text-[44px] font-extrabold leading-none tracking-[-0.04em] text-gradient">0{i + 1}</span>
                 <h3 className="mt-6 text-[21px] font-bold">{e.title}</h3>
                 <p className="mt-3 text-[15px] leading-relaxed text-muted">{e.body}</p>

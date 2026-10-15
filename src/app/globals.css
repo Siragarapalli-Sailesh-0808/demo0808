@@ -2,22 +2,25 @@
 
 /* ───────────────────────── Design tokens ───────────────────────── */
 @theme {
-  --color-bg: #fafaf8;
+  /* Palette taken from the M & K logo: navy, blue, green, orange */
+  --color-bg: #ffffff;
   --color-surface: #ffffff;
-  --color-tint: #f1f4fa;
-  --color-tint-2: #e8eefb;
-  --color-ink: #0b1220;
-  --color-ink-2: #2f3849;
-  --color-muted: #667085;
-  --color-line: #e5e8ee;
-  --color-line-2: #d6dbe5;
-  --color-accent: #5b3df5;
-  --color-accent-600: #4a2be0;
-  --color-accent-50: #f1edff;
-  --color-accent-100: #e2dbff;
-  --color-violet: #7c3aed;
-  --color-cyan: #06b6d4;
-  --color-navy: #141a46;
+  --color-tint: #f4f6f8;
+  --color-tint-2: #e9eef3;
+  --color-ink: #0d2b45; /* logo navy */
+  --color-ink-2: #2e4459;
+  --color-muted: #5b6b7b;
+  --color-line: #e2e7ec;
+  --color-line-2: #cdd6df;
+  --color-accent: #0f6fa8; /* logo blue, deepened for readable text */
+  --color-accent-600: #0b5a8a;
+  --color-accent-50: #eaf4fb;
+  --color-accent-100: #d2e7f5;
+  --color-brand-blue: #1592d6;
+  --color-brand-green: #0f8c6f;
+  --color-brand-orange: #f2961e;
+  --color-navy: #0d2b45;
+  --color-navy-2: #123a5c;
 
   --font-display: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
@@ -26,13 +29,13 @@
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 
   --shadow-card: 0 1px 2px rgb(11 18 32 / 0.04), 0 8px 24px -12px rgb(11 18 32 / 0.08);
-  --shadow-lift: 0 2px 4px rgb(11 18 32 / 0.04), 0 24px 48px -20px rgb(79 70 229 / 0.3);
+  --shadow-lift: 0 2px 4px rgb(13 43 69 / 0.05), 0 18px 40px -22px rgb(13 43 69 / 0.28);
 }
 
 :root {
-  /* Signature brand gradient: violet → blue → cyan */
-  --grad-brand: linear-gradient(100deg, #7c3aed 0%, #4f46e5 30%, #2563eb 60%, #0891b2 100%);
-  --grad-text: linear-gradient(100deg, #7c3aed 0%, #4f46e5 35%, #2563eb 65%, #06b6d4 100%);
+  /* Thin brand rule in the three logo colours (used only for hairline accents) */
+  --grad-brand: linear-gradient(90deg, #0f8c6f 0 33.33%, #1592d6 33.33% 66.66%, #f2961e 66.66% 100%);
+  --grad-text: none;
 }
 
 /* ───────────────────────── Base ───────────────────────── */
@@ -69,7 +72,7 @@
     text-wrap: pretty;
   }
   ::selection {
-    background: #e4dcff;
+    background: #d2e7f5;
     color: var(--color-ink);
   }
   :focus-visible {
@@ -96,46 +99,29 @@
   .eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 14px 6px 10px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #5b21b6;
-    background: linear-gradient(100deg, #f1ebff, #e6eeff 60%, #e0f7fb);
-    box-shadow: inset 0 0 0 1px rgb(124 58 237 / 0.12);
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--color-accent);
   }
   .eyebrow::before {
     content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: var(--grad-brand);
-    box-shadow: 0 0 0 3px rgb(124 58 237 / 0.15);
+    width: 22px;
+    height: 2px;
+    background: var(--color-brand-orange);
   }
 
   .h-section {
-    font-size: clamp(2rem, 1.4rem + 2.6vw, 3.5rem);
-    font-weight: 700;
+    font-size: clamp(1.9rem, 1.4rem + 2vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
-  /* Gradient headline words */
+  /* Second half of a heading: same colour, kept as a hook for future styling */
   .accent-word,
-  .text-gradient {
-    background-image: var(--grad-text);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-  }
+  .text-gradient,
   .text-gradient-live {
-    background-image: linear-gradient(100deg, #7c3aed, #4f46e5, #2563eb, #06b6d4, #7c3aed);
-    background-size: 100% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: inherit;
   }
 
   .btn {
@@ -146,7 +132,7 @@
     gap: 10px;
     height: 48px;
     padding-inline: 24px;
-    border-radius: 999px;
+    border-radius: 6px;
     font-family: var(--font-display);
     font-weight: 600;
     font-size: 15px;
@@ -168,61 +154,41 @@
     transform: translateX(3px);
   }
   .btn-primary {
-    background-image: var(--grad-brand);
-    background-size: 170% 100%;
-    background-position: 0% 0;
+    background: var(--color-navy);
     color: #fff;
-    box-shadow: 0 12px 28px -14px rgb(79 70 229 / 0.75);
   }
   .btn-primary:hover {
-    background-position: 100% 0;
-    box-shadow: 0 18px 36px -14px rgb(37 99 235 / 0.7);
-    transform: translateY(-1px);
-  }
-  /* light sweep across primary buttons on hover (transform only = cheap) */
-  .btn-primary::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.35) 50%, transparent 70%);
-    transform: translateX(-120%);
-    transition: transform 0.8s var(--ease-out-expo);
-  }
-  .btn-primary:hover::after {
-    transform: translateX(120%);
+    background: var(--color-navy-2);
   }
   .btn-dark {
     background: var(--color-ink);
     color: #fff;
   }
   .btn-dark:hover {
-    background: #1f2a44;
+    background: var(--color-navy-2);
   }
   .btn-white {
     background: #fff;
     color: var(--color-ink);
-    box-shadow: 0 14px 30px -14px rgb(11 18 32 / 0.45);
   }
   .btn-white:hover {
-    transform: translateY(-1px);
+    background: #eaf4fb;
   }
   .btn-ghost {
-    background: rgb(255 255 255 / 0.7);
+    background: #fff;
     color: var(--color-ink);
     box-shadow: inset 0 0 0 1px var(--color-line-2);
   }
   .btn-ghost:hover {
     background: #fff;
-    color: #5b21b6;
-    box-shadow: inset 0 0 0 1px #a78bfa;
+    color: var(--color-accent);
+    box-shadow: inset 0 0 0 1px var(--color-accent);
   }
 
   /* Tone helpers (see src/lib/tones.ts) */
   .tone-icon {
-    background-image: linear-gradient(135deg, var(--c2), var(--c));
-    color: #fff;
-    box-shadow: 0 12px 24px -12px var(--c);
+    background: var(--cs);
+    color: var(--ci);
   }
   .tone-soft {
     background: var(--cs);
@@ -234,6 +200,7 @@
 
   /* Soft colour glow without blur filters (blur is what made scrolling stutter) */
   .orb {
+    display: none;
     position: absolute;
     border-radius: 999px;
     pointer-events: none;
@@ -838,3 +805,11 @@ header {
 .legal ul { padding-left: 1.25em; list-style: disc; }
 .legal li { margin: 0.35em 0; }
 .legal a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ─────────── Classic, professional finish (Oct 15) ───────────
+   Retires the decorative effects: no underline swipes, glow borders, card tilt or button pull. */
+.h-section .accent-word::after { display: none; }
+.glow-border { display: none !important; }
+.tilt-card { transform: none !important; }
+.btn { translate: none !important; }
+.btn .ripple { display: none; }

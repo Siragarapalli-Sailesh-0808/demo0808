@@ -17,7 +17,7 @@ export function TopBar() {
   return (
     <div
       className="relative h-10 overflow-hidden text-white"
-      style={{ background: "linear-gradient(90deg, #1e1b4b 0%, #1e3a8a 55%, #0c4a6e 100%)" }}
+      style={{ background: "#0d2b45" }}
     >
       <div className="container-x flex h-full items-center gap-4">
         <span className="relative z-10 flex shrink-0 items-center gap-2 rounded-full bg-white/12 py-1 pl-2 pr-3 text-[12px] font-bold uppercase tracking-[0.08em] ring-1 ring-white/20">

@@ -10,12 +10,12 @@ export function Stats() {
     <section aria-label="Key figures" className="relative z-10 -mt-10 md:-mt-16">
       <div className="container-x">
         <ul
-          className="grid grid-cols-2 gap-px overflow-hidden rounded-[28px] bg-line shadow-[0_30px_60px_-36px_rgb(79_70_229/0.45)] ring-1 ring-line lg:grid-cols-4"
+          className="grid grid-cols-2 gap-px overflow-hidden rounded-lg bg-line shadow-card ring-1 ring-line lg:grid-cols-4"
           data-reveal
         >
           {stats.map((s) => (
             <li key={s.label} style={toneVars(s.tone)} className="group relative flex items-center gap-4 bg-white p-6 md:p-8">
-              <span className="tone-icon grid h-12 w-12 shrink-0 place-items-center rounded-2xl transition-transform duration-500 group-hover:-rotate-6 md:h-14 md:w-14">
+              <span className="tone-icon grid h-12 w-12 shrink-0 place-items-center rounded-lg md:h-14 md:w-14">
                 <StatIcon label={s.label} />
               </span>
               <p>
@@ -25,7 +25,6 @@ export function Stats() {
                 </span>
                 <span className="mt-1.5 block text-[13.5px] font-medium text-muted md:text-[14.5px]">{s.label}</span>
               </p>
-              <span aria-hidden className="absolute inset-x-6 bottom-0 h-[3px] origin-left scale-x-0 rounded-full bg-[var(--c)] transition-transform duration-700 ease-out-expo group-hover:scale-x-100" />
             </li>
           ))}
         </ul>

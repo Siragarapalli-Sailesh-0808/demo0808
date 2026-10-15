@@ -112,7 +112,7 @@ export function Header() {
           ref={bar}
           aria-hidden
           className="absolute inset-x-0 bottom-0 h-[3px] origin-left"
-          style={{ background: "var(--grad-brand)", transform: "scaleX(0)" }}
+          style={{ background: "var(--color-brand-blue)", transform: "scaleX(0)" }}
         />
         <div
           className={`container-x flex items-center justify-between transition-[height] duration-500 ease-out-expo ${
@@ -141,7 +141,7 @@ export function Header() {
                       openMega(item.mega);
                     }}
                     className={`relative flex items-center gap-1 px-4 py-2 text-[15px] font-medium transition-colors duration-300 ${
-                      i === activeIndex || open === item.mega ? "text-[#5b21b6]" : "text-ink-2 hover:text-[#5b21b6]"
+                      i === activeIndex || open === item.mega ? "text-accent" : "text-ink-2 hover:text-accent"
                     }`}
                   >
                     {item.label}
@@ -167,7 +167,7 @@ export function Header() {
                 aria-hidden
                 className="pointer-events-none absolute -bottom-0.5 left-0 h-[2px] rounded-full transition-[transform,width,opacity] duration-500 ease-out-expo"
                 style={{
-                  background: "var(--grad-brand)",
+                  background: "var(--color-accent)",
                   width: Math.max(indicator.w - 32, 0),
                   transform: `translateX(${indicator.x + 16}px)`,
                   opacity: indicator.o,
@@ -247,7 +247,7 @@ function MegaPanel({ which }: { which: Mega }) {
       <div className="grid grid-cols-4 gap-8">
         {industryGroups.map((g) => (
           <div key={g.key}>
-            <Link href={`/industries#${g.key}`} className="font-display text-[15px] font-semibold text-ink hover:text-[#5b21b6]">
+            <Link href={`/industries#${g.key}`} className="font-display text-[15px] font-semibold text-ink hover:text-accent">
               {g.label}
             </Link>
             <ul className="mt-3 space-y-2">
@@ -270,7 +270,7 @@ function MegaPanel({ which }: { which: Mega }) {
       <ul className="col-span-8 grid grid-cols-2 gap-2">
         {list.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} style={toneVars(l.tone)} className="group flex gap-4 rounded-2xl p-4 transition-colors duration-300 hover:bg-[var(--cs)]">
+            <Link href={l.href} style={toneVars(l.tone)} className="group flex gap-4 rounded-lg p-4 transition-colors duration-300 hover:bg-[var(--cs)]">
               <span className="tone-icon grid h-11 w-11 shrink-0 place-items-center rounded-xl transition-transform duration-300 group-hover:-rotate-6">
                 <Icon name={l.icon} size={20} />
               </span>
@@ -284,8 +284,8 @@ function MegaPanel({ which }: { which: Mega }) {
       </ul>
       <Link
         href="/services"
-        className="group relative col-span-4 flex flex-col justify-end overflow-hidden rounded-2xl p-6 text-white"
-        style={{ background: "var(--grad-brand)" }}
+        className="group relative col-span-4 flex flex-col justify-end overflow-hidden rounded-lg p-6 text-white"
+        style={{ background: "var(--color-navy)" }}
       >
         <span
           aria-hidden

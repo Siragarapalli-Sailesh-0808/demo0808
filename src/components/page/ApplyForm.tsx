@@ -62,7 +62,7 @@ export function ApplyForm({ job }: { job?: string }) {
   if (status === "sent") {
     return (
       <div className="fade-up flex min-h-[360px] flex-col items-start justify-center" role="status">
-        <span className="grid h-16 w-16 place-items-center rounded-full bg-[linear-gradient(135deg,#7c3aed,#2563eb_60%,#0891b2)] text-white shadow-lift">
+        <span className="grid h-16 w-16 place-items-center rounded-full bg-navy text-white shadow-lift">
           <Check size={28} />
         </span>
         <h2 className="mt-8 text-[clamp(1.6rem,1.3rem+1.2vw,2.3rem)] font-bold">
@@ -90,7 +90,7 @@ export function ApplyForm({ job }: { job?: string }) {
       <div>
         <label
           htmlFor="f-cv"
-          className={`flex cursor-pointer items-center gap-4 rounded-2xl border-2 border-dashed bg-white px-5 py-5 transition-colors duration-300 hover:border-accent focus-within:border-accent ${
+          className={`flex cursor-pointer items-center gap-4 rounded-lg border-2 border-dashed bg-white px-5 py-5 transition-colors duration-300 hover:border-accent focus-within:border-accent ${
             errors.cv ? "border-red-400" : "border-line-2"
           }`}
         >
@@ -136,7 +136,7 @@ export function ApplyForm({ job }: { job?: string }) {
       </div>
 
       {status === "error" && (
-        <p role="alert" className="rounded-2xl bg-red-50 px-5 py-4 text-[14.5px] text-red-700">
+        <p role="alert" className="rounded-lg bg-red-50 px-5 py-4 text-[14.5px] text-red-700">
           {message || "Something went wrong."} Please try again, or email your résumé to{" "}
           <a href={`mailto:${site.email}`} className="font-semibold underline">
             {site.email}

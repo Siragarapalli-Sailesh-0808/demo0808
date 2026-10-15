@@ -5,7 +5,7 @@ import { trustGroups } from "@/lib/content";
  * Pure CSS (transform only); pauses on hover; tiles go from grey to colour.
  * Each tile is a placeholder until the real logos are supplied.
  */
-const tileColors = ["#7c3aed", "#2563eb", "#0891b2", "#db2777", "#059669", "#d97706"];
+const tileColors = ["#0d2b45", "#0f6fa8", "#0f8c6f", "#0d2b45", "#0f6fa8", "#c27510"];
 
 export function Trust() {
   const tiles = trustGroups.flatMap((g) => g.items.map((label) => ({ label, group: g.title })));
@@ -36,18 +36,13 @@ export function Trust() {
           {[0, 1].map((copy) => (
             <ul key={copy} aria-hidden={copy === 1} className="flex shrink-0 gap-4 pr-4">
               {[...tiles, ...tiles].map((t, i) => {
-                const c = tileColors[i % tileColors.length];
                 return (
                   <li
                     key={i}
                     title={t.group}
-                    style={{ ["--tc" as string]: c }}
-                    className="logo-tile grid h-20 min-w-40 px-8 shrink-0 place-items-center rounded-2xl bg-bg ring-1 ring-line"
+                    className="grid h-16 min-w-40 shrink-0 place-items-center rounded-md bg-white px-7 ring-1 ring-line"
                   >
-                    <span className="flex items-center gap-2.5 text-[14px] font-semibold">
-                      <span className="logo-mark h-7 w-7 rounded-lg" />
-                      {t.label}
-                    </span>
+                    <span className="text-[14.5px] font-semibold text-ink-2">{t.label}</span>
                   </li>
                 );
               })}

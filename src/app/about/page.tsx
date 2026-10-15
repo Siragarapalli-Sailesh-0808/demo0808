@@ -32,9 +32,9 @@ export default function AboutPage() {
       </PageHero>
 
       {/* Stats */}
-      <section className="pb-20">
+      <section className="pt-16 pb-8 md:pt-20">
         <div className="container-x">
-          <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-[28px] bg-line ring-1 ring-line lg:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-lg bg-line ring-1 ring-line lg:grid-cols-4">
             {about.stats.map((s, i) => (
               <li key={s.label} className="bg-white p-7 md:p-10" data-reveal style={{ ["--d" as string]: `${i * 70}ms` }}>
                 <p className="font-display text-[clamp(2.2rem,1.6rem+2.4vw,3.6rem)] font-extrabold leading-none tracking-[-0.04em]">
@@ -68,9 +68,9 @@ export default function AboutPage() {
                   key={m.k}
                   data-reveal
                   style={{ ["--d" as string]: `${i * 80}ms` }}
-                  className={`rounded-3xl p-7 ${i === 0 ? "bg-[linear-gradient(135deg,#6d28d9,#2563eb)] text-white" : "bg-[#e2f8fc]"}`}
+                  className={`rounded-lg p-7 ${i === 0 ? "bg-navy text-white" : "bg-white ring-1 ring-line"}`}
                 >
-                  <p className={`text-[12.5px] font-semibold uppercase tracking-[0.08em] ${i === 0 ? "text-white/70" : "text-[#0e7490]"}`}>{m.k}</p>
+                  <p className={`text-[12.5px] font-semibold uppercase tracking-[0.08em] ${i === 0 ? "text-white/70" : "text-[#0f6fa8]"}`}>{m.k}</p>
                   <p className={`mt-4 font-display text-[19px] font-semibold leading-snug ${i === 0 ? "text-white" : "text-ink"}`}>{m.v}</p>
                 </div>
               ))}
@@ -89,12 +89,10 @@ export default function AboutPage() {
                 key={v.title}
                 data-reveal
                 style={{ ["--d" as string]: `${i * 70}ms` }}
-                className="group rounded-3xl bg-white p-7 ring-1 ring-line transition-[box-shadow,translate] duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-lift"
+                className="rounded-lg border border-line bg-white p-7"
               >
-                <span className="font-display text-[48px] font-extrabold leading-none tracking-[-0.05em] text-accent-100 transition-colors duration-500 group-hover:text-accent">
-                  0{i + 1}
-                </span>
-                <h3 className="mt-8 text-[21px] font-bold">{v.title}</h3>
+                <span aria-hidden className="block h-[3px] w-8 bg-brand-blue" />
+                <h3 className="mt-5 text-[20px] font-semibold">{v.title}</h3>
                 <p className="mt-3 text-[15px] leading-relaxed text-muted">{v.body}</p>
               </li>
             ))}
@@ -127,8 +125,8 @@ export default function AboutPage() {
           <SectionHead eyebrow="Offices" title="Where to" accent="find us" />
           <ul className="mt-12 grid max-w-xl gap-5">
             {site.offices.map((o, i) => (
-              <li key={o.country} data-reveal style={{ ["--d" as string]: `${i * 80}ms` }} className="rounded-3xl bg-white p-8 ring-1 ring-line md:p-10">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-accent-50 text-accent">
+              <li key={o.country} data-reveal style={{ ["--d" as string]: `${i * 80}ms` }} className="rounded-lg bg-white p-8 ring-1 ring-line md:p-10">
+                <span className="grid h-12 w-12 place-items-center rounded-lg bg-accent-50 text-accent">
                   <Pin />
                 </span>
                 <h3 className="mt-6 text-[24px] font-bold">{o.country}</h3>
