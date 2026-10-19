@@ -78,7 +78,7 @@ export default function EVerifyPage() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: "E-Verify" }]}
+        crumbs={[{ label: "E-Verify", href: "/e-verify" }]}
         eyebrow="Federal Compliance & Verification"
         title={["E-Verify® Participating ", "Employer"]}
         intro={`${site.legalName} participates in the federal E-Verify program, electronically confirming the employment eligibility of every new team member with the U.S. Department of Homeland Security and the Social Security Administration.`}
