@@ -8,7 +8,7 @@ import { FeatureGrid } from "@/components/page/FeatureGrid";
 import { ArrowRight, Pin } from "@/components/Icons";
 import { EVerifyBadge } from "@/components/EVerifyBadge";
 
-export const revalidate = 300; // seconds — keep in sync with JOBS_REVALIDATE in src/lib/jobs.ts
+export const revalidate = 30; // seconds — keep in sync with JOBS_REVALIDATE in src/lib/jobs.ts
 
 export const metadata: Metadata = {
   title: "Careers — IT jobs",

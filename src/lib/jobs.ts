@@ -34,8 +34,8 @@ export type Job = {
   requirements: string[];
 };
 
-/** How often (seconds) the site checks the sheet for changes. */
-export const JOBS_REVALIDATE = 300;
+/** How often (seconds) the site checks the sheet for changes in production. */
+export const JOBS_REVALIDATE = 30;
 
 /** Optional fallback list, used only when no sheet is configured or the sheet can't be reached. */
 const fallbackJobs: Job[] = [];
@@ -156,8 +156,16 @@ export async function getJobs(): Promise<Job[]> {
     url = url.replace("/pubhtml", "/pub");
     if (!/[?&]output=csv/.test(url)) url += (url.includes("?") ? "&" : "?") + "output=csv";
   }
+  // Bypass Google CDN edge caching with timestamp query param
+  const fetchUrl = url + (url.includes("?") ? "&" : "?") + `_t=${Date.now()}`;
+
   try {
-    const res = await fetch(url, { next: { revalidate: JOBS_REVALIDATE, tags: ["jobs"] } });
+    const isDev = process.env.NODE_ENV === "development";
+    const res = await fetch(fetchUrl, {
+      ...(isDev
+        ? { cache: "no-store" as const }
+        : { next: { revalidate: JOBS_REVALIDATE, tags: ["jobs"] } }),
+    });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const text = await res.text();
     if (/^\s*</.test(text)) throw new Error("The sheet link returned a web page, not CSV — use the 'Publish to web' CSV link.");

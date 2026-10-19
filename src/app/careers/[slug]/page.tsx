@@ -10,7 +10,7 @@ import { ArrowLeft, Check } from "@/components/Icons";
 type Props = { params: Promise<{ slug: string }> };
 
 // New rows in the jobs sheet get their own page on first visit; existing pages refresh every few minutes.
-export const revalidate = 300; // seconds — keep in sync with JOBS_REVALIDATE in src/lib/jobs.ts
+export const revalidate = 30; // seconds — keep in sync with JOBS_REVALIDATE in src/lib/jobs.ts
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
