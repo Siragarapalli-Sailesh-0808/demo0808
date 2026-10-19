@@ -3,13 +3,13 @@
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { nav, services, industryGroups } from "@/lib/content";
+import { nav, services, solutions, capabilities } from "@/lib/content";
 import { Logo } from "./Logo";
 import { ArrowRight, Icon } from "./Icons";
 import { TopBar, type TickerJob } from "./TopBar";
 import { toneVars } from "@/lib/tones";
 
-type Mega = "services" | "solutions" | "industries";
+type Mega = "solutions" | "capabilities";
 
 export function Header({ jobs = [] }: { jobs?: TickerJob[] }) {
   const pathname = usePathname();
@@ -22,7 +22,13 @@ export function Header({ jobs = [] }: { jobs?: TickerJob[] }) {
   const scrolledRef = useRef(false);
   const closeTimer = useRef<number | undefined>(undefined);
 
-  const activeIndex = nav.findIndex((n) => pathname === n.href || pathname.startsWith(n.href + "/"));
+  const activeIndex = nav.findIndex((n) => {
+    const base = n.href.split("#")[0];
+    if (pathname === n.href) return true;
+    if (base !== "/services" && base !== "" && pathname.startsWith(base + "/")) return true;
+    if (n.href === "/services" && pathname.startsWith("/services")) return true;
+    return false;
+  });
 
   // Shrink, tuck the ticker away and update the progress line — one rAF per frame, transform only
   useEffect(() => {
@@ -141,7 +147,11 @@ export function Header({ jobs = [] }: { jobs?: TickerJob[] }) {
                       openMega(item.mega);
                     }}
                     className={`relative flex items-center gap-1 px-4 py-2 text-[15px] font-medium transition-colors duration-300 ${
-                      i === activeIndex || open === item.mega ? "text-accent" : "text-ink-2 hover:text-accent"
+                      item.highlight
+                        ? "font-semibold text-emerald-600 hover:text-emerald-700 dark:text-emerald-400"
+                        : i === activeIndex || open === item.mega
+                          ? "text-accent"
+                          : "text-ink-2 hover:text-accent"
                     }`}
                   >
                     {item.label}
@@ -242,41 +252,72 @@ export function Header({ jobs = [] }: { jobs?: TickerJob[] }) {
 }
 
 function MegaPanel({ which }: { which: Mega }) {
-  if (which === "industries") {
+  if (which === "solutions") {
     return (
-      <div className="grid grid-cols-4 gap-8">
-        {industryGroups.map((g) => (
-          <div key={g.key}>
-            <Link href={`/industries#${g.key}`} className="font-display text-[15px] font-semibold text-ink hover:text-accent">
-              {g.label}
-            </Link>
-            <ul className="mt-3 space-y-2">
-              {g.sectors.map((s) => (
-                <li key={s} className="text-[14px] text-muted">
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      <div className="grid grid-cols-12 gap-8">
+        <ul className="col-span-8 grid grid-cols-2 gap-2">
+          {solutions.map((item) => (
+            <li key={item.slug}>
+              <Link
+                href={item.href}
+                style={toneVars(item.tone)}
+                className="group flex gap-4 rounded-lg p-4 transition-colors duration-300 hover:bg-[var(--cs)]"
+              >
+                <span className="tone-icon grid h-11 w-11 shrink-0 place-items-center rounded-xl transition-transform duration-300 group-hover:-rotate-6">
+                  <Icon name={item.icon} size={20} />
+                </span>
+                <span>
+                  <span className="block font-display text-[15px] font-semibold text-ink group-hover:text-accent">
+                    {item.title}
+                  </span>
+                  <span className="mt-0.5 block text-[13.5px] leading-snug text-muted">{item.body}</span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Link
+          href="/services"
+          className="group relative col-span-4 flex flex-col justify-end overflow-hidden rounded-lg p-6 text-white"
+          style={{ background: "var(--color-navy)" }}
+        >
+          <span
+            aria-hidden
+            className="orb -right-20 -top-20 h-64 w-64 transition-transform duration-700 ease-out-expo group-hover:scale-125"
+            style={{ ["--orb" as string]: "rgb(255 255 255 / 0.35)" }}
+          />
+          <span className="relative text-[12px] font-semibold uppercase tracking-[0.08em] text-white/60">
+            Workforce Solutions
+          </span>
+          <span className="relative mt-2 font-display text-xl font-semibold leading-tight">
+            Flexible staffing and database support models tailored to your business.
+          </span>
+          <span className="relative mt-4 inline-flex items-center gap-2 text-[14px] font-semibold">
+            Explore solutions <ArrowRight />
+          </span>
+        </Link>
       </div>
     );
   }
 
-  const list = services.map((s) => ({ href: `/services/${s.slug}`, title: s.title, sub: s.short, icon: s.icon, tone: s.tone }));
-
   return (
     <div className="grid grid-cols-12 gap-8">
       <ul className="col-span-8 grid grid-cols-2 gap-2">
-        {list.map((l) => (
-          <li key={l.href}>
-            <Link href={l.href} style={toneVars(l.tone)} className="group flex gap-4 rounded-lg p-4 transition-colors duration-300 hover:bg-[var(--cs)]">
+        {capabilities.map((c) => (
+          <li key={c.slug}>
+            <Link
+              href={c.href}
+              style={toneVars(c.tone)}
+              className="group flex gap-4 rounded-lg p-4 transition-colors duration-300 hover:bg-[var(--cs)]"
+            >
               <span className="tone-icon grid h-11 w-11 shrink-0 place-items-center rounded-xl transition-transform duration-300 group-hover:-rotate-6">
-                <Icon name={l.icon} size={20} />
+                <Icon name={c.icon} size={20} />
               </span>
               <span>
-                <span className="block font-display text-[15px] font-semibold text-ink">{l.title}</span>
-                <span className="mt-0.5 block text-[13.5px] leading-snug text-muted">{l.sub}</span>
+                <span className="block font-display text-[15px] font-semibold text-ink group-hover:text-accent">
+                  {c.title}
+                </span>
+                <span className="mt-0.5 block text-[13.5px] leading-snug text-muted">{c.body}</span>
               </span>
             </Link>
           </li>
@@ -293,13 +334,13 @@ function MegaPanel({ which }: { which: Mega }) {
           style={{ ["--orb" as string]: "rgb(255 255 255 / 0.35)" }}
         />
         <span className="relative text-[12px] font-semibold uppercase tracking-[0.08em] text-white/60">
-          Services
+          Core Capabilities
         </span>
         <span className="relative mt-2 font-display text-xl font-semibold leading-tight">
-          The right people, with the right skills, at the right price.
+          100% US-based DBA, ERP support, IT staffing and managed services.
         </span>
         <span className="relative mt-4 inline-flex items-center gap-2 text-[14px] font-semibold">
-          Explore all <ArrowRight />
+          View all capabilities <ArrowRight />
         </span>
       </Link>
     </div>

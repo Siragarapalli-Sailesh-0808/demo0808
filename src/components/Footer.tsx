@@ -2,13 +2,13 @@ import { Link } from "next-view-transitions";
 import { site } from "@/lib/site";
 import { industryGroups, services } from "@/lib/content";
 import { Logo } from "./Logo";
-import { Mail, Phone, Pin, Social } from "./Icons";
+import { Mail, Social } from "./Icons";
 import { BackToTop } from "./BackToTop";
-import { EVerifyBadge } from "./EVerifyBadge";
 
 const company = [
   { label: "About us", href: "/about" },
   { label: "Careers", href: "/careers" },
+  { label: "E-Verify", href: "/e-verify" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -32,11 +32,6 @@ export function Footer() {
               managed IT services since {site.founded}.
             </p>
             <ul className="mt-7 space-y-3 text-[15px]">
-              <li>
-                <a href={`tel:${site.phoneHref}`} className="inline-flex items-center gap-3 text-ink-2 transition-colors hover:text-accent">
-                  <Phone className="text-accent" /> {site.phone}
-                </a>
-              </li>
               {site.emails.map((e) => (
                 <li key={e}>
                   <a href={`mailto:${e}`} className="inline-flex items-center gap-3 text-ink-2 transition-colors hover:text-accent">
@@ -44,16 +39,7 @@ export function Footer() {
                   </a>
                 </li>
               ))}
-              <li className="flex items-start gap-3 text-ink-2">
-                <Pin className="mt-0.5 shrink-0 text-accent" />
-                <address className="not-italic">
-                  {site.address.street}
-                  <br />
-                  {site.address.city}, {site.address.region} {site.address.postalCode}
-                </address>
-              </li>
             </ul>
-            <EVerifyBadge className="mt-7" />
             {site.socials.length > 0 && (
               <ul className="mt-7 flex gap-2">
                 {site.socials.map((s) => (

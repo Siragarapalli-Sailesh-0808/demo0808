@@ -101,6 +101,14 @@ export function ArrowUpRight({ size = 16, ...rest }: P) {
   );
 }
 
+export function ExternalLink({ size = 16, ...rest }: P) {
+  return (
+    <svg {...base(size)} strokeWidth={1.8} {...rest}>
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m4-3h6v6m-11 5L21 3" />
+    </svg>
+  );
+}
+
 export function Check({ size = 16, ...rest }: P) {
   return (
     <svg {...base(size)} strokeWidth={2} {...rest}>

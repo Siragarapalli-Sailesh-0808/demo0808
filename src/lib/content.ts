@@ -17,11 +17,62 @@ export type IconName =
   | "bolt";
 
 export const nav = [
+  { label: "Solutions", href: "/services#solutions", mega: "solutions" as const },
+  { label: "Capabilities", href: "/services#capabilities", mega: "capabilities" as const },
+  { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
-  { label: "Services", href: "/services", mega: "services" as const },
-  { label: "Who We Serve", href: "/industries" },
+  { label: "E-Verify", href: "/e-verify", highlight: true },
   { label: "Careers", href: "/careers" },
-  { label: "Contact", href: "/contact" },
+];
+
+export const capabilities: {
+  slug: string;
+  href: string;
+  title: string;
+  body: string;
+  icon: IconName;
+  tone: Tone;
+}[] = [
+  {
+    slug: "database-administration",
+    href: "/services/database-administration",
+    title: "Database Administration (DBA)",
+    body: "100% US-based DBA support for Oracle, SQL Server, DB2, MySQL & MongoDB.",
+    icon: "data",
+    tone: "blue",
+  },
+  {
+    slug: "it-staffing",
+    href: "/services/it-staffing",
+    title: "IT Staff Augmentation",
+    body: "Pre-screened, background-checked IT professionals for enterprise and government teams.",
+    icon: "talent",
+    tone: "emerald",
+  },
+  {
+    slug: "erp-support",
+    href: "/services/erp-support",
+    title: "ERP Systems Support",
+    body: "Technical support for SAP, Oracle E-Business Suite & Microsoft Dynamics.",
+    icon: "ops",
+    tone: "violet",
+  },
+  {
+    slug: "managed-it-support",
+    href: "/services/managed-it-support",
+    title: "Managed IT & Infrastructure",
+    body: "Windows networks, security, virus protection, email migration & help desk.",
+    icon: "cloud",
+    tone: "pink",
+  },
+  {
+    slug: "it-consulting",
+    href: "/services/it-consulting",
+    title: "Technology Consulting",
+    body: "Practical IT advice, systems architecture, and legacy modernization since 2013.",
+    icon: "consulting",
+    tone: "amber",
+  },
 ];
 
 export const services: {

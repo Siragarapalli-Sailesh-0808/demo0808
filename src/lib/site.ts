@@ -15,8 +15,8 @@ export const site = {
   phoneHref: "+13479449929",
   /** WhatsApp number in international format, digits only. Leave empty to hide the WhatsApp button. */
   whatsapp: "",
-  email: "mandip@mandkstaffing.com",
-  emails: ["mandip@mandkstaffing.com", "deep@mandkstaffing.com"],
+  email: "deep@mktechnoinc.com",
+  emails: ["deep@mktechnoinc.com"],
   address: {
     street: "225 Market Street, Suite #510",
     city: "Harrisburg",

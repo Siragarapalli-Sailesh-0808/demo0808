@@ -35,7 +35,7 @@ export default function ServicesPage() {
         </Link>
       </PageHero>
 
-      <section className="py-20 md:py-28">
+      <section id="capabilities" className="py-20 md:py-28">
         <div className="container-x">
           <ul className="border-t border-line">
             {services.map((s, i) => (
@@ -76,7 +76,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="bg-tint py-24 md:py-32">
+      <section id="solutions" className="bg-tint py-24 md:py-32">
         <div className="container-x">
           <SectionHead eyebrow="Engagement" title="Work with us" accent="your way" intro="Every organization buys differently. Choose the model that fits your goals, budget and in-house capacity — and change it as you grow." />
           <ul className="mt-14 grid gap-4 md:grid-cols-3">
