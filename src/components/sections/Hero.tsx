@@ -1,6 +1,6 @@
 import { Link } from "next-view-transitions";
 import { site } from "@/lib/site";
-import { ArrowRight, Phone } from "../Icons";
+import { ArrowRight } from "../Icons";
 
 const paths = [
   { title: "Hire IT talent", body: "Contract, contract-to-hire and direct-hire professionals", href: "/services/it-staffing" },
@@ -84,10 +84,9 @@ export function Hero() {
                   </li>
                 ))}
               </ul>
-              <a href={`tel:${site.phoneHref}`} className="mt-6 inline-flex items-center gap-3 text-[15px] text-white/80 hover:text-white">
-                <Phone className="text-[#7cc4ec]" />
-                Prefer to talk? <span className="font-semibold text-white">{site.phone}</span>
-              </a>
+              <Link href="/contact" className="mt-6 inline-flex items-center gap-2 text-[15px] font-semibold text-white hover:underline hover:underline-offset-4">
+                Something else? Send us a message <ArrowRight className="text-[#7cc4ec]" />
+              </Link>
             </div>
           </div>
         </div>

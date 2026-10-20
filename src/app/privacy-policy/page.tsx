@@ -53,7 +53,7 @@ export default function PrivacyPage() {
       <p>We use reasonable technical and organizational measures to protect your information. No method of transmission over the internet is completely secure.</p>
       <h2>Contact us</h2>
       <p>
-        {site.legalName}, {site.address.street}, {site.address.city}, {site.address.region} {site.address.postalCode} · {site.phone} ·{" "}
+        {site.legalName}, {site.address.street}, {site.address.city}, {site.address.region} {site.address.postalCode} ·{" "}
         <a href={`mailto:${site.email}`}>{site.email}</a>
       </p>
     </LegalPage>

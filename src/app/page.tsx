@@ -30,7 +30,6 @@ export default function HomePage() {
         logo: `${site.url}/brand/logo.svg`,
         image: `${site.url}/opengraph-image`,
         email: site.email,
-        telephone: site.phoneHref,
         foundingDate: String(site.founded),
         description: site.description,
         address,

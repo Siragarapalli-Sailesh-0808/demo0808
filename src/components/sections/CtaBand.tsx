@@ -1,6 +1,5 @@
 import { Link } from "next-view-transitions";
-import { site } from "@/lib/site";
-import { ArrowRight, Phone } from "../Icons";
+import { ArrowRight } from "../Icons";
 
 /** Closing call to action: a calm navy band with a direct line to the team. */
 export function CtaBand() {
@@ -25,9 +24,6 @@ export function CtaBand() {
               Find a job
             </Link>
           </div>
-          <a href={`tel:${site.phoneHref}`} className="inline-flex items-center gap-2.5 text-[15px] text-white/75 hover:text-white">
-            <Phone className="text-[#7cc4ec]" /> {site.phone}
-          </a>
         </div>
       </div>
     </section>

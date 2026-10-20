@@ -11,8 +11,6 @@ export const site = {
   tagline: "IT Staffing, Database & Technology Services",
   description:
     "M & K Technovations delivers the right people, with the right skills, at the right price — IT staff augmentation, 100% US-based database administration, ERP support and managed IT services for enterprises and government agencies since 2013.",
-  phone: "(347) 944-9929",
-  phoneHref: "+13479449929",
   /** WhatsApp number in international format, digits only. Leave empty to hide the WhatsApp button. */
   whatsapp: "",
   email: "deep@mktechnoinc.com",
@@ -47,8 +45,10 @@ export const site = {
     enabled: true,
     posters: [] as { label: string; href: string }[],
   },
-  /** Add real profile URLs here (LinkedIn etc.). Empty = hidden everywhere. */
-  socials: [] as { label: string; href: string; icon: string }[],
+  /** Social profiles (shown in the footer and the side rail). Empty = hidden everywhere. */
+  socials: [
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/m-k-technovations-inc-b4816569/", icon: "linkedin" },
+  ] as { label: string; href: string; icon: string }[],
 } as const;
 
 export type Site = typeof site;

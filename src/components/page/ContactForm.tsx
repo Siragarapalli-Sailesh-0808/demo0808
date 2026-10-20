@@ -64,7 +64,7 @@ export function ContactForm() {
           Thank you — <span className="accent-word">message received.</span>
         </h2>
         <p className="mt-4 max-w-md text-[16.5px] leading-relaxed text-ink-2">
-          A member of our team will get back to you within one business day. If it&apos;s urgent, call us on {site.phone}.
+          A member of our team will get back to you within one business day.
         </p>
         <button type="button" onClick={() => setStatus("idle")} className="btn btn-ghost mt-8">
           Send another message

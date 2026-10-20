@@ -21,7 +21,7 @@ export default function EeoPage() {
       <h2>Reasonable accommodation</h2>
       <p>
         If you need a reasonable accommodation to apply for a position or take part in the hiring process, please contact us at{" "}
-        <a href={`mailto:${site.email}`}>{site.email}</a> or {site.phone}.
+        <a href={`mailto:${site.email}`}>{site.email}</a>.
       </p>
     </LegalPage>
   );

@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 import { PageHero } from "@/components/page/PageHero";
 import { ContactForm } from "@/components/page/ContactForm";
 import { JsonLd } from "@/components/page/JsonLd";
-import { Mail, Phone, Pin, Social } from "@/components/Icons";
+import { Pin } from "@/components/Icons";
 
 export const metadata: Metadata = {
   title: "Contact us",
@@ -31,7 +31,6 @@ export default function ContactPage() {
             name: site.legalName,
             url: site.url,
             email: site.email,
-            telephone: site.phoneHref,
             address: {
               "@type": "PostalAddress",
               streetAddress: site.address.street,
@@ -40,7 +39,7 @@ export default function ContactPage() {
               postalCode: site.address.postalCode,
               addressCountry: site.address.country,
             },
-            contactPoint: site.emails.map((email) => ({ "@type": "ContactPoint", contactType: "sales", email, telephone: site.phoneHref, areaServed: "US", availableLanguage: ["English"] })),
+            contactPoint: site.emails.map((email) => ({ "@type": "ContactPoint", contactType: "sales", email, url: `${site.url}/contact`, areaServed: "US", availableLanguage: ["English"] })),
           },
         }}
       />
@@ -58,53 +57,6 @@ export default function ContactPage() {
           </div>
 
           <aside className="space-y-4 lg:col-span-5">
-            <div className="rounded-lg p-8 text-white" data-reveal style={{ ["--d" as string]: "80ms", background: "#0d2b45" }}>
-              <p className="text-[12.5px] font-semibold uppercase tracking-[0.08em] text-white/60">Prefer to reach out directly?</p>
-              <ul className="mt-6 space-y-4">
-                {site.emails.map((email) => (
-                <li key={email}>
-                  <a href={`mailto:${email}`} className="group flex items-center gap-4">
-                    <span className="grid h-12 w-12 place-items-center rounded-lg bg-white/10 transition-colors duration-300 group-hover:bg-brand-blue">
-                      <Mail />
-                    </span>
-                    <span>
-                      <span className="block text-[13px] text-white/60">Email</span>
-                      <span className="block break-all font-display text-[17px] font-semibold">{email}</span>
-                    </span>
-                  </a>
-                </li>
-                ))}
-                <li>
-                  <a href={`tel:${site.phoneHref}`} className="group flex items-center gap-4">
-                    <span className="grid h-12 w-12 place-items-center rounded-lg bg-white/10 transition-colors duration-300 group-hover:bg-brand-blue">
-                      <Phone />
-                    </span>
-                    <span>
-                      <span className="block text-[13px] text-white/60">Phone</span>
-                      <span className="block font-display text-[17px] font-semibold">{site.phone}</span>
-                    </span>
-                  </a>
-                </li>
-              </ul>
-              {site.socials.length > 0 && (
-              <ul className="mt-8 flex gap-2 border-t border-white/10 pt-6">
-                {site.socials.map((s) => (
-                  <li key={s.label}>
-                    <a
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={s.label}
-                      className="grid h-10 w-10 place-items-center rounded-full bg-white/10 transition-colors duration-300 hover:bg-brand-blue"
-                    >
-                      <Social name={s.icon} />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              )}
-            </div>
-
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
               {site.offices.map((o, i) => (
                 <address

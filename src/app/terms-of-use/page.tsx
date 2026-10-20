@@ -45,7 +45,7 @@ export default function TermsPage() {
       <p>These terms are governed by the laws of the Commonwealth of Pennsylvania, USA.</p>
       <h2>Contact</h2>
       <p>
-        Questions? Email <a href={`mailto:${site.email}`}>{site.email}</a> or call {site.phone}.
+        Questions? Email <a href={`mailto:${site.email}`}>{site.email}</a>.
       </p>
     </LegalPage>
   );
