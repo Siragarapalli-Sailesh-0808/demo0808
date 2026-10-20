@@ -223,17 +223,17 @@ export const strengths = [
   { title: "Total satisfaction guarantee", body: "If a placement isn't right, we make it right. Long-term relationships matter more to us than one-off placements." },
 ];
 
-/**
- * Highlights for the scrolling bar at the top of every page.
- * When the jobs Google Sheet has open roles (see src/lib/jobs.ts), the bar shows those instead.
- */
+/** Statements that scroll in the bar at the top of every page (plain text, not links). */
 export const tickerHighlights = [
-  { text: "See our current IT job openings", href: "/careers" },
-  { text: "100% US-based DBA support for Oracle, SQL Server, DB2 & MySQL", href: "/services/database-administration" },
-  { text: "IT staff augmentation for enterprises & government agencies", href: "/services/it-staffing" },
-  { text: "ERP support for SAP, Oracle Suite & Microsoft Dynamics", href: "/services/erp-support" },
-  { text: "Managed IT support — on-site, remote or by phone", href: "/services/managed-it-support" },
-  { text: "Serving clients since 2013 · Harrisburg, PA", href: "/about" },
+  "IT staffing & technology services since 2013",
+  "Contract, contract-to-hire and direct-hire IT professionals",
+  "100% US-based database administration",
+  "Oracle · SQL Server · DB2 · MySQL · MongoDB",
+  "ERP support for SAP, Oracle and Microsoft Dynamics",
+  "Trusted by enterprises and government agencies",
+  "Background-checked talent, compliant hiring",
+  "E-Verify participating employer",
+  "Headquartered in Harrisburg, Pennsylvania",
 ];
 
 /** Headline facts on the home and About pages. `text` shows as-is; `value` rolls like an odometer. */

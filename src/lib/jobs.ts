@@ -112,7 +112,7 @@ export function rowsToJobs(rows: string[][], today = new Date().toISOString().sl
   const jobs: Job[] = [];
   for (const r of rows.slice(1)) {
     const title = col(r, "title", "job title");
-    if (!title) continue;
+    if (!title || /\bexample\b/i.test(title)) continue; // template sample rows never go live
     const status = col(r, "status").toLowerCase();
     if (status && status !== "open") continue;
     const validThrough = isoDate(col(r, "closing date", "valid through", "closes"));

@@ -429,9 +429,9 @@ header[data-scrolled="true"] .ticker-dot {
   animation-play-state: paused;
 }
 
-/* Top "Now hiring" ticker */
+/* Top highlights ticker */
 .ticker {
-  animation: marquee 48s linear infinite;
+  animation: marquee 75s linear infinite;
 }
 @media (prefers-reduced-motion: reduce) {
   .ticker {

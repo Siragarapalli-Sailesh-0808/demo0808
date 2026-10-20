@@ -6,7 +6,7 @@ export const site = {
   name: "M & K Technovations",
   legalName: "M & K Technovations Inc.",
   shortName: "M & K",
-  url: "https://mandkstaffing.com",
+  url: "https://mktechnoinc.com",
   founded: 2013,
   tagline: "IT Staffing, Database & Technology Services",
   description:
