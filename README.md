@@ -53,6 +53,16 @@ The contact form emails you through [Resend](https://resend.com). Spam protectio
 2. In Vercel → Project → **Settings → Environment Variables**, add the values from `.env.example`.
 3. Redeploy.
 
+## Staff email requests (internal)
+
+`/email-request` is an unlisted page (not in menus, hidden from search engines) where the client asks for a new
+staff email account or a password reset. Each request is emailed to `EMAIL_REQUESTS_TO` with a to-do list;
+the reply-to is the person who asked. Set in Vercel → Settings → Environment Variables, then redeploy:
+
+- `EMAIL_REQUESTS_TO` — who receives requests (required)
+- `EMAIL_REQUEST_CODE` — optional access code shown as an extra field on the form
+- Uses the same `RESEND_API_KEY` and `CONTACT_FROM` as the contact form
+
 ## Going live on mandkstaffing.com — cutover checklist
 
 The domain's **email (mandip@ / deep@mandkstaffing.com) must keep working**. Only the website records change.
