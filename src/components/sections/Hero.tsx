@@ -39,7 +39,7 @@ export function Hero() {
 
           <p className="fade-up mt-7 max-w-[38rem] text-[17.5px] leading-relaxed text-ink-2 md:text-[19px]" style={{ ["--d" as string]: "160ms" }}>
             IT staff augmentation, 100% US-based database administration, ERP support and managed IT for enterprises and
-            government agencies — from our headquarters in Harrisburg, Pennsylvania.
+            government agencies — from our headquarters in Camp Hill, Pennsylvania.
           </p>
 
           <div className="fade-up mt-10 flex flex-wrap items-center gap-3" style={{ ["--d" as string]: "240ms" }}>

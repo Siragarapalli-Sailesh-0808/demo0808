@@ -232,7 +232,7 @@ export const industryDetails: Record<string, { challenges: string[]; help: strin
 
 export const about = {
   intro:
-    "M & K Technovations Inc. is an IT staffing and technology services company headquartered in Harrisburg, Pennsylvania, serving enterprises and government agencies since 2013.",
+    "M & K Technovations Inc. is an IT staffing and technology services company headquartered in Camp Hill, Pennsylvania, serving enterprises and government agencies since 2013.",
   story: [
     "We were founded in 2013 on a simple promise: the right people, with the right skills, at the right price. Too many organizations were paying for résumés instead of results — we set out to change that with careful screening and honest advice.",
     "Today we help global enterprises, government agencies and growing businesses with IT staff augmentation, 100% US-based database administration, ERP support and managed IT services — all from one accountable partner.",

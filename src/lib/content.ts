@@ -233,7 +233,7 @@ export const tickerHighlights = [
   "Trusted by enterprises and government agencies",
   "Background-checked talent, compliant hiring",
   "E-Verify participating employer",
-  "Headquartered in Harrisburg, Pennsylvania",
+  "Headquartered in Camp Hill, Pennsylvania",
 ];
 
 /** Headline facts on the home and About pages. `text` shows as-is; `value` rolls like an odometer. */

@@ -16,16 +16,16 @@ export const site = {
   email: "deep@mktechnoinc.com",
   emails: ["deep@mktechnoinc.com"],
   address: {
-    street: "225 Market Street, Suite #510",
-    city: "Harrisburg",
+    street: "205 Grandview Avenue, Suite 200-P",
+    city: "Camp Hill",
     region: "PA",
-    postalCode: "17101",
+    postalCode: "17011",
     country: "US",
   },
   offices: [
     {
-      country: "Headquarters — Harrisburg, PA",
-      lines: ["225 Market Street, Suite #510", "Harrisburg, PA 17101", "United States"],
+      country: "Headquarters — Camp Hill, PA",
+      lines: ["205 Grandview Avenue, Suite 200-P", "Camp Hill, PA 17011", "United States"],
     },
   ],
   /**
