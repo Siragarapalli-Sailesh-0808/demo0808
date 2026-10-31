@@ -112,8 +112,18 @@ ${d.notes ? `<p style="margin-top:16px;white-space:pre-wrap;line-height:1.6">${e
     }),
   });
   if (!res.ok) {
-    console.error("[email-request] Resend error", res.status, await res.text());
-    return NextResponse.json({ ok: false, error: "We couldn't send your request right now." }, { status: 502 });
+    const raw = await res.text();
+    console.error("[email-request] Resend error", res.status, raw);
+    // Internal page: show the email service's reason (addresses masked) so setup problems are easy to fix.
+    let reason = "";
+    try {
+      reason = String(JSON.parse(raw).message ?? "");
+    } catch {}
+    reason = reason.replace(/[^\s@()<>]+@[^\s@()<>]+/g, "***").slice(0, 300);
+    return NextResponse.json(
+      { ok: false, error: `We couldn't send your request right now (email service said: ${reason || `error ${res.status}`}).` },
+      { status: 502 },
+    );
   }
   return NextResponse.json({ ok: true });
 }
